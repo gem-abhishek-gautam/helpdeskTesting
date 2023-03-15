@@ -31,8 +31,8 @@ public class StepDefinition {
             DriverAction.waitSec(5);
             DriverAction.typeText(Locator.ms_email,"abhishek.gautam@geminisolutions.com");
             DriverAction.click(Locator.ms_submit);
-            DriverAction.waitSec(5);
-            DriverAction.typeText(Locator.ms_pswd,"a.aa.aa...1");
+            DriverAction.waitSec(7);
+            // enter pswd
             DriverAction.click(Locator.ms_submit);
             DriverAction.waitSec(5);
             if(DriverAction.isExist(Locator.ms_prompt)){
