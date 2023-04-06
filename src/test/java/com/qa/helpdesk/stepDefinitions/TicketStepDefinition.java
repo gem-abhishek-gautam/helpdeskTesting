@@ -354,7 +354,12 @@ public class TicketStepDefinition {
                 GemTestReporter.addTestStep("Required fields validation", "Warning for all required fields are displayed", STATUS.PASS, DriverAction.takeSnapShot());
             } else
                 GemTestReporter.addTestStep("Required fields validation", "Warning for all required fields are not displayed", STATUS.FAIL, DriverAction.takeSnapShot());
-            DriverAction.typeText(TicketLocators.subject, "a".repeat(75));
+            StringBuilder text= new StringBuilder();
+            for(int i=1;i<75;i++) {
+                text.append("a");
+            }
+            DriverAction.typeText(TicketLocators.subject, text.toString());
+
             String actualVal = DriverAction.getAttributeName(TicketLocators.subject, "value");
             if (actualVal.length() == 70) {
                 GemTestReporter.addTestStep("Subject field character limit", "Maximum 70 characters inserted as per limit", STATUS.PASS, DriverAction.takeSnapShot());

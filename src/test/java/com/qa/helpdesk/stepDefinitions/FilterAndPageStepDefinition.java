@@ -69,7 +69,7 @@ public class FilterAndPageStepDefinition {
     public void selectFilterCriteria(String dept, String status) {
         try
         {
-            if(!dept.isBlank())
+            if(!dept.isEmpty())
             {
                 if(dept.contains(",")){
                     String[] deptList = dept.split(",");
@@ -84,7 +84,7 @@ public class FilterAndPageStepDefinition {
 
             }
 
-            if(!status.isBlank())
+            if(!status.isEmpty())
             {
                 if(status.contains(",")){
                     String[] statusList = status.split(",");
@@ -115,7 +115,7 @@ public class FilterAndPageStepDefinition {
             DriverAction.dropDown(TableAndPaginationLocators.paginationDropdown,"25");
             DriverAction.waitSec(2);
             boolean nextActive;
-            if(!dept.isBlank()) {
+            if(!dept.isEmpty()) {
                 int deptFlag=1;
                 String pos = CommonUtils.getTableColPosition("Department");
                 if(DriverAction.isExist(TableAndPaginationLocators.getTableRows)) {
@@ -147,7 +147,7 @@ public class FilterAndPageStepDefinition {
                 } else GemTestReporter.addTestStep("Dept filter","No results for filter dept "+dept+"",STATUS.INFO,DriverAction.takeSnapShot());
             }
 
-            if(!status.isBlank()) {
+            if(!status.isEmpty()) {
                 int statusFlag=1;
                 String pos = CommonUtils.getTableColPosition("Status");
                 if(DriverAction.isExist(TableAndPaginationLocators.getTableRows)) {
@@ -207,7 +207,7 @@ public class FilterAndPageStepDefinition {
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)){
                 DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,5);
             }
-            if(!dept.isBlank()) {
+            if(!dept.isEmpty()) {
                 int deptFlag=0;
                 String pos = CommonUtils.getTableColPosition("Department");
                 List<WebElement> elements = DriverAction.getElements(TableAndPaginationLocators.getColValues(pos));
@@ -223,7 +223,7 @@ public class FilterAndPageStepDefinition {
                     GemTestReporter.addTestStep("Clear Department filter","Dept filter not cleared",STATUS.FAIL,DriverAction.takeSnapShot());
                 }
             }
-            if(!status.isBlank()) {
+            if(!status.isEmpty()) {
                 int statusFlag=0;
                 String pos = CommonUtils.getTableColPosition("Status");
                 List<WebElement> elements = DriverAction.getElements(TableAndPaginationLocators.getColValues(pos));

@@ -33,7 +33,7 @@ public class CommonUtils {
 
         if(deptActual.equalsIgnoreCase(dept)){
             GemTestReporter.addTestStep("Preview Department","Department expected: "+dept+" Actual: "+deptActual,STATUS.PASS,DriverAction.takeSnapShot());
-        } else if (dept.trim().isBlank() && deptActual.equalsIgnoreCase("unassigned")){
+        } else if (dept.trim().isEmpty() && deptActual.equalsIgnoreCase("unassigned")){
             GemTestReporter.addTestStep("Preview Department","Department unassigned",STATUS.PASS,DriverAction.takeSnapShot());
         } else GemTestReporter.addTestStep("Preview Department","Department expected: "+dept+" Actual: "+deptActual,STATUS.FAIL,DriverAction.takeSnapShot());
 
@@ -65,7 +65,7 @@ public class CommonUtils {
 
         if(deptActual.equalsIgnoreCase(dept)){
             GemTestReporter.addTestStep("Preview Department","Department expected: "+dept+" Actual: "+deptActual,STATUS.PASS,DriverAction.takeSnapShot());
-        } else if (dept.trim().isBlank() && deptActual.equalsIgnoreCase("unassigned")){
+        } else if (dept.trim().isEmpty() && deptActual.equalsIgnoreCase("unassigned")){
             GemTestReporter.addTestStep("Preview Department","Department unassigned",STATUS.PASS,DriverAction.takeSnapShot());
         } else GemTestReporter.addTestStep("Preview Department","Department expected: "+dept+" Actual: "+deptActual,STATUS.FAIL,DriverAction.takeSnapShot());
 
@@ -101,7 +101,7 @@ public class CommonUtils {
             DriverAction.click(TicketLocators.ticketDropdownOptions(dept));
 
             DriverAction.waitSec(2);
-            if(!filePath.isBlank()){
+            if(!filePath.isEmpty()){
                 DriverAction.fileUpload(TicketLocators.fileUpload,filePath);
             }
             DriverAction.waitSec(3);
@@ -129,7 +129,7 @@ public class CommonUtils {
             DriverAction.waitSec(2);
             DriverAction.click(TicketLocators.ticketDropdown("Sub-category"));
             DriverAction.click(TicketLocators.ticketDropdownOptions(subCategory));
-            if(!filePath.isBlank()){
+            if(!filePath.isEmpty()){
                 DriverAction.fileUpload(TicketLocators.fileUpload,filePath);
             }
             DriverAction.waitSec(3);
@@ -168,7 +168,7 @@ public class CommonUtils {
 
                 if(deptActual.equalsIgnoreCase(dept)){
                     GemTestReporter.addTestStep("Verify Department","Department expected: "+dept+" Actual: "+deptActual,STATUS.PASS,DriverAction.takeSnapShot());
-                } else if (dept.trim().isBlank() && deptActual.equalsIgnoreCase("unassigned")){
+                } else if (dept.trim().isEmpty() && deptActual.equalsIgnoreCase("unassigned")){
                     GemTestReporter.addTestStep("Verify Department","Department unassigned",STATUS.PASS,DriverAction.takeSnapShot());
                 } else GemTestReporter.addTestStep("Verify Department","Department expected: "+dept+" Actual: "+deptActual,STATUS.FAIL,DriverAction.takeSnapShot());
 
