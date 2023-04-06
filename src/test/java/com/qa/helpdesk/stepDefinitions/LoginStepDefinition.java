@@ -3,6 +3,7 @@ package com.qa.helpdesk.stepDefinitions;
 import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
 import com.gemini.generic.ui.utils.DriverAction;
+import com.gemini.generic.ui.utils.DriverManager;
 import com.gemini.generic.utils.ProjectConfigData;
 import com.qa.helpdesk.locators.DashboardHeaderLocators;
 import com.qa.helpdesk.locators.LoginLocators;
@@ -12,6 +13,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.github.cdimascio.dotenv.Dotenv;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class LoginStepDefinition {
@@ -30,11 +33,14 @@ public class LoginStepDefinition {
                 DriverAction.waitUntilElementClickable(LoginLocators.loginPswd,10);
                 DriverAction.typeText(LoginLocators.loginPswd,"Password","Password entered successfully",env.get("PSWD"));
                 DriverAction.click(LoginLocators.submitLoginForm);
-                DriverAction.waitSec(3);
+                DriverAction.waitUntilElementClickable(LoginLocators.rejectPrompt,5);
                 if(DriverAction.isExist(LoginLocators.microsoftLoginPrompt)){
                     DriverAction.click(LoginLocators.rejectPrompt);
                 }
             } else GemTestReporter.addTestStep("Login button","Login button not found", STATUS.FAIL,DriverAction.takeSnapShot());
+
+            WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(),45);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(DashboardHeaderLocators.headerButtons("logout")));
             DriverAction.waitUntilElementClickable(DashboardHeaderLocators.headerButtons("logout"),10);
 
         } catch (Exception e) {
@@ -48,7 +54,6 @@ public class LoginStepDefinition {
     public void verifyIfLoginIsSuccessful() {
         try
         {
-            DriverAction.setPageLoadTimeOut(10);
             String actualUrl = DriverAction.getCurrentURL();
             String expectedUrl = ProjectConfigData.getProperty("dashboardUrl");
             if(expectedUrl.equalsIgnoreCase(actualUrl)) {
@@ -86,6 +91,7 @@ public class LoginStepDefinition {
     public void switchToView(String view) {
         try {
             DriverAction.waitUntilElementClickable(LoginLocators.getView("Support View"),10);
+            DriverAction.waitSec(1);
             DriverAction.click(LoginLocators.getView("Support View"),"View dropdown");
             DriverAction.waitSec(1);
             DriverAction.click(LoginLocators.getView(view),view);
@@ -105,8 +111,8 @@ public class LoginStepDefinition {
         {
             DriverAction.waitUntilElementClickable(LoginLocators.loginButton,10);
             if(DriverAction.isExist(LoginLocators.loginButton)) {
-                DriverAction.click(LoginLocators.loginButton);
-                DriverAction.waitSec(5);
+                DriverAction.click(LoginLocators.loginButton,"SSO Login");
+                DriverAction.waitUntilElementClickable(LoginLocators.loginEmail,20);
                 DriverAction.typeText(LoginLocators.loginEmail,email);
                 DriverAction.click(LoginLocators.submitLoginForm);
 

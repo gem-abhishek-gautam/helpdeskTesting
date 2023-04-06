@@ -16,6 +16,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -63,7 +64,6 @@ public class CalendarStepDefinition {
     public void verifyIfTheDateIsShownOnCalendar(String date) {
         try {
             List<String> months = Arrays.asList("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
-
             if (DriverAction.isExist(FilterAndCalendarLocators.calendarCard)) {
                 String day = date.split("-")[0];
                 String month = date.split("-")[1];

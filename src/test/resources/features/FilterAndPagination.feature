@@ -25,7 +25,6 @@ Feature: Testcases for pagination and filters
       |          | Unassigned |
       | IT,HR    | Unassigned |
       | HR       | Rejected   |
-      |          | Unassigned |
       | IT       | Open       |
       | IT       | Unassigned |
       | IT       | Assigned   |
@@ -119,5 +118,7 @@ Feature: Testcases for pagination and filters
       | dept | status                      |
       | IT   | Unassigned,Cancelled,Closed |
       |      | Closed,Cancelled,Resolved   |
+      |      | Closed,Cancelled            |
+      |      | Cancelled,Resolved          |
 
 

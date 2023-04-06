@@ -31,7 +31,9 @@ public class SearchAndSortStepDefinition {
                 DriverAction.typeText(SearchAndSortLocators.ticketSearchBox,keyword);
                 DriverAction.waitSec(1);
                 DriverAction.click(SearchAndSortLocators.ticketSearchButton);
-                DriverAction.waitSec(3);
+                if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                    DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                }
 
             }
         } catch (Exception e) {
@@ -68,15 +70,19 @@ public class SearchAndSortStepDefinition {
 
     @Given("Verify sorting button for {string} column")
     public void checkSortingButtonForColumn(String colName) {
-        DriverAction.waitSec(3);
+        if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+            DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+        }
         try
         {
             List<String> values = new ArrayList<>();
+            DriverAction.waitUntilElementClickable(SearchAndSortLocators.columns(colName),10);
             DriverAction.click(SearchAndSortLocators.columns(colName),colName+" sort button");
             DriverAction.waitSec(2);
             DriverAction.dropDown(TableAndPaginationLocators.paginationDropdown,"25");
-            DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
-
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+            }
             String pos = CommonUtils.getTableColPosition(colName);
             boolean nextActive;
             do {

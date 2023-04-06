@@ -14,6 +14,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,27 +84,45 @@ public class TicketStepDefinition {
 
         try {
             DriverAction.click(TicketLocators.submitForm);
-            DriverAction.waitSec(5);
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
+            DriverAction.waitUntilElementAppear(TicketLocators.ticketCreatedLogo,10);
+            DriverAction.waitUntilElementClickable(TicketLocators.postSubmitContinueButton,10);
             String ticketID = DriverAction.getElementText(TicketLocators.postSubmitTicketID).replace("Ticket ID: ", "");
             DriverAction.waitUntilElementClickable(TicketLocators.postSubmitContinueButton, 6);
             DriverAction.click(TicketLocators.postSubmitContinueButton);
-            DriverAction.waitSec(5);
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
+            DriverAction.waitUntilElementClickable(SearchAndSortLocators.ticketSearchButton,10);
             DriverAction.typeText(SearchAndSortLocators.ticketSearchBox, ticketID);
             DriverAction.waitSec(1);
             DriverAction.click(SearchAndSortLocators.ticketSearchButton);
-            DriverAction.waitSec(3);
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
+            DriverAction.waitUntilElementClickable(TableAndPaginationLocators.firstTicketID,10);
+
             if (DriverAction.isExist(TableAndPaginationLocators.firstTicketID)) {
                 DriverAction.click(TableAndPaginationLocators.firstTicketID);
-                DriverAction.waitSec(5);
+                if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                    DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                }
+                DriverAction.waitUntilElementClickable(TicketLocators.ticketCancelButton,10);
+                DriverAction.waitSec(1);
                 DriverAction.click(TicketLocators.ticketCancelButton);
                 DriverAction.waitSec(2);
                 DriverAction.click(TicketLocators.confirmCancelButton, "Cancel");
                 if (DriverAction.isExist(TicketLocators.inputError)) {
                     GemTestReporter.addTestStep("Required field", "Validated cancel reason required field", STATUS.PASS, DriverAction.takeSnapShot());
                     DriverAction.typeText(TicketLocators.ticketCancelReasonBox, reason);
-                    DriverAction.waitSec(2);
+                    DriverAction.waitSec(1);
                     DriverAction.click(TicketLocators.confirmCancelButton, "Cancel");
-                    DriverAction.waitSec(7);
+                    if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                        DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                    }
+                    DriverAction.waitUntilElementClickable(TableAndPaginationLocators.firstTicketID,10);
                 } else
                     GemTestReporter.addTestStep("Required field", "Validation failed for cancel reason required field", STATUS.FAIL, DriverAction.takeSnapShot());
 
@@ -132,13 +152,15 @@ public class TicketStepDefinition {
     public void submitAndVerifyIncident(String file, String subject, String dept, String desc) {
         try {
             DriverAction.click(TicketLocators.submitForm);
-            DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
-            DriverAction.waitSec(5);
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
+            DriverAction.waitUntilElementAppear(TicketLocators.ticketCreatedLogo,10);
+            DriverAction.waitUntilElementClickable(TicketLocators.postSubmitContinueButton, 10);
             if (DriverAction.getElementText(TicketLocators.postSubmitBannerTitle).equalsIgnoreCase("Ticket Created")) {
                 GemTestReporter.addTestStep("Ticket Creation", "Ticket created successfully", STATUS.PASS, DriverAction.takeSnapShot());
             } else
                 GemTestReporter.addTestStep("Ticket Creation", "Unable to successfully create ticket", STATUS.FAIL, DriverAction.takeSnapShot());
-            DriverAction.waitUntilElementClickable(TicketLocators.postSubmitContinueButton, 6);
             String category = "Unassigned";
             String subCategory = "Unassigned";
             String status = "Unassigned";
@@ -156,7 +178,13 @@ public class TicketStepDefinition {
     public void submitAndVerifyRequest(String file, String subject, String dept, String desc, String category, String subCategory) {
         try {
             DriverAction.click(TicketLocators.submitForm);
-            DriverAction.waitSec(5);
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
+            WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(),30);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(TicketLocators.ticketCreatedLogo));
+
+            DriverAction.waitUntilElementClickable(TicketLocators.postSubmitContinueButton, 10);
             if (DriverAction.getElementText(TicketLocators.postSubmitBannerTitle).equalsIgnoreCase("Ticket Created")) {
                 GemTestReporter.addTestStep("Ticket Creation", "Ticket created successfully", STATUS.PASS, DriverAction.takeSnapShot());
             } else
@@ -187,11 +215,17 @@ public class TicketStepDefinition {
     public void verifyIfActionButtonIsActiveForTheTicket() {
         try {
             DriverAction.click(TicketLocators.submitForm);
-            DriverAction.waitSec(5);
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
+            DriverAction.waitUntilElementAppear(TicketLocators.ticketCreatedLogo,10);
+            DriverAction.waitUntilElementClickable(TicketLocators.postSubmitContinueButton, 10);
             String ticketID = DriverAction.getElementText(TicketLocators.postSubmitTicketID).replace("Ticket ID: ", "");
-            DriverAction.waitUntilElementClickable(TicketLocators.postSubmitContinueButton, 6);
             DriverAction.click(TicketLocators.postSubmitContinueButton);
-            DriverAction.waitSec(6);
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
+            DriverAction.waitUntilElementClickable(SearchAndSortLocators.ticketSearchButton, 10);
             DriverAction.typeText(SearchAndSortLocators.ticketSearchBox, ticketID);
             DriverAction.waitSec(1);
             DriverAction.click(SearchAndSortLocators.ticketSearchButton);
@@ -206,11 +240,14 @@ public class TicketStepDefinition {
             DriverAction.typeText(TicketLocators.ticketCancelReasonBox, "reason");
             DriverAction.waitSec(2);
             DriverAction.click(TicketLocators.confirmCancelButton);
-            DriverAction.waitSec(5);
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
+            DriverAction.waitUntilElementClickable(SearchAndSortLocators.ticketSearchButton, 10);
             DriverAction.typeText(SearchAndSortLocators.ticketSearchBox, ticketID);
             DriverAction.waitSec(1);
             DriverAction.click(SearchAndSortLocators.ticketSearchButton);
-            DriverAction.waitSec(3);
+            DriverAction.waitSec(2);
             if (!DriverManager.getWebDriver().findElement(TicketLocators.ticketActionButton).isEnabled()) {
                 GemTestReporter.addTestStep("Action button", "Action button is not active for the cancelled ticket", STATUS.PASS, DriverAction.takeSnapShot());
             } else
@@ -354,12 +391,11 @@ public class TicketStepDefinition {
                 GemTestReporter.addTestStep("Required fields validation", "Warning for all required fields are displayed", STATUS.PASS, DriverAction.takeSnapShot());
             } else
                 GemTestReporter.addTestStep("Required fields validation", "Warning for all required fields are not displayed", STATUS.FAIL, DriverAction.takeSnapShot());
-            StringBuilder text= new StringBuilder();
-            for(int i=1;i<75;i++) {
-                text.append("a");
+            String text="";
+            for(int i=0;i<75;i++) {
+                text+="a";
             }
-            DriverAction.typeText(TicketLocators.subject, text.toString());
-
+            DriverAction.typeText(TicketLocators.subject, text);
             String actualVal = DriverAction.getAttributeName(TicketLocators.subject, "value");
             if (actualVal.length() == 70) {
                 GemTestReporter.addTestStep("Subject field character limit", "Maximum 70 characters inserted as per limit", STATUS.PASS, DriverAction.takeSnapShot());
@@ -380,7 +416,10 @@ public class TicketStepDefinition {
             DriverAction.typeText(TicketLocators.ticketCommentInput, text);
             DriverAction.waitSec(1);
             DriverAction.click(TicketLocators.ticketCommentSubmit, "Update comment");
-            DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover))
+            {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+            }
             if (DriverAction.isExist(TicketLocators.lastTicketComments) && DriverAction.getElementText(TicketLocators.lastTicketComments).equalsIgnoreCase(text)) {
                 DriverAction.scrollIntoView(TicketLocators.lastTicketComments);
                 GemTestReporter.addTestStep("Ticket comments", "Comments posted successfully", STATUS.PASS, DriverAction.takeSnapShot());

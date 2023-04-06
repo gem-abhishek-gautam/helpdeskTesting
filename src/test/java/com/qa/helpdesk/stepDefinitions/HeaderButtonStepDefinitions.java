@@ -19,8 +19,7 @@ public class HeaderButtonStepDefinitions {
     @And("Click on user guide button")
     public void headerButtons() {
         try {
-            DriverAction.waitSec(3);
-            DriverAction.waitUntilElementAppear(DashboardHeaderLocators.headerButtons("userGuide"),10);
+            DriverAction.waitUntilElementClickable(DashboardHeaderLocators.headerButtons("userGuide"),10);
             DriverAction.click(DashboardHeaderLocators.headerButtons("userGuide"),"User-guide");
         } catch (Exception e) {
             GemTestReporter.addTestStep("Exception: ","Exception:"+ e,STATUS.FAIL);
@@ -52,6 +51,7 @@ public class HeaderButtonStepDefinitions {
     public void clickOnSupportButton() {
         try {
             DriverAction.click(DashboardHeaderLocators.headerButtons("Support"));
+            DriverAction.waitSec(1);
         } catch (Exception e) {
             GemTestReporter.addTestStep("Exception Occurred","Exception: "+e,STATUS.FAIL);
             throw new RuntimeException(e);
@@ -61,7 +61,6 @@ public class HeaderButtonStepDefinitions {
     @Then("Verify if support info {string} is displayed")
     public void verifyIfSupportInfoIsDisplayed(String info) {
         try {
-            DriverAction.waitSec(2);
             if(DriverAction.getElementText(DashboardHeaderLocators.contact).equalsIgnoreCase(info)) {
                 GemTestReporter.addTestStep("Contact info","Email address visible",STATUS.PASS,DriverAction.takeSnapShot());
             } else GemTestReporter.addTestStep("Contact info","Email address is not visible, Expected: "+info+"",STATUS.FAIL,DriverAction.takeSnapShot());

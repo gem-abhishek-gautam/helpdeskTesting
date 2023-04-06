@@ -10,7 +10,7 @@ public class TicketLocators {
     public static By subject = By.xpath("//input[@name='subject']");
     public static By desc = By.xpath("//textarea[@name='description']");
     public static By fileUpload = By.xpath("//input[@type='file']");
-    public static By uploadContainer = By.xpath("//div[@role='presentation']");
+    public static By ticketCreatedLogo = By.xpath("//img[contains(@alt,'created')]");
     public static By typeDropdown = By.xpath("//label[contains(text(),'Type')]/parent::div/following-sibling::div/div");
     public static By getPreviewTypeValue = By.xpath("//label[text()='Type']//parent::div/following-sibling::p");
     public static By ticketDropdownOptions(String options) {

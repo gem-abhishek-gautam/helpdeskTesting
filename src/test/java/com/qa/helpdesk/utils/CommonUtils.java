@@ -3,11 +3,14 @@ package com.qa.helpdesk.utils;
 import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
 import com.gemini.generic.ui.utils.DriverAction;
+import com.gemini.generic.ui.utils.DriverManager;
 import com.qa.helpdesk.locators.DashboardHeaderLocators;
 import com.qa.helpdesk.locators.SearchAndSortLocators;
 import com.qa.helpdesk.locators.TableAndPaginationLocators;
 import com.qa.helpdesk.locators.TicketLocators;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -88,10 +91,13 @@ public class CommonUtils {
     }
 
     public static void createIncidentTicket(String subject, String desc, String dept, String filePath) {
-        DriverAction.waitUntilElementClickable(TicketLocators.createTicket,10);
+        WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(),10);
+        wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.createTicket));
+
         if(DriverAction.isExist(TicketLocators.createTicket)) {
             DriverAction.click(TicketLocators.createTicket);
-            DriverAction.waitUntilElementAppear(TicketLocators.ticketFormHeader,5);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(TicketLocators.ticketFormHeader));
+
             DriverAction.typeText(TicketLocators.subject,subject);
             DriverAction.typeText(TicketLocators.desc,desc);
             DriverAction.click(TicketLocators.typeDropdown);
@@ -106,16 +112,17 @@ public class CommonUtils {
             }
             DriverAction.waitSec(3);
             DriverAction.click(TicketLocators.previewButton);
-            DriverAction.waitSec(3);
+            DriverAction.waitSec(1);
         }
 
     }
 
     public static void createRequestTicket(String subject, String desc, String dept, String category, String subCategory, String filePath) {
-        DriverAction.waitUntilElementClickable(TicketLocators.createTicket,10);
+        WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(),10);
+        wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.createTicket));
         if(DriverAction.isExist(TicketLocators.createTicket)){
             DriverAction.click(TicketLocators.createTicket);
-            DriverAction.waitUntilElementAppear(TicketLocators.ticketFormHeader,5);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(TicketLocators.ticketFormHeader));
             DriverAction.typeText(TicketLocators.subject,subject);
             DriverAction.typeText(TicketLocators.desc,desc);
             DriverAction.click(TicketLocators.typeDropdown);
@@ -134,7 +141,7 @@ public class CommonUtils {
             }
             DriverAction.waitSec(3);
             DriverAction.click(TicketLocators.previewButton);
-            DriverAction.waitSec(3);
+            DriverAction.waitSec(1);
 
         }
     }
@@ -143,15 +150,20 @@ public class CommonUtils {
         DriverAction.waitSec(3);
         String ticketID = DriverAction.getElementText(TicketLocators.postSubmitTicketID).replace("Ticket ID: ","");
         DriverAction.click(TicketLocators.postSubmitContinueButton);
-        DriverAction.waitSec(5);
+        if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+            DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+        }
+        DriverAction.waitUntilElementClickable(SearchAndSortLocators.ticketSearchButton,10);
         DriverAction.typeText(SearchAndSortLocators.ticketSearchBox,ticketID);
         DriverAction.waitSec(1);
         DriverAction.click(SearchAndSortLocators.ticketSearchButton);
-        DriverAction.waitSec(3);
+        DriverAction.waitSec(2);
         if(DriverAction.isExist(TableAndPaginationLocators.firstTicketID)){
             DriverAction.click(TableAndPaginationLocators.firstTicketID);
-            DriverAction.waitSec(5);
-
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,15);
+            }
+            DriverAction.waitUntilElementClickable(TicketLocators.timelineToggle,10);
             String typeActual = DriverAction.getElementText(TicketLocators.ticketDetails("Type"));
             String descActual = DriverAction.getElementText(TicketLocators.ticketDetails("Description"));
             String deptActual = DriverAction.getElementText(TicketLocators.ticketDetails("Department"));
@@ -177,6 +189,7 @@ public class CommonUtils {
                 } else GemTestReporter.addTestStep("Verify Status","Status expected: "+status+" Actual: "+statusActual,STATUS.FAIL,DriverAction.takeSnapShot());
 
                 if(DriverAction.isExist(TicketLocators.timelineToggle)) {
+                    DriverAction.waitSec(1);
                     DriverAction.click(TicketLocators.timelineToggle,"Timeline");
                     if(DriverAction.getElementText(TicketLocators.lastTimelineStatus).equalsIgnoreCase(status)) {
                         GemTestReporter.addTestStep("Timeline status","Latest status is updated on timeline",STATUS.PASS,DriverAction.takeSnapShot());
