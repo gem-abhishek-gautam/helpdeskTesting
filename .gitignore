@@ -1,8 +1,10 @@
 # Default ignored files
 /shelf/
-/.idea/workspace.xml
+/.idea/
 **/target/**
 target
 /target/
 /Report/
-
+/.env
+/helpdesk_automation.iml
+src/test/resources/files
