@@ -91,7 +91,7 @@ public class LoginStepDefinition {
     public void switchToView(String view) {
         try {
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,30);
             }
             DriverAction.waitUntilElementClickable(LoginLocators.getView("Support View"),10);
             DriverAction.waitSec(1);
@@ -99,7 +99,7 @@ public class LoginStepDefinition {
             DriverAction.waitSec(1);
             DriverAction.click(LoginLocators.getView(view),view);
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,30);
             }
             DriverAction.waitUntilElementClickable(TicketLocators.createTicket,10);
         } catch (Exception e) {
