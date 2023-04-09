@@ -101,6 +101,9 @@ public class LoginStepDefinition {
             wait.until(ExpectedConditions.visibilityOfElementLocated(LoginLocators.getView("Support View")));
             DriverAction.waitUntilElementClickable(LoginLocators.getView("Support View"),10);
             DriverAction.waitSec(1);
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
             DriverAction.click(LoginLocators.getView("Support View"),"View dropdown");
             DriverAction.waitUntilElementClickable(LoginLocators.getView(view),20);
             DriverAction.click(LoginLocators.getView(view),view);

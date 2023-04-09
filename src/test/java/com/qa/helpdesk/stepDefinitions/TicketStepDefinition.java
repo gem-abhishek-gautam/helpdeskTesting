@@ -244,16 +244,21 @@ public class TicketStepDefinition {
             DriverAction.typeText(SearchAndSortLocators.ticketSearchBox, ticketID);
             DriverAction.waitSec(1);
             DriverAction.click(SearchAndSortLocators.ticketSearchButton);
-            DriverAction.waitSec(3);
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
+            DriverAction.waitUntilElementClickable(TicketLocators.ticketActionButton,10);
             if (DriverManager.getWebDriver().findElement(TicketLocators.ticketActionButton).isEnabled()) {
                 GemTestReporter.addTestStep("Action button", "Action button is active for the new ticket", STATUS.PASS, DriverAction.takeSnapShot());
             } else
                 GemTestReporter.addTestStep("Action button", "Action button is not active for the new ticket", STATUS.FAIL, DriverAction.takeSnapShot());
+
             DriverAction.click(TicketLocators.ticketActionButton, "Action button");
+            DriverAction.waitUntilElementClickable(TicketLocators.ticketCancelButton,10);
             DriverAction.click(TicketLocators.ticketCancelButton);
             DriverAction.waitSec(2);
             DriverAction.typeText(TicketLocators.ticketCancelReasonBox, "reason");
-            DriverAction.waitSec(2);
+            DriverAction.waitUntilElementClickable(TicketLocators.confirmCancelButton,10);
             DriverAction.click(TicketLocators.confirmCancelButton);
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
                 DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);

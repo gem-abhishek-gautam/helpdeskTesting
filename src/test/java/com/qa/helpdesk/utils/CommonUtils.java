@@ -230,7 +230,10 @@ public class CommonUtils {
                 } else GemTestReporter.addTestStep("Verify Status","Status expected: "+status+" Actual: "+statusActual,STATUS.FAIL,DriverAction.takeSnapShot());
 
                 if(DriverAction.isExist(TicketLocators.timelineToggle)) {
-                    DriverAction.waitSec(1);
+                    if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                        DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                    }
+                    DriverAction.waitUntilElementClickable(TicketLocators.timelineToggle,10);
                     DriverAction.click(TicketLocators.timelineToggle,"Timeline");
                     if(DriverAction.getElementText(TicketLocators.lastTimelineStatus).equalsIgnoreCase(status)) {
                         GemTestReporter.addTestStep("Timeline status","Latest status is updated on timeline",STATUS.PASS,DriverAction.takeSnapShot());

@@ -166,7 +166,7 @@ public class FilterAndPageStepDefinition {
                     } while(nextActive);
 
                     for(String ele:allStatus) {
-                        if(!status.toLowerCase().contains(ele.toLowerCase())){
+                        if(!ele.toLowerCase().contains(status.toLowerCase())){
                             statusFlag=0;
                             break;
                         }
