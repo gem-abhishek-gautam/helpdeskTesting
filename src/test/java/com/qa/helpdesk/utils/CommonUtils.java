@@ -100,10 +100,22 @@ public class CommonUtils {
 
             DriverAction.typeText(TicketLocators.subject,subject);
             DriverAction.typeText(TicketLocators.desc,desc);
+            DriverAction.waitUntilElementClickable(TicketLocators.typeDropdown,10);
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
             DriverAction.click(TicketLocators.typeDropdown);
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
+            wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.ticketDropdownOptions("Incident")));
             DriverAction.click(TicketLocators.ticketDropdownOptions("Incident"));
-            DriverAction.waitSec(2);
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
+            wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.ticketDropdown("Department")));
             DriverAction.click(TicketLocators.ticketDropdown("Department"));
+            wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.ticketDropdownOptions(dept)));
             DriverAction.click(TicketLocators.ticketDropdownOptions(dept));
 
             DriverAction.waitSec(2);
@@ -125,17 +137,46 @@ public class CommonUtils {
             wait.until(ExpectedConditions.visibilityOfElementLocated(TicketLocators.ticketFormHeader));
             DriverAction.typeText(TicketLocators.subject,subject);
             DriverAction.typeText(TicketLocators.desc,desc);
+            wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.typeDropdown));
             DriverAction.click(TicketLocators.typeDropdown);
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
+            wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.ticketDropdownOptions("Request")));
             DriverAction.click(TicketLocators.ticketDropdownOptions("Request"));
-            DriverAction.waitSec(2);
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
+            wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.ticketDropdown("Department")));
             DriverAction.click(TicketLocators.ticketDropdown("Department"));
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
+            wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.ticketDropdownOptions(dept)));
             DriverAction.click(TicketLocators.ticketDropdownOptions(dept));
-            DriverAction.waitSec(2);
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
+            wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.ticketDropdown("Category")));
             DriverAction.click(TicketLocators.ticketDropdown("Category"));
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
+            wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.ticketDropdownOptions(category)));
             DriverAction.click(TicketLocators.ticketDropdownOptions(category));
-            DriverAction.waitSec(2);
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
+            wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.ticketDropdown("Sub-category")));
             DriverAction.click(TicketLocators.ticketDropdown("Sub-category"));
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
+            wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.ticketDropdownOptions(subCategory)));
             DriverAction.click(TicketLocators.ticketDropdownOptions(subCategory));
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
             if(!filePath.isEmpty()){
                 DriverAction.fileUpload(TicketLocators.fileUpload,filePath);
             }

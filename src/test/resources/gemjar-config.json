@@ -18,6 +18,6 @@
     "launchUrl": "https://helpdeskui-np.geminisolutions.com/",
     "dashboardUrl": "https://helpdeskui-np.geminisolutions.com/#/dashboard/0",
     "ticketDetailsUrl": "https://helpdeskui-np.geminisolutions.com/#/ticket-details/",
-    "browserTimeout": 10
+    "browserTimeout": 20
   }
 }

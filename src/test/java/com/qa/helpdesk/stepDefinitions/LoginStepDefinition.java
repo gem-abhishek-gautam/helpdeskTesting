@@ -39,7 +39,14 @@ public class LoginStepDefinition {
                 }
             } else GemTestReporter.addTestStep("Login button","Login button not found", STATUS.FAIL,DriverAction.takeSnapShot());
 
-            WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(),60);
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,30);
+            }
+            if(DriverAction.isExist(LoginLocators.loginButton)) {
+                DriverAction.waitUntilElementClickable(LoginLocators.loginButton,20);
+                DriverAction.click(LoginLocators.loginButton,"Login SSO");
+            }
+            WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(),45);
             wait.until(ExpectedConditions.visibilityOfElementLocated(DashboardHeaderLocators.headerButtons("logout")));
             DriverAction.waitUntilElementClickable(DashboardHeaderLocators.headerButtons("logout"),10);
 
@@ -90,16 +97,15 @@ public class LoginStepDefinition {
     @And("Switch to view {string}")
     public void switchToView(String view) {
         try {
-            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,30);
-            }
+            WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(),10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(LoginLocators.getView("Support View")));
             DriverAction.waitUntilElementClickable(LoginLocators.getView("Support View"),10);
             DriverAction.waitSec(1);
             DriverAction.click(LoginLocators.getView("Support View"),"View dropdown");
-            DriverAction.waitSec(1);
+            DriverAction.waitUntilElementClickable(LoginLocators.getView(view),20);
             DriverAction.click(LoginLocators.getView(view),view);
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,30);
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
             DriverAction.waitUntilElementClickable(TicketLocators.createTicket,10);
         } catch (Exception e) {

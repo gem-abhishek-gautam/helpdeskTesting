@@ -24,11 +24,10 @@ Feature: Testcases for pagination and filters
       | dept     | status     |
       |          | Unassigned |
       | IT,HR    | Unassigned |
-      | HR       | Rejected   |
       | IT       | Open       |
       | IT       | Unassigned |
       | IT       | Assigned   |
-      | IT       | On Hold    |
+      | IT       | Hold       |
       | IT       | Resolved   |
       | IT       | Cancelled  |
       | IT       | Closed     |
@@ -37,7 +36,7 @@ Feature: Testcases for pagination and filters
       | HR       | Open       |
       | HR       | Unassigned |
       | HR       | Assigned   |
-      | HR       | On Hold    |
+      | HR       | Hold       |
       | HR       | Resolved   |
       | HR       | Cancelled  |
       | HR       | Closed     |
@@ -46,7 +45,7 @@ Feature: Testcases for pagination and filters
       | Admin    | Open       |
       | Admin    | Unassigned |
       | Admin    | Assigned   |
-      | Admin    | On Hold    |
+      | Admin    | Hold       |
       | Admin    | Resolved   |
       | Admin    | Cancelled  |
       | Admin    | Closed     |
@@ -55,7 +54,7 @@ Feature: Testcases for pagination and filters
       | Accounts | Open       |
       | Accounts | Unassigned |
       | Accounts | Assigned   |
-      | Accounts | On Hold    |
+      | Accounts | Hold       |
       | Accounts | Resolved   |
       | Accounts | Cancelled  |
       | Accounts | Closed     |
@@ -74,7 +73,7 @@ Feature: Testcases for pagination and filters
       | IT          | Open       |
       | IT          | Unassigned |
       | IT          | Assigned   |
-      | IT          | On Hold    |
+      | IT          | Hold       |
       | IT          | Resolved   |
       | IT          | Cancelled  |
       | IT          | Closed     |
@@ -83,7 +82,7 @@ Feature: Testcases for pagination and filters
       | HR          | Open       |
       | HR          | Unassigned |
       | HR          | Assigned   |
-      | HR          | On Hold    |
+      | HR          | Hold       |
       | HR          | Resolved   |
       | HR          | Cancelled  |
       | HR          | Closed     |
@@ -92,7 +91,7 @@ Feature: Testcases for pagination and filters
       | Admin       | Open       |
       | Admin       | Unassigned |
       | Admin       | Assigned   |
-      | Admin       | On Hold    |
+      | Admin       | Hold       |
       | Admin       | Resolved   |
       | Admin       | Cancelled  |
       | Admin       | Closed     |
@@ -101,7 +100,7 @@ Feature: Testcases for pagination and filters
       | Accounts    | Open       |
       | Accounts    | Unassigned |
       | Accounts    | Assigned   |
-      | Accounts    | On Hold    |
+      | Accounts    | Hold       |
       | Accounts    | Resolved   |
       | Accounts    | Cancelled  |
       | Accounts    | Closed     |

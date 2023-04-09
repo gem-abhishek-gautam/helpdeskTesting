@@ -134,7 +134,7 @@ public class FilterAndPageStepDefinition {
                     } while (nextActive);
 
                     for(String ele:allDept) {
-                        if(!dept.contains(ele)){
+                        if(!dept.toLowerCase().contains(ele.toLowerCase())){
                             deptFlag=0;
                             break;
                         }
@@ -166,7 +166,7 @@ public class FilterAndPageStepDefinition {
                     } while(nextActive);
 
                     for(String ele:allStatus) {
-                        if(!status.contains(ele)){
+                        if(!status.toLowerCase().contains(ele.toLowerCase())){
                             statusFlag=0;
                             break;
                         }

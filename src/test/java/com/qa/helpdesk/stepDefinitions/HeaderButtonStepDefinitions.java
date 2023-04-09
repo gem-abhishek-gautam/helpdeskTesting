@@ -115,6 +115,7 @@ public class HeaderButtonStepDefinitions {
     public void checkIfIsThereAnUnreadCountForNotifications() {
         try {
             if(DriverAction.isExist(DashboardHeaderLocators.unreadCount)) {
+                DriverAction.waitUntilElementClickable(DashboardHeaderLocators.notificationButton,10);
                 DriverAction.click(DashboardHeaderLocators.notificationButton,"Notification button");
                 DriverAction.waitSec(2);
                 DriverAction.click(DashboardHeaderLocators.unreadNotifications,"Unread");
@@ -134,14 +135,15 @@ public class HeaderButtonStepDefinitions {
                 unreadCount = Integer.parseInt(DriverAction.getElementText(DashboardHeaderLocators.unreadCount));
             }
             if(unreadCount>0) {
-                List<WebElement> notifList = null;
-                while(DriverAction.isExist(DashboardHeaderLocators.showMoreNotifications)) {
+                List<WebElement> notifList = new ArrayList<>();
+                boolean isExist = DriverAction.isExist(DashboardHeaderLocators.showMoreNotifications);
+                while(isExist) {
                     DriverAction.scrollIntoView(DashboardHeaderLocators.showMoreNotifications);
-                    DriverAction.waitUntilElementClickable(DashboardHeaderLocators.showMoreNotifications,5);
+                    DriverAction.waitUntilElementClickable(DashboardHeaderLocators.showMoreNotifications,10);
                     DriverAction.click(DashboardHeaderLocators.showMoreNotifications,"Show more");
-                    notifList = DriverAction.getElements(DashboardHeaderLocators.notificationList);
+                    notifList=DriverAction.getElements(DashboardHeaderLocators.notificationList);;
+                    isExist = DriverAction.isExist(DashboardHeaderLocators.showMoreNotifications);
                 }
-                assert notifList != null;
                 if(unreadCount==notifList.size()) {
                     GemTestReporter.addTestStep("Unread notifications","Unread notifications count matched",STATUS.PASS,DriverAction.takeSnapShot());
                 } else GemTestReporter.addTestStep("Unread notifications","Unread notifications count not matched, Expected: "+unreadCount+" Actual: "+notifList.size()+"",STATUS.FAIL,DriverAction.takeSnapShot());
