@@ -3,6 +3,7 @@ package com.qa.helpdesk.stepDefinitions;
 import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
 import com.gemini.generic.ui.utils.DriverAction;
+import com.gemini.generic.ui.utils.DriverManager;
 import com.gemini.generic.utils.ProjectConfigData;
 import com.qa.helpdesk.locators.DashboardHeaderLocators;
 import com.qa.helpdesk.locators.LoginLocators;
@@ -10,6 +11,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -92,7 +94,6 @@ public class HeaderButtonStepDefinitions {
             if(DriverAction.isExist(DashboardHeaderLocators.notificationContainer)){
                 GemTestReporter.addTestStep("Notifications","Notification container is visible", STATUS.PASS, DriverAction.takeSnapShot());
                 List<WebElement> initialCount = DriverAction.getElements(DashboardHeaderLocators.notificationList);
-                DriverAction.scrollIntoView(DashboardHeaderLocators.showMoreNotifications);
 
                 if(DriverAction.isExist(DashboardHeaderLocators.showMoreNotifications)) {
                     GemTestReporter.addTestStep("Show more notifications","Show more button for notifications is present",STATUS.PASS,DriverAction.takeSnapShot());
@@ -139,8 +140,16 @@ public class HeaderButtonStepDefinitions {
                 boolean isExist = DriverAction.isExist(DashboardHeaderLocators.showMoreNotifications);
                 while(isExist) {
                     DriverAction.scrollIntoView(DashboardHeaderLocators.showMoreNotifications);
-                    DriverAction.waitUntilElementClickable(DashboardHeaderLocators.showMoreNotifications,10);
-                    DriverAction.click(DashboardHeaderLocators.showMoreNotifications,"Show more");
+                    try {
+                        DriverAction.waitUntilElementClickable(DashboardHeaderLocators.showMoreNotifications,10);
+                        DriverAction.click(DashboardHeaderLocators.showMoreNotifications,"Show more");
+                    } catch (Exception e) {
+                        if(DriverAction.isExist(DashboardHeaderLocators.showMoreNotifications)) {
+                            JavascriptExecutor exe = (JavascriptExecutor) DriverManager.getWebDriver();
+                            exe.executeScript("arguments[0].click();",DriverAction.getElement(DashboardHeaderLocators.showMoreNotifications));
+                        }
+                    }
+
                     notifList=DriverAction.getElements(DashboardHeaderLocators.notificationList);;
                     isExist = DriverAction.isExist(DashboardHeaderLocators.showMoreNotifications);
                 }

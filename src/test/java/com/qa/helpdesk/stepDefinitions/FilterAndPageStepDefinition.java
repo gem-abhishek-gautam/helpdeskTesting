@@ -69,17 +69,24 @@ public class FilterAndPageStepDefinition {
     public void selectFilterCriteria(String dept, String status) {
         try
         {
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
             if(!dept.isEmpty())
             {
                 if(dept.contains(",")){
                     String[] deptList = dept.split(",");
                     for(String i:deptList) {
                         DriverAction.click(FilterAndCalendarLocators.filterOptions(i),"Department");
-                        DriverAction.waitSec(2);
+                        if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                            DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                        }
                     }
                 } else {
                     DriverAction.click(FilterAndCalendarLocators.filterOptions(dept),"Status");
-                    DriverAction.waitSec(2);
+                    if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                        DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                    }
                 }
 
             }
@@ -90,11 +97,15 @@ public class FilterAndPageStepDefinition {
                     String[] statusList = status.split(",");
                     for(String j:statusList) {
                         DriverAction.click(FilterAndCalendarLocators.filterOptions(j),"Status");
-                        DriverAction.waitSec(2);
+                        if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                            DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                        }
                     }
                 } else {
                     DriverAction.click(FilterAndCalendarLocators.filterOptions(status),"Status");
-                    DriverAction.waitSec(2);
+                    if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                        DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                    }
                 }
 
             }
