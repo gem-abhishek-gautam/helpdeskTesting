@@ -253,6 +253,7 @@ public class TicketStepDefinition {
             } else
                 GemTestReporter.addTestStep("Action button", "Action button is not active for the new ticket", STATUS.FAIL, DriverAction.takeSnapShot());
 
+            DriverAction.scrollIntoView(TicketLocators.ticketActionButton);
             DriverAction.click(TicketLocators.ticketActionButton, "Action button");
             DriverAction.waitUntilElementClickable(TicketLocators.ticketCancelButton,10);
             DriverAction.click(TicketLocators.ticketCancelButton);

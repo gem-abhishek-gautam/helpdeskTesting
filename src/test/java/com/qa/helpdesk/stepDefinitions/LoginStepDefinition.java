@@ -13,6 +13,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.github.cdimascio.dotenv.Dotenv;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -108,8 +109,11 @@ public class LoginStepDefinition {
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
                 DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
+            wait.until(ExpectedConditions.visibilityOfElementLocated(LoginLocators.getView(view)));
             DriverAction.waitSec(1);
-            DriverAction.click(LoginLocators.getView(view),view);
+            JavascriptExecutor executor = (JavascriptExecutor)DriverManager.getWebDriver();
+            executor.executeScript("arguments[0].click();", LoginLocators.getView(view));
+//            DriverAction.click(LoginLocators.getView(view),view);
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
                 DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }

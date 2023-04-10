@@ -4,10 +4,8 @@ import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
 import com.gemini.generic.ui.utils.DriverAction;
 import com.gemini.generic.ui.utils.DriverManager;
-import com.qa.helpdesk.locators.DashboardHeaderLocators;
-import com.qa.helpdesk.locators.SearchAndSortLocators;
-import com.qa.helpdesk.locators.TableAndPaginationLocators;
-import com.qa.helpdesk.locators.TicketLocators;
+import com.qa.helpdesk.locators.*;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -163,17 +161,24 @@ public class CommonUtils {
                 DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
             wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.ticketDropdownOptions(category)));
-            DriverAction.click(TicketLocators.ticketDropdownOptions(category));
+            JavascriptExecutor executor = (JavascriptExecutor)DriverManager.getWebDriver();
+            executor.executeScript("arguments[0].click();", TicketLocators.ticketDropdownOptions(category));
+
+//            DriverAction.click(TicketLocators.ticketDropdownOptions(category));
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
                 DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
             wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.ticketDropdown("Sub-category")));
-            DriverAction.click(TicketLocators.ticketDropdown("Sub-category"));
+//
+            executor.executeScript("arguments[0].click();", TicketLocators.ticketDropdown("Sub-category"));
+//            DriverAction.click(TicketLocators.ticketDropdown("Sub-category"));
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
                 DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
             wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.ticketDropdownOptions(subCategory)));
-            DriverAction.click(TicketLocators.ticketDropdownOptions(subCategory));
+
+            executor.executeScript("arguments[0].click();", TicketLocators.ticketDropdownOptions(subCategory));
+//            DriverAction.click(TicketLocators.ticketDropdownOptions(subCategory));
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
                 DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
