@@ -112,7 +112,7 @@ public class LoginStepDefinition {
             wait.until(ExpectedConditions.visibilityOfElementLocated(LoginLocators.getView(view)));
             DriverAction.waitSec(1);
             JavascriptExecutor executor = (JavascriptExecutor)DriverManager.getWebDriver();
-            executor.executeScript("arguments[0].click();", LoginLocators.getView(view));
+            executor.executeScript("arguments[0].click();", DriverAction.getElement(LoginLocators.getView(view)));
 //            DriverAction.click(LoginLocators.getView(view),view);
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
                 DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);

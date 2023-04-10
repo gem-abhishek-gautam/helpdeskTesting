@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.sql.Driver;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -162,7 +163,7 @@ public class CommonUtils {
             }
             wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.ticketDropdownOptions(category)));
             JavascriptExecutor executor = (JavascriptExecutor)DriverManager.getWebDriver();
-            executor.executeScript("arguments[0].click();", TicketLocators.ticketDropdownOptions(category));
+            executor.executeScript("arguments[0].click();", DriverAction.getElement(TicketLocators.ticketDropdownOptions(category)));
 
 //            DriverAction.click(TicketLocators.ticketDropdownOptions(category));
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
@@ -170,14 +171,14 @@ public class CommonUtils {
             }
             wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.ticketDropdown("Sub-category")));
 //
-            executor.executeScript("arguments[0].click();", TicketLocators.ticketDropdown("Sub-category"));
+            executor.executeScript("arguments[0].click();", DriverAction.getElement(TicketLocators.ticketDropdown("Sub-category")));
 //            DriverAction.click(TicketLocators.ticketDropdown("Sub-category"));
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
                 DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
             wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.ticketDropdownOptions(subCategory)));
 
-            executor.executeScript("arguments[0].click();", TicketLocators.ticketDropdownOptions(subCategory));
+            executor.executeScript("arguments[0].click();", DriverAction.getElement(TicketLocators.ticketDropdownOptions(subCategory)));
 //            DriverAction.click(TicketLocators.ticketDropdownOptions(subCategory));
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
                 DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
