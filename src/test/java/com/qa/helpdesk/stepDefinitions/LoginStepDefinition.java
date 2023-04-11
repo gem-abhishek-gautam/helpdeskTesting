@@ -112,6 +112,7 @@ public class LoginStepDefinition {
             try {
                 DriverAction.click(LoginLocators.getView(view),view);
             } catch (Exception e) {
+                DriverAction.click(LoginLocators.getView("Support View"),"View dropdown");
                 DriverAction.waitSec(1);
                 DriverAction.click(LoginLocators.getView(view),view);
             }
