@@ -12,6 +12,7 @@ public class LoginLocators {
     public static By microsoftLoginPrompt = By.xpath("//div[contains(text(),'Stay')]");
     public static By employeeName = By.xpath("//div[contains(@class,'empName')]");
     public static By viewDropdown = By.xpath("//div[contains(@class,'control')]");
+    public static By viewListbox = By.xpath("//div[contains(@id,'listbox')]");
     public static By getView(String view) {
         return By.xpath("//div[text()='"+view+"']");
     }

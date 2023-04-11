@@ -56,6 +56,7 @@ public class FilterAndPageStepDefinition {
         try
         {
             if(DriverAction.isExist(FilterAndCalendarLocators.filterButton)) {
+                DriverAction.waitUntilElementClickable(FilterAndCalendarLocators.filterButton,10);
                 DriverAction.click(FilterAndCalendarLocators.filterButton, "Filter button");
                 DriverAction.waitSec(2);
             } else GemTestReporter.addTestStep("Filter button","Filter button not found",STATUS.FAIL,DriverAction.takeSnapShot());

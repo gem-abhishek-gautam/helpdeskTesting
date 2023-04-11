@@ -266,7 +266,10 @@ public class TicketStepDefinition {
             }
             DriverAction.waitUntilElementClickable(SearchAndSortLocators.ticketSearchButton, 10);
             DriverAction.typeText(SearchAndSortLocators.ticketSearchBox, ticketID);
-            DriverAction.waitSec(1);
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
+            DriverAction.waitUntilElementClickable(SearchAndSortLocators.ticketSearchButton, 10);
             DriverAction.click(SearchAndSortLocators.ticketSearchButton);
             DriverAction.waitSec(2);
             if (!DriverManager.getWebDriver().findElement(TicketLocators.ticketActionButton).isEnabled()) {
@@ -416,7 +419,10 @@ public class TicketStepDefinition {
     public void openCreateTicketForm() {
         try {
             DriverAction.click(TicketLocators.createTicket, "Create ticket");
-            DriverAction.waitUntilElementAppear(TicketLocators.ticketFormHeader, 5);
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
+            DriverAction.waitUntilElementAppear(TicketLocators.ticketDropdown("Department"), 5);
         } catch (Exception e) {
             GemTestReporter.addTestStep("Exception Occurred", "Exception: " + e, STATUS.FAIL);
             throw new RuntimeException(e);

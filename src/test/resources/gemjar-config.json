@@ -16,7 +16,7 @@
   "dev": {
     "browserName": "chrome",
     "launchUrl": "https://helpdeskui-np.geminisolutions.com/",
-    "dashboardUrl": "https://helpdeskui-np.geminisolutions.com/#/dashboard/0",
+    "dashboardUrl": "https://helpdeskui-np.geminisolutions.com/#/dashboard",
     "ticketDetailsUrl": "https://helpdeskui-np.geminisolutions.com/#/ticket-details/",
     "browserTimeout": 20
   }

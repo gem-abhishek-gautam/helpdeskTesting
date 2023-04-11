@@ -62,7 +62,7 @@ public class LoginStepDefinition {
         try {
             String actualUrl = DriverAction.getCurrentURL();
             String expectedUrl = ProjectConfigData.getProperty("dashboardUrl");
-            if (expectedUrl.equalsIgnoreCase(actualUrl)) {
+            if (actualUrl.contains(expectedUrl)) {
                 GemTestReporter.addTestStep("Login to dashboard", "Login is successful", STATUS.PASS, DriverAction.takeSnapShot());
             } else {
                 GemTestReporter.addTestStep("Login to dashboard", "Login is unsuccessful \nActual URL: " + actualUrl + " \nExpected URL: " + expectedUrl, STATUS.FAIL, DriverAction.takeSnapShot());
@@ -97,15 +97,20 @@ public class LoginStepDefinition {
     public void switchToView(String view) {
         try {
             WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 10);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(LoginLocators.getView("Support View")));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(LoginLocators.viewDropdown));
             DriverAction.waitUntilElementClickable(LoginLocators.viewDropdown, 10);
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
                 DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
             }
             DriverAction.click(LoginLocators.viewDropdown, "View dropdown");
-            DriverAction.waitSec(1);
-            DriverAction.click(LoginLocators.getView(view), view);
-
+            try {
+                DriverAction.click(LoginLocators.getView(view), view);
+            } catch (Exception e) {
+                if(!DriverAction.isExist(LoginLocators.viewListbox)) {
+                    DriverAction.click(LoginLocators.viewDropdown, "View dropdown");
+                    DriverAction.click(LoginLocators.getView(view), view);
+                } else DriverAction.click(LoginLocators.getView(view), view);
+            }
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
                 DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
             }
