@@ -112,6 +112,7 @@ public class CommonUtils {
                 wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.ticketDropdownOptions("Incident")));
                 DriverAction.click(TicketLocators.ticketDropdownOptions("Incident"));
             } catch (Exception e) {
+                DriverAction.click(TicketLocators.typeDropdown);
                 DriverAction.click(TicketLocators.ticketDropdownOptions("Incident"));
             }
 
@@ -131,6 +132,7 @@ public class CommonUtils {
                 wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.ticketDropdownOptions(dept)));
                 DriverAction.click(TicketLocators.ticketDropdownOptions(dept));
             } catch (Exception e) {
+                DriverAction.click(TicketLocators.ticketDropdown("Department"));
                 DriverAction.click(TicketLocators.ticketDropdownOptions(dept));
             }
 
@@ -162,6 +164,7 @@ public class CommonUtils {
                 wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.ticketDropdownOptions("Request")));
                 DriverAction.click(TicketLocators.ticketDropdownOptions("Request"));
             } catch (Exception e) {
+                DriverAction.click(TicketLocators.typeDropdown);
                 DriverAction.click(TicketLocators.ticketDropdownOptions("Request"));
             }
 
@@ -181,6 +184,7 @@ public class CommonUtils {
                 wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.ticketDropdownOptions(dept)));
                 DriverAction.click(TicketLocators.ticketDropdownOptions(dept));
             } catch (Exception e) {
+                DriverAction.click(TicketLocators.ticketDropdown("Department"));
                 DriverAction.click(TicketLocators.ticketDropdownOptions(dept));
             }
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
@@ -200,6 +204,7 @@ public class CommonUtils {
                 wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.ticketDropdownOptions(category)));
                 DriverAction.click(TicketLocators.ticketDropdownOptions(category));
             } catch (Exception e) {
+                DriverAction.click(TicketLocators.ticketDropdown("Category"));
                 DriverAction.click(TicketLocators.ticketDropdownOptions(category));
             }
 
@@ -221,6 +226,7 @@ public class CommonUtils {
                 wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.ticketDropdownOptions(subCategory)));
                 DriverAction.click(TicketLocators.ticketDropdownOptions(subCategory));
             } catch (Exception e) {
+                DriverAction.click(TicketLocators.ticketDropdown("Sub-category"));
                 DriverAction.click(TicketLocators.ticketDropdownOptions(subCategory));
             }
 
