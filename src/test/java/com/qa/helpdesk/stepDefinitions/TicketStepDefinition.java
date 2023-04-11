@@ -264,14 +264,20 @@ public class TicketStepDefinition {
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
                 DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
+
+            DriverAction.waitUntilElementClickable(TableAndPaginationLocators.firstTicketID,10);
             DriverAction.waitUntilElementClickable(SearchAndSortLocators.ticketSearchButton, 10);
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
             DriverAction.typeText(SearchAndSortLocators.ticketSearchBox, ticketID);
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
                 DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
-            DriverAction.waitUntilElementClickable(SearchAndSortLocators.ticketSearchButton, 10);
             DriverAction.click(SearchAndSortLocators.ticketSearchButton);
-            DriverAction.waitSec(2);
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            }
             if (!DriverManager.getWebDriver().findElement(TicketLocators.ticketActionButton).isEnabled()) {
                 GemTestReporter.addTestStep("Action button", "Action button is not active for the cancelled ticket", STATUS.PASS, DriverAction.takeSnapShot());
             } else
