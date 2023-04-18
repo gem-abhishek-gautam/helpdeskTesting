@@ -7,6 +7,10 @@ public class DashboardHeaderLocators {
     public static By headerButtons(String option) {
         return By.xpath("//img[@alt='"+option+"']");
     }
+    public static By ticketTabs(String tab) {
+        return By.xpath("//div[contains(text(),'"+tab+"')]");
+    }
+    public static By getActiveTab = By.xpath("//div[contains(@class,'tabs_fontLight')]");
     public static By loaderCover = By.xpath("//div[contains(@class,'Loader')]");
     public static By myTicketsHeader = By.xpath("//div[contains(@class,'tabs_tabItem')]");
     public static By pdfHeader = By.xpath("//span[contains(text(),'Helpdesk User Guide')]");

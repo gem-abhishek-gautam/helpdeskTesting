@@ -17,7 +17,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.sql.Driver;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,7 +83,7 @@ public class TicketStepDefinition {
     public void submitAndCancelTicket(String reason) {
 
         try {
-            DriverAction.click(TicketLocators.submitForm);
+            DriverAction.click(TicketLocators.submitModalForm);
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
                 DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
@@ -163,7 +162,7 @@ public class TicketStepDefinition {
     @Then("Submit and verify the incident details having file {string}, subject {string}, dept {string} and description {string}")
     public void submitAndVerifyIncident(String file, String subject, String dept, String desc) {
         try {
-            DriverAction.click(TicketLocators.submitForm);
+            DriverAction.click(TicketLocators.submitModalForm);
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
                 DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
@@ -191,7 +190,7 @@ public class TicketStepDefinition {
     @Then("Submit and verify the request details having file {string}, subject {string}, dept {string}, description {string}, category {string} and sub-category {string}")
     public void submitAndVerifyRequest(String file, String subject, String dept, String desc, String category, String subCategory) {
         try {
-            DriverAction.click(TicketLocators.submitForm);
+            DriverAction.click(TicketLocators.submitModalForm);
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
                 DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
@@ -229,7 +228,7 @@ public class TicketStepDefinition {
     @Then("Verify if action button is active for the ticket")
     public void verifyIfActionButtonIsActiveForTheTicket() {
         try {
-            DriverAction.click(TicketLocators.submitForm);
+            DriverAction.click(TicketLocators.submitModalForm);
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
                 DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
@@ -438,7 +437,7 @@ public class TicketStepDefinition {
     @Then("Verify subject character limit and required field values")
     public void verifySubjectCharacterLimit() {
         try {
-            DriverAction.click(TicketLocators.submitForm, "Submit");
+            DriverAction.click(TicketLocators.submitModalForm, "Submit");
             List<WebElement> elements = DriverAction.getElements(TicketLocators.inputError);
             if (elements.size() == 4) {
                 GemTestReporter.addTestStep("Required fields validation", "Warning for all required fields are displayed", STATUS.PASS, DriverAction.takeSnapShot());

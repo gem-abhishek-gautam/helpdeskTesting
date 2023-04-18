@@ -1,4 +1,4 @@
-@regression
+@employee @support
 Feature: Login to helpdesk
 
   Scenario: Check login functionality

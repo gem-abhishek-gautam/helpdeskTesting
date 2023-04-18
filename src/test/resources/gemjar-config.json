@@ -10,13 +10,13 @@
   "email_bcc": "",
   "enter_point": "https://apis.gemecosystem.com/enter-point",
   "gemjarSubID": "test_id",
-  "tagName": "@regression",
+  "tags": "@scenario",
   "feature": "src/test/resources/features",
   "glueCode": "com.qa.helpdesk.stepDefinitions",
   "dev": {
     "browserName": "chrome",
     "launchUrl": "https://helpdeskui-np.geminisolutions.com/",
-    "dashboardUrl": "https://helpdeskui-np.geminisolutions.com/#/dashboard",
+    "dashboardUrl": "https://helpdeskui-np.geminisolutions.com/#/dashboard/",
     "ticketDetailsUrl": "https://helpdeskui-np.geminisolutions.com/#/ticket-details/",
     "browserTimeout": 20
   }

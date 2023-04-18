@@ -1,4 +1,4 @@
-@regression
+@employee
 Feature: Testcases for Create Ticket
 
   Background: Check login functionality
@@ -33,6 +33,7 @@ Feature: Testcases for Create Ticket
       | subject      | dept     | desc                                     | catg             | sub                            |
       | test request | IT       | this is test request without file upload | Software         | Software License               |
       | test request | IT       | this is test request without file upload | Software         | Unlicensed/OpenSource          |
+      | test request | IT       | this is test request without file upload | Software         | Domain Change                  |
       | test request | IT       | this is test request without file upload | Access Request   | Creation Of DL/o365 group      |
       | test request | IT       | this is test request without file upload | Access Request   | Modification of DL/o365 group  |
       | test request | IT       | this is test request without file upload | Access Request   | Modification of security group |
@@ -40,11 +41,11 @@ Feature: Testcases for Create Ticket
       | test request | IT       | this is test request without file upload | Hardware         | Docking station                |
       | test request | IT       | this is test request without file upload | Hardware         | Keyboard                       |
       | test request | IT       | this is test request without file upload | Hardware         | Mouse                          |
+      | test request | IT       | this is test request without file upload | Hardware         | Monitor                        |
       | test request | IT       | this is test request without file upload | Hardware         | RAM                            |
       | test request | IT       | this is test request without file upload | Hardware         | Laptop                         |
       | test request | IT       | this is test request without file upload | Hardware         | Other                          |
       | test request | Accounts | this is test request without file upload | Travel           | cards                          |
-      | test request | Accounts | this is test request without file upload | Travel           | insurance                      |
       | test request | Accounts | this is test request without file upload | Travel           | insurance                      |
       | test request | HR       | this is test request without file upload | Leave Management | LNSA                           |
       | test request | HR       | this is test request without file upload | Leave Management | Off                            |
@@ -63,6 +64,7 @@ Feature: Testcases for Create Ticket
       | subject      | dept     | desc                                  | catg             | sub                            |
       | test request | IT       | this is test request with file upload | Software         | Software License               |
       | test request | IT       | this is test request with file upload | Software         | Unlicensed/OpenSource          |
+      | test request | IT       | this is test request with file upload | Software         | Domain Change                  |
       | test request | IT       | this is test request with file upload | Access Request   | Creation Of DL/o365 group      |
       | test request | IT       | this is test request with file upload | Access Request   | Modification of DL/o365 group  |
       | test request | IT       | this is test request with file upload | Access Request   | Modification of security group |
@@ -70,11 +72,11 @@ Feature: Testcases for Create Ticket
       | test request | IT       | this is test request with file upload | Hardware         | Docking station                |
       | test request | IT       | this is test request with file upload | Hardware         | Keyboard                       |
       | test request | IT       | this is test request with file upload | Hardware         | Mouse                          |
+      | test request | IT       | this is test request with file upload | Hardware         | Monitor                        |
       | test request | IT       | this is test request with file upload | Hardware         | RAM                            |
       | test request | IT       | this is test request with file upload | Hardware         | Laptop                         |
       | test request | IT       | this is test request with file upload | Hardware         | Other                          |
       | test request | Accounts | this is test request with file upload | Travel           | cards                          |
-      | test request | Accounts | this is test request with file upload | Travel           | insurance                      |
       | test request | Accounts | this is test request with file upload | Travel           | insurance                      |
       | test request | HR       | this is test request with file upload | Leave Management | LNSA                           |
       | test request | HR       | this is test request with file upload | Leave Management | Off                            |
@@ -106,6 +108,7 @@ Feature: Testcases for Create Ticket
       | subject      | dept     | desc                                     | catg             | sub                            |
       | test request | IT       | this is test request without file upload | Software         | Software License               |
       | test request | IT       | this is test request without file upload | Software         | Unlicensed/OpenSource          |
+      | test request | IT       | this is test request without file upload | Software         | Domain Change                  |
       | test request | IT       | this is test request without file upload | Access Request   | Creation Of DL/o365 group      |
       | test request | IT       | this is test request without file upload | Access Request   | Modification of DL/o365 group  |
       | test request | IT       | this is test request without file upload | Access Request   | Modification of security group |
@@ -113,20 +116,20 @@ Feature: Testcases for Create Ticket
       | test request | IT       | this is test request without file upload | Hardware         | Docking station                |
       | test request | IT       | this is test request without file upload | Hardware         | Keyboard                       |
       | test request | IT       | this is test request without file upload | Hardware         | Mouse                          |
+      | test request | IT       | this is test request without file upload | Hardware         | Monitor                        |
       | test request | IT       | this is test request without file upload | Hardware         | RAM                            |
       | test request | IT       | this is test request without file upload | Hardware         | Laptop                         |
       | test request | IT       | this is test request without file upload | Hardware         | Other                          |
       | test request | Accounts | this is test request without file upload | Travel           | cards                          |
       | test request | Accounts | this is test request without file upload | Travel           | insurance                      |
-      | test request | Accounts | this is test request without file upload | Travel           | insurance                      |
       | test request | HR       | this is test request without file upload | Leave Management | LNSA                           |
       | test request | HR       | this is test request without file upload | Leave Management | Off                            |
-      | test request | HR       | this is test request with file upload    | Leave Management | Missed                         |
-      | test request | Admin    | this is test request with file upload    | Facility         | Courier                        |
-      | test request | Admin    | this is test request with file upload    | Facility         | Lunch                          |
-      | test request | Admin    | this is test request with file upload    | Facility         | Chair                          |
-      | test request | Admin    | this is test request with file upload    | Hardware         | Mobile                         |
-      | test request | Admin    | this is test request with file upload    | Registration     | Face                           |
+      | test request | HR       | this is test request without file upload | Leave Management | Missed                         |
+      | test request | Admin    | this is test request without file upload | Facility         | Courier                        |
+      | test request | Admin    | this is test request without file upload | Facility         | Lunch                          |
+      | test request | Admin    | this is test request without file upload | Facility         | Chair                          |
+      | test request | Admin    | this is test request without file upload | Hardware         | Mobile                         |
+      | test request | Admin    | this is test request without file upload | Registration     | Face                           |
 
 
   Scenario: Check action button for ticket
@@ -159,12 +162,12 @@ Feature: Testcases for Create Ticket
 
   Scenario: Check comments and files can be added for incident ticket details
     Given Create a ticket for incident with subject "incident test", desc "desc test" and dept "Accounts"
-    When Submit and verify the incident details having file "unattached", subject "incident test", dept "Accounts" and description "desc test"
+    Then Submit and verify the incident details having file "unattached", subject "incident test", dept "Accounts" and description "desc test"
     Then Verify if comment "no file" can be added for the ticket
     Then Validate comment with file uploads on ticket page
 
   Scenario: Check comments and files can be added for request ticket details
     Given Create request without file and with subject "request test", dept "HR", category "Leave Management", sub-category "LNSA" and description "desc test"
-    When Submit and verify the request details having file "unattached", subject "request test", dept "HR", description "desc test", category "Leave Management" and sub-category "LNSA"
+    Then Submit and verify the request details having file "unattached", subject "request test", dept "HR", description "desc test", category "Leave Management" and sub-category "LNSA"
     Then Verify if comment "no file" can be added for the ticket
     Then Validate comment with file uploads on ticket page

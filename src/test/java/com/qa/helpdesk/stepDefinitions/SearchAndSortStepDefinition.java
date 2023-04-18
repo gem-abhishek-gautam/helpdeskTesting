@@ -70,15 +70,15 @@ public class SearchAndSortStepDefinition {
 
     @Given("Verify sorting button for {string} column")
     public void checkSortingButtonForColumn(String colName) {
-        if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-            DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
-        }
         try
         {
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+            }
             List<String> values = new ArrayList<>();
             DriverAction.waitUntilElementClickable(SearchAndSortLocators.columns(colName),10);
             DriverAction.click(SearchAndSortLocators.columns(colName),colName+" sort button");
-            DriverAction.waitSec(2);
+            DriverAction.waitUntilElementClickable(TableAndPaginationLocators.paginationDropdown,5);
             DriverAction.dropDown(TableAndPaginationLocators.paginationDropdown,"25");
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
                 DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
@@ -86,7 +86,18 @@ public class SearchAndSortStepDefinition {
             String pos = CommonUtils.getTableColPosition(colName);
             boolean nextActive;
             do {
-                List<WebElement> elements = DriverAction.getElements(TableAndPaginationLocators.getColValues(pos));
+                List<WebElement> elements = new ArrayList<>();
+                if(DriverAction.getElementText(DashboardHeaderLocators.getActiveTab).toLowerCase().contains("department")) {
+                    if(!(DriverAction.getElementText(DashboardHeaderLocators.getActiveTab).toLowerCase()).contains("my tickets")) {
+                        if(colName.equalsIgnoreCase("Assigned to")) {
+                            elements = DriverAction.getElements(TableAndPaginationLocators.getAssignValues);
+                        }
+                        if(colName.equalsIgnoreCase("status")) {
+                            elements = DriverAction.getElements(TableAndPaginationLocators.getStatusValues);
+                        }
+                    } else
+                        elements = DriverAction.getElements(TableAndPaginationLocators.getColValues(pos));
+                }
                 for(WebElement ele: elements)
                 {
                     values.add(DriverAction.getElementText(ele));
@@ -101,12 +112,12 @@ public class SearchAndSortStepDefinition {
                 }
             } while (nextActive);
 
-            if(CommonUtils.isListInAscendingOrder(values) || CommonUtils.isListInDescOrder(values)) {
+            if(CommonUtils.isListInOrder(values)) {
                 GemTestReporter.addTestStep(""+colName+" Values","Values are in sorted order",STATUS.PASS,DriverAction.takeSnapShot());
             } else GemTestReporter.addTestStep(""+colName+" Values","Values are not in sorted order",STATUS.FAIL,DriverAction.takeSnapShot());
             values.clear();
             DriverAction.refresh();
-            DriverAction.waitUntilElementClickable(TableAndPaginationLocators.nextPageButton,10);
+            DriverAction.waitUntilElementClickable(SearchAndSortLocators.columns(colName),5);
 
         } catch (Exception e) {
             GemTestReporter.addTestStep("Exception Occurred","Exception: "+e,STATUS.FAIL);

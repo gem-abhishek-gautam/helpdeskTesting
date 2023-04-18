@@ -1,4 +1,4 @@
-@regression
+@employee
 Feature: Testcases for pagination and filters
 
   Background: Check login functionality

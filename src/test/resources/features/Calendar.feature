@@ -1,4 +1,4 @@
-@regression
+@employee
 Feature: Calendar functionality
 
   Background: Check login functionality

@@ -15,7 +15,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class HeaderButtonStepDefinitions {
     @And("Click on user guide button")
@@ -34,8 +36,9 @@ public class HeaderButtonStepDefinitions {
     public void verifyIfUserGuideIsOpened() {
         try
         {
-            ArrayList<String> chromeTabs = new ArrayList<>(DriverAction.getWindowHandles());
-            DriverAction.switchToWindow(chromeTabs.get(1));
+            Set<String> chromeTabs = new HashSet<>(DriverAction.getWindowHandles());
+            String[] tabsList = chromeTabs.toArray(new String[chromeTabs.size()]);
+            DriverAction.switchToWindow(tabsList[1]);
             DriverAction.waitUntilElementClickable(DashboardHeaderLocators.pdfHeader,10);
             if(DriverAction.isExist(DashboardHeaderLocators.pdfHeader) && DriverAction.getElementText(DashboardHeaderLocators.pdfHeader).equalsIgnoreCase("Helpdesk user guide.pdf"))
             {

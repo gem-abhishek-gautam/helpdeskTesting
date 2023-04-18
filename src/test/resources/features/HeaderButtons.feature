@@ -1,4 +1,4 @@
-@regression
+@employee
 Feature: Header buttons functionality
 
   Background: Check login functionality

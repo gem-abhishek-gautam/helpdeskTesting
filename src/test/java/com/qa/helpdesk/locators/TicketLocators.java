@@ -11,6 +11,12 @@ public class TicketLocators {
     public static By desc = By.xpath("//textarea[@name='description']");
     public static By fileUpload = By.xpath("//input[@type='file']");
     public static By ticketCreatedLogo = By.xpath("//img[contains(@alt,'created')]");
+    public static By callerMenu(String name) {
+      return By.xpath("//div[contains(@id,'listbox')]//div[contains(text(),'"+name+"')]");
+    }
+    public static By callerNameInput = By.xpath("//div[contains(text(),'Search')]/following-sibling::div/input");
+    public static By configInput = By.xpath("//label[contains(text(),'Config')]/following-sibling::div//input");
+    public static By getCallerName = By.xpath("//div[contains(@class,'header_labelValue')]");
     public static By typeDropdown = By.xpath("//label[contains(text(),'Type')]/parent::div/following-sibling::div/div");
     public static By getPreviewTypeValue = By.xpath("//label[text()='Type']//parent::div/following-sibling::p");
     public static By ticketDropdownOptions(String options) {
@@ -27,7 +33,8 @@ public class TicketLocators {
     }
     public static By previewButton = By.xpath("//button[text()='Preview']");
     public static By previewAttachments = By.xpath("//label[text()='Attachments']");
-    public static By submitForm = By.xpath("//div[contains(@class,'modal')]//button[@type='submit']");
+    public static By submitModalForm = By.xpath("//div[contains(@class,'modal')]//button[@type='submit']");
+    public static By submitForm = By.xpath("//button[@type='submit']");
     public static By postSubmitBannerTitle = By.xpath("//div[contains(@class,'modal_header')]");
     public static By postSubmitTicketID = By.xpath("//div[contains(@class,'modal-body')]//p[2]");
     public static By postSubmitContinueButton = By.xpath("//button[contains(text(),'Continue')]");

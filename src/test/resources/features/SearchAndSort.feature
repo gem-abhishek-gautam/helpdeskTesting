@@ -1,4 +1,4 @@
-@regression
+@employee
 Feature: Testcases for search and sort functionality
 
   Background: Check login functionality
