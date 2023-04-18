@@ -118,7 +118,6 @@ public class SearchAndSortStepDefinition {
             } else GemTestReporter.addTestStep(""+colName+" Values","Values are not in sorted order",STATUS.FAIL,DriverAction.takeSnapShot());
             values.clear();
             DriverAction.refresh();
-            DriverAction.waitUntilElementClickable(SearchAndSortLocators.columns(colName),5);
 
         } catch (Exception e) {
             GemTestReporter.addTestStep("Exception Occurred","Exception: "+e,STATUS.FAIL);
