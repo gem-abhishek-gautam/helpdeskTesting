@@ -77,7 +77,7 @@ public class SearchAndSortStepDefinition {
                 DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
             }
             List<String> values = new ArrayList<>();
-            DriverAction.scrollIntoView(TicketLocators.createTicket);
+            DriverAction.scrollIntoView(SearchAndSortLocators.columns(colName));
             DriverAction.waitUntilElementClickable(SearchAndSortLocators.columns(colName),10);
             DriverAction.click(SearchAndSortLocators.columns(colName),colName+" sort button");
             DriverAction.waitUntilElementClickable(TableAndPaginationLocators.paginationDropdown,5);
