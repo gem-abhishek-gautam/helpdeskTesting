@@ -7,6 +7,7 @@ import com.gemini.generic.ui.utils.DriverManager;
 import com.qa.helpdesk.locators.DashboardHeaderLocators;
 import com.qa.helpdesk.locators.SearchAndSortLocators;
 import com.qa.helpdesk.locators.TableAndPaginationLocators;
+import com.qa.helpdesk.locators.TicketLocators;
 import com.qa.helpdesk.utils.CommonUtils;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -76,6 +77,7 @@ public class SearchAndSortStepDefinition {
                 DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
             }
             List<String> values = new ArrayList<>();
+            DriverAction.scrollIntoView(TicketLocators.createTicket);
             DriverAction.waitUntilElementClickable(SearchAndSortLocators.columns(colName),10);
             DriverAction.click(SearchAndSortLocators.columns(colName),colName+" sort button");
             DriverAction.waitUntilElementClickable(TableAndPaginationLocators.paginationDropdown,5);

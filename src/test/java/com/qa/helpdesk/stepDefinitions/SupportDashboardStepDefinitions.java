@@ -400,6 +400,7 @@ public class SupportDashboardStepDefinitions {
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
                 DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 5);
             }
+            DriverAction.scrollIntoView(TicketLocators.createTicket);
             DriverAction.waitUntilElementClickable(SupportTicketLocators.otherTicketDept, 5);
             DriverAction.click(SupportTicketLocators.otherTicketDept, "Choose Department");
             DriverAction.waitUntilElementClickable(TicketLocators.ticketDropdownOptions(dept), 5);
