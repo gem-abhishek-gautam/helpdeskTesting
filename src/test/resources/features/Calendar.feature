@@ -18,6 +18,11 @@ Feature: Calendar functionality
       | August  | 2020 |
       | January | 2022 |
 
+  Scenario: Select a particular date from calendar in all ticket tabs
+    Given Open calendar on dashboard
+    And Select date "7-April-2023" from calendar
+    Then Verify if tickets are shown for selected date "7-April-2023" only
+
   Scenario: Select a date range from calendar
     Given Open calendar on dashboard
     When Specific date range from "15-February-2023" to "30-March-2023" is selected on calendar

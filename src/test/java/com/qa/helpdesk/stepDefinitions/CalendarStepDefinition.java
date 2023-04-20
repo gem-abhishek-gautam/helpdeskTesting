@@ -221,4 +221,56 @@ public class CalendarStepDefinition {
         }
     }
 
+    @And("Select date {string} from calendar")
+    public void selectDateFromCalendar(String date) {
+        try {
+            if(DriverAction.isExist(FilterAndCalendarLocators.calendarCard)) {
+                String startDay = date.split("-")[0];
+                String startMonth = date.split("-")[1];
+                String startYear = date.split("-")[2];
+
+                DriverAction.dropDown(FilterAndCalendarLocators.calendarMonthPicker, startMonth);
+                DriverAction.dropDown(FilterAndCalendarLocators.calendarYearPicker, startYear);
+                DriverAction.click(FilterAndCalendarLocators.dateSelector(startDay));
+                if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                }
+
+            } else GemTestReporter.addTestStep("Calendar Visibility", "Calendar not visible", STATUS.FAIL, DriverAction.takeSnapShot());
+        } catch (Exception e) {
+            GemTestReporter.addTestStep("Exception Occurred", "Exception: " + e, STATUS.FAIL);
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Then("Verify if tickets are shown for selected date {string} only")
+    public void verifyIfTicketsAreShownForSelectedDateOnly(String date) {
+        try {
+            DriverAction.click(DashboardHeaderLocators.myTicketsHeader,"Tickets");
+            DriverAction.dropDown(TableAndPaginationLocators.paginationDropdown,"25");
+            if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+            }
+            String pos = CommonUtils.getTableColPosition("Created on");
+            List<WebElement> elements = DriverAction.getElements(TableAndPaginationLocators.getColValues(pos));
+            int flag=0;
+            String invalidDate="";
+            for(WebElement ele:elements) {
+                String dateVal = DriverAction.getElementText(ele);
+                if(!CommonUtils.dateRangeValidate(date,date,dateVal)){
+                    flag=1;
+                    invalidDate = dateVal;
+                    break;
+                }
+            }
+            if(flag==1) {
+                GemTestReporter.addTestStep("Date Selection","Ticket found outside selected date: "+invalidDate+"",STATUS.FAIL,DriverAction.takeSnapShot());
+            } else GemTestReporter.addTestStep("Date Selection","Tickets found within selected date",STATUS.PASS,DriverAction.takeSnapShot());
+
+        } catch (Exception e) {
+            GemTestReporter.addTestStep("Exception Occurred", "Exception: " + e, STATUS.FAIL);
+            throw new RuntimeException(e);
+        }
+    }
+
 }

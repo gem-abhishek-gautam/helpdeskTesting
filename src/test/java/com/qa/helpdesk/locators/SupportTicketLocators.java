@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 public class SupportTicketLocators {
 
+    public static By typeDropdownInfo = By.xpath("//label//following-sibling::img[@alt='info']");
     public static By detailsCallerInfoButton = By.xpath("//img[contains(@class,'info')]/parent::span");
     public static By formCallerInfoButton = By.xpath("//img[contains(@alt,'info')]/parent::span");
     public static By detailsCallerHistoryButton = By.xpath("//img[contains(@class,'history')]/parent::span");

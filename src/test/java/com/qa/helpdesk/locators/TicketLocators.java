@@ -7,6 +7,9 @@ public class TicketLocators {
     public static By createTicket = By.xpath("//button[contains(text(),'Create')]");
     public static By ticketFormHeader = By.xpath("//div[contains(text(),'Create')]");
     public static By inputError = By.xpath("//span[contains(@class,'inputError')]");
+    public static By typeDropdownInfo = By.xpath("//label//following-sibling::div/img[@alt='info']");
+    public static By toolTip = By.xpath("//div[contains(@class,'Tooltip-popper')]");
+    public static By reqLabel = By.xpath("//span[text()='*']");
     public static By subject = By.xpath("//input[@name='subject']");
     public static By desc = By.xpath("//textarea[@name='description']");
     public static By fileUpload = By.xpath("//input[@type='file']");

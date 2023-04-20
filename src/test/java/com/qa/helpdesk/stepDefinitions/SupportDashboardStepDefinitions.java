@@ -6,6 +6,7 @@ import com.gemini.generic.ui.utils.DriverAction;
 import com.gemini.generic.ui.utils.DriverManager;
 import com.qa.helpdesk.locators.*;
 import com.qa.helpdesk.utils.CommonUtils;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -115,10 +116,10 @@ public class SupportDashboardStepDefinitions {
     @Given("Open {string} ticket category tab")
     public void openTicketCategoryTab(String tab) {
         try {
+            DriverAction.refresh();
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
                 CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
             }
-            CommonUtils.scrollToTop();
             DriverAction.waitUntilElementClickable(DashboardHeaderLocators.ticketTabs(tab), 5);
             try {
                 DriverAction.click(DashboardHeaderLocators.ticketTabs(tab), tab);
@@ -480,4 +481,6 @@ public class SupportDashboardStepDefinitions {
             throw new RuntimeException(e);
         }
     }
+
+
 }

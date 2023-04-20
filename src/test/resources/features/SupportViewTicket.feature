@@ -1098,3 +1098,40 @@ Feature: Testcases for Support view Create Ticket
       | IT   | Hardware       | RAM                            |
       | IT   | Hardware       | Laptop                         |
       | IT   | Hardware       | Other                          |
+
+
+  Scenario: Check for field validation in create ticket form
+    Given Open create ticket form
+    Then Verify subject character limit and required field values
+
+  Scenario: Check comments and files can be added for support incident ticket details
+    Given Create ticket with file "unattached" and type "Incident", caller "Abhishek Gautam", channel "Portal", dept "IT", category "End User Hardware", sub-category "Desktop", subject "support test with file", desc "support test" and status "Open"
+    Then Submit and verify ticket with file "unattached" and type "Incident", caller "Abhishek Gautam", channel "Portal", dept "IT", category "End User Hardware", sub-category "Desktop", subject "support test with file", desc "support test" and status "Open"
+    Then Verify if comment "no file" can be added for the ticket
+    Then Validate comment with file uploads on ticket page
+
+  Scenario: Check comments and files can be added for support request ticket details
+    Given Create ticket with file "unattached" and type "Request", caller "Abhishek Gautam", channel "Portal", dept "IT", category "Software", sub-category "Software License", subject "support test with file", desc "support test" and status "Open"
+    Then Submit and verify ticket with file "unattached" and type "Request", caller "Abhishek Gautam", channel "Portal", dept "IT", category "Software", sub-category "Software License", subject "support test with file", desc "support test" and status "Open"
+    Then Verify if comment "no file" can be added for the ticket
+    Then Validate comment with file uploads on ticket page
+
+  Scenario: Check file upload with valid extensions and size limit for support incident
+    Given Create ticket with file "unattached" and type "Incident", caller "Abhishek Gautam", channel "Portal", dept "IT", category "End User Hardware", sub-category "Desktop", subject "support test with file", desc "support test" and status "Open"
+    And Upload file with valid extensions and size
+    Then Verify if "valid" file can be uploaded
+
+  Scenario: Check file upload with invalid extensions and size limit for support incident
+    Given Create ticket with file "unattached" and type "Incident", caller "Abhishek Gautam", channel "Portal", dept "IT", category "End User Hardware", sub-category "Desktop", subject "support test with file", desc "support test" and status "Open"
+    And Upload file with invalid extensions and size
+    Then Verify if "invalid" file can be uploaded
+
+  Scenario: Check file upload with valid extensions and size limit for support request
+    Given Create ticket with file "unattached" and type "Request", caller "Abhishek Gautam", channel "Portal", dept "IT", category "Software", sub-category "Software License", subject "support test with file", desc "support test" and status "Open"
+    And Upload file with valid extensions and size
+    Then Verify if "valid" file can be uploaded
+
+  Scenario: Check file upload with invalid extensions and size limit for support request
+    Given Create ticket with file "unattached" and type "Request", caller "Abhishek Gautam", channel "Portal", dept "IT", category "Software", sub-category "Software License", subject "support test with file", desc "support test" and status "Open"
+    And Upload file with invalid extensions and size
+    Then Verify if "invalid" file can be uploaded

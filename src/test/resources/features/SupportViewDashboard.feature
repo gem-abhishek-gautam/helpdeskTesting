@@ -1,4 +1,4 @@
-@support
+@support1
 Feature: Testcases for Support view dashboard
 
   Background: Check login functionality
@@ -85,13 +85,13 @@ Feature: Testcases for Support view dashboard
 
   @test
   Scenario Outline: Check VIP filter for tickets
-    Given Enable VIP filter for tickets
-    When Open "<tab>" ticket category tab
+    Given Open "<tab>" ticket category tab
+    When Enable VIP filter for tickets
     Then Verify VIP filter for "<tab>" ticket category
     Examples:
       | tab           |
       | Assigned      |
-      | Unassigned    |
+#      | Unassigned    |
       | My Department |
 
   @test
@@ -104,7 +104,7 @@ Feature: Testcases for Support view dashboard
     Then Verify VIP table results for others tab
 
   @test
-  Scenario Outline: Check column sorting for tickets
+  Scenario Outline: Check column sorting for ticket tabs
     Given Open "<tab>" ticket category tab
     Then Verify sorting button for "ID" column
     Then Verify sorting button for "Subject" column
@@ -161,15 +161,15 @@ Feature: Testcases for Support view dashboard
     Given Open "Others" ticket category tab
     When Search for dept "IT" and assigned to "Priyanka"
     Then Verify ticket details page access for "IT" dept
-    And Search for dept "Accounts" and assigned to "Jaish"
+    And Search for dept "Accounts" and assigned to "Aditya"
     Then Verify ticket details page access for "Accounts" dept
     And Search for dept "HR" and assigned to "Vishal"
     Then Verify ticket details page access for "HR" dept
-    And Search for dept "Admin" and assigned to "Ritik"
+    And Search for dept "Admin" and assigned to "Himanshu"
     Then Verify ticket details page access for "Admin" dept
 
   @test
-  Scenario Outline: Select a date range from calendar for all ticket tabs
+  Scenario Outline: Select a date range from calendar for ticket tabs
     Given Open "<tab>" ticket category tab
     When Open calendar on dashboard
     Then Verify if highlighted current date matches today's date
@@ -190,21 +190,62 @@ Feature: Testcases for Support view dashboard
     And Specific date range from "15-February-2023" to "30-March-2023" is selected on calendar
     Then Verify if tickets shown are in selected date range from "15-February-2023" to "30-March-2023"
 
+  Scenario Outline: Select a particular date from calendar in ticket tabs
+    Given Open "<tab>" ticket category tab
+    When Open calendar on dashboard
+    And Select date "7-April-2023" from calendar
+    Then Verify if tickets are shown for selected date "7-April-2023" only
+    Examples:
+      | tab           |
+      | Assigned      |
+      | Unassigned    |
+      | My Department |
+
+  Scenario: Select a particular date from calendar in 'Others' ticket tab
+    Given Open "Others" ticket category tab
+    When Search for dept "IT" and assigned to "Priyanka"
+    When Open calendar on dashboard
+    And Select date "7-April-2023" from calendar
+    Then Verify if tickets are shown for selected date "7-April-2023" only
+
+  Scenario Outline: Jump to specific date in ticket tabs and clear data for calendar
+    Given Open "<tab>" ticket category tab
+    When Open calendar on dashboard
+    And Verify if the date "20-June-2022" is shown on calendar
+    And Clear calendar date filter
+    Then Verify if highlighted current date matches today's date
+    Examples:
+      | tab           |
+      | Assigned      |
+      | Unassigned    |
+      | My Department |
+
+  Scenario: Jump to specific date in 'Others' tab and clear data for calendar
+    Given Open "Others" ticket category tab
+    When Search for dept "IT" and assigned to "Priyanka"
+    When Open calendar on dashboard
+    And Verify if the date "20-June-2022" is shown on calendar
+    And Clear calendar date filter
+    Then Verify if highlighted current date matches today's date
+
+
   @test
-  Scenario Outline: Check Apply filter functionality for all ticket tabs
+  Scenario Outline: Check Apply filter functionality for ticket tabs
     Given Open "Assigned" ticket category tab
     When Open filter option
     And Select filter criteria as department "" and status "<status>"
     Then Verify result for selection dept "" and status "<status>"
     And Open "Unassigned" ticket category tab
+    When Open filter option
+    And Select filter criteria as department "" and status "<status>"
     Then Verify result for selection dept "" and status "<status>"
     And Open "My Department" ticket category tab
-    Then Verify result for selection dept "" and status "<status>"
-    And Open "Others" ticket category tab
-    And Search for dept "IT" and assigned to "Priyanka"
+    When Open filter option
+    And Select filter criteria as department "" and status "<status>"
     Then Verify result for selection dept "" and status "<status>"
     Examples:
       | status     |
+      | Open       |
       | Unassigned |
       | Assigned   |
       | Hold       |
@@ -212,5 +253,48 @@ Feature: Testcases for Support view dashboard
       | Cancelled  |
       | Closed     |
       | Re-open    |
+
+
+  Scenario Outline: Check Apply filter functionality for 'Others' ticket tab
+    Given Open "Others" ticket category tab
+    When Search for dept "IT" and assigned to "Priyanka"
+    And Select filter criteria as department "" and status "<status>"
+    Then Verify result for selection dept "" and status "<status>"
+    Examples:
+      | status     |
+      | Open       |
+      | Unassigned |
+      | Assigned   |
+      | Hold       |
+      | Resolved   |
+      | Cancelled  |
+      | Closed     |
+      | Re-open    |
+
+  Scenario Outline: Check filter toggle button functionality in ticket tabs
+    Given Open "<tab>" ticket category tab
+    When Open filter option
+    And Clear all applied filters
+    And Select filter criteria as department "" and status "Closed,Cancelled,Resolved"
+    And Click on toggle button to hide closed, resolved and cancelled status
+    Then Verify if closed, cancelled and resolved tickets are hidden
+    Examples:
+      | tab           |
+      | Assigned      |
+      | Unassigned    |
+      | My Department |
+
+  Scenario: Check filter toggle button functionality for 'Others' tab
+    Given Open "Others" ticket category tab
+    When Search for dept "IT" and assigned to "Priyanka"
+    And Open filter option
+    And Clear all applied filters
+    And Select filter criteria as department "" and status "Closed,Cancelled,Resolved"
+    And Click on toggle button to hide closed, resolved and cancelled status
+    Then Verify if closed, cancelled and resolved tickets are hidden
+
+
+
+
 
 

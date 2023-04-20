@@ -10,11 +10,11 @@ Feature: Testcases for search and sort functionality
     Given Search for keyword "<keyword>"
     Then Verify search result for "<keyword>"
     Examples:
-      | keyword       |
-      | INC-000000591 |
-      | request       |
-      | test          |
-      | $             |
+      | keyword |
+      | ReQ     |
+      | request |
+      | test    |
+      | $       |
 
   Scenario: Verify clear text button
     Given Search for keyword "test"
