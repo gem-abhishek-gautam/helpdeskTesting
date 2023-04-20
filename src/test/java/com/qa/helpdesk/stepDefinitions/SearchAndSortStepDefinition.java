@@ -33,7 +33,7 @@ public class SearchAndSortStepDefinition {
                 DriverAction.waitSec(1);
                 DriverAction.click(SearchAndSortLocators.ticketSearchButton);
                 if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
                 }
 
             }
@@ -74,7 +74,7 @@ public class SearchAndSortStepDefinition {
         try
         {
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
             }
             List<String> values = new ArrayList<>();
             DriverAction.waitUntilElementClickable(SearchAndSortLocators.columns(colName),10);
@@ -82,7 +82,7 @@ public class SearchAndSortStepDefinition {
             DriverAction.waitUntilElementClickable(TableAndPaginationLocators.paginationDropdown,5);
             DriverAction.dropDown(TableAndPaginationLocators.paginationDropdown,"25");
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
             }
             String pos = CommonUtils.getTableColPosition(colName);
             boolean nextActive;
@@ -105,11 +105,11 @@ public class SearchAndSortStepDefinition {
                 }
                 nextActive = DriverManager.getWebDriver().findElement(TableAndPaginationLocators.nextPageButton).isEnabled();
                 if(nextActive){
+                    DriverAction.waitUntilElementClickable(TableAndPaginationLocators.nextPageButton,5);
                     DriverAction.click(TableAndPaginationLocators.nextPageButton,"Next page");
                     if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                        DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                        CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
                     }
-                    DriverAction.waitUntilElementClickable(TableAndPaginationLocators.paginationDropdown,5);
                 }
             } while (nextActive);
 

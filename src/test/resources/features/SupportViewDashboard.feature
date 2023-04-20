@@ -83,7 +83,7 @@ Feature: Testcases for Support view dashboard
     And Edit ticket details for field "Configuration" and value "config1"
     Then Verify ticket audit trail for "Configuration"
 
-  @scenario
+  @test
   Scenario Outline: Check VIP filter for tickets
     Given Enable VIP filter for tickets
     When Open "<tab>" ticket category tab
@@ -94,7 +94,7 @@ Feature: Testcases for Support view dashboard
       | Unassigned    |
       | My Department |
 
-  @scenario
+  @test
   Scenario: Check VIP filter for 'Others' tab
     Given Open "Others" ticket category tab
     When Search for dept "IT" and assigned to "Priyanka"
@@ -103,7 +103,7 @@ Feature: Testcases for Support view dashboard
     And Search for dept "Accounts" and assigned to "Jaish"
     Then Verify VIP table results for others tab
 
-  @scenario
+  @test
   Scenario Outline: Check column sorting for tickets
     Given Open "<tab>" ticket category tab
     Then Verify sorting button for "ID" column
@@ -118,7 +118,7 @@ Feature: Testcases for Support view dashboard
       | Unassigned    |
       | My Department |
 
-  @scenario
+  @test
   Scenario: Check column sorting for 'Others' tab
     Given Open "Others" ticket category tab
     When Search for dept "IT" and assigned to "Priyanka"
@@ -134,18 +134,18 @@ Feature: Testcases for Support view dashboard
     And Search for dept "IT" and assigned to "Priyanka"
     Then Verify sorting button for "Status" column
 
-  @scenario
+  @test
   Scenario Outline: Verify search functionality for all tabs
     Given Open "<tab>" ticket category tab
     When Search for keyword "<keyword>"
     Then Verify search result for "<keyword>"
     Examples:
-      | keyword | tab           |
-      | Android | Assigned      |
-      | request | Unassigned    |
-      | test    | My Department |
+      | keyword  | tab           |
+      | Android  | Assigned      |
+      | request  | Unassigned    |
+      | incident | My Department |
 
-  @scenario
+  @test
   Scenario Outline: Verify clear text button
     Given Open "<tab>" ticket category tab
     When Search for keyword "test"
@@ -156,7 +156,61 @@ Feature: Testcases for Support view dashboard
       | Unassigned    |
       | My Department |
 
+  @test
+  Scenario: Check if ticket details can be accessed for other departments
+    Given Open "Others" ticket category tab
+    When Search for dept "IT" and assigned to "Priyanka"
+    Then Verify ticket details page access for "IT" dept
+    And Search for dept "Accounts" and assigned to "Jaish"
+    Then Verify ticket details page access for "Accounts" dept
+    And Search for dept "HR" and assigned to "Vishal"
+    Then Verify ticket details page access for "HR" dept
+    And Search for dept "Admin" and assigned to "Ritik"
+    Then Verify ticket details page access for "Admin" dept
 
+  @test
+  Scenario Outline: Select a date range from calendar for all ticket tabs
+    Given Open "<tab>" ticket category tab
+    When Open calendar on dashboard
+    Then Verify if highlighted current date matches today's date
+    When Specific date range from "15-February-2023" to "30-March-2023" is selected on calendar
+    Then Verify if tickets shown are in selected date range from "15-February-2023" to "30-March-2023"
+    Examples:
+      | tab           |
+      | Assigned      |
+      | Unassigned    |
+      | My Department |
 
+  @test
+  Scenario: Select a date range from calendar for 'Others' tab
+    Given Open "Others" ticket category tab
+    When Search for dept "IT" and assigned to "Priyanka"
+    And Open calendar on dashboard
+    Then Verify if highlighted current date matches today's date
+    And Specific date range from "15-February-2023" to "30-March-2023" is selected on calendar
+    Then Verify if tickets shown are in selected date range from "15-February-2023" to "30-March-2023"
+
+  @test
+  Scenario Outline: Check Apply filter functionality for all ticket tabs
+    Given Open "Assigned" ticket category tab
+    When Open filter option
+    And Select filter criteria as department "" and status "<status>"
+    Then Verify result for selection dept "" and status "<status>"
+    And Open "Unassigned" ticket category tab
+    Then Verify result for selection dept "" and status "<status>"
+    And Open "My Department" ticket category tab
+    Then Verify result for selection dept "" and status "<status>"
+    And Open "Others" ticket category tab
+    And Search for dept "IT" and assigned to "Priyanka"
+    Then Verify result for selection dept "" and status "<status>"
+    Examples:
+      | status     |
+      | Unassigned |
+      | Assigned   |
+      | Hold       |
+      | Resolved   |
+      | Cancelled  |
+      | Closed     |
+      | Re-open    |
 
 

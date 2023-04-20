@@ -14,6 +14,7 @@ public class FilterAndCalendarLocators {
 
     // Calendar locators
     public static By calendarButton = By.xpath("//button[contains(@class,'calenderButton')]");
+    public static By calendarButtonOther = By.xpath("//div[contains(@class,'calenderButton')]");
     public static By calendarCard = By.xpath("//div[contains(@class,'rdrCalendarWrapper')]");
     public static By calendarMonthPicker = By.xpath("//span[contains(@class,'rdrMonthPicker')]/select");
     public static By calendarYearPicker = By.xpath("//span[contains(@class,'rdrYearPicker')]/select");

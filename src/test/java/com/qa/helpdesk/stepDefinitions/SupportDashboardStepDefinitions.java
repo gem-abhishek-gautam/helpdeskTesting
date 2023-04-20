@@ -23,7 +23,7 @@ public class SupportDashboardStepDefinitions {
     public void checkPresenceOfTabs() {
         try {
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
             }
             if (DriverAction.isExist(DashboardHeaderLocators.ticketTabs("Assigned"))) {
                 GemTestReporter.addTestStep("Assigned Tab presence", "Assigned tab is present", STATUS.PASS, DriverAction.takeSnapShot());
@@ -52,12 +52,12 @@ public class SupportDashboardStepDefinitions {
     public void verifyTheTicketCountMatches() {
         try {
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
             }
             List<String> tabs = Arrays.asList("Assigned", "Unassigned", "My Department");
             for (String tab : tabs) {
                 if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
                 }
                 DriverAction.waitUntilElementClickable(DashboardHeaderLocators.ticketTabs(tab), 5);
                 try {
@@ -67,13 +67,13 @@ public class SupportDashboardStepDefinitions {
                     exe.executeScript("argument[0].click();", DriverAction.getElement(DashboardHeaderLocators.ticketTabs(tab)));
                 }
                 if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
                 }
                 List<WebElement> elements = new ArrayList<>();
                 if (!DriverAction.isExist(TableAndPaginationLocators.noTableDataImg)) {
                     DriverAction.dropDown(TableAndPaginationLocators.paginationDropdown, "25");
                     if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                        DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                        CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
                     }
                     elements = DriverAction.getElements(TableAndPaginationLocators.getTableRows);
                     DriverAction.scrollIntoView(TableAndPaginationLocators.nextPageButton);
@@ -83,7 +83,7 @@ public class SupportDashboardStepDefinitions {
                         elements.addAll(DriverAction.getElements(TableAndPaginationLocators.getTableRows));
                         DriverAction.click(TableAndPaginationLocators.nextPageButton, "Next button");
                         if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                            DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                            CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
                         }
                         nextActive = DriverManager.getWebDriver().findElement(TableAndPaginationLocators.nextPageButton).isEnabled();
                     }
@@ -92,7 +92,7 @@ public class SupportDashboardStepDefinitions {
 
                 DriverAction.refresh();
                 if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
                 }
 
                 String[] displayedCountVal = DriverAction.getElementText(DashboardHeaderLocators.ticketTabs(tab)).replace("\"", "").split(" ");
@@ -116,8 +116,9 @@ public class SupportDashboardStepDefinitions {
     public void openTicketCategoryTab(String tab) {
         try {
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
             }
+            CommonUtils.scrollToTop();
             DriverAction.waitUntilElementClickable(DashboardHeaderLocators.ticketTabs(tab), 5);
             try {
                 DriverAction.click(DashboardHeaderLocators.ticketTabs(tab), tab);
@@ -125,8 +126,12 @@ public class SupportDashboardStepDefinitions {
                 JavascriptExecutor exe = (JavascriptExecutor) DriverManager.getWebDriver();
                 exe.executeScript("argument[0].click();", DriverAction.getElement(DashboardHeaderLocators.ticketTabs(tab)));
             }
+
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+            }
+            if (DriverAction.isExist(LoginLocators.employeeName)) {
+                DriverAction.click(DashboardHeaderLocators.headerButtons("toggle icon"), "Side menu toggle");
             }
 
         } catch (Exception e) {
@@ -139,14 +144,14 @@ public class SupportDashboardStepDefinitions {
     public void assignTicketToAndVerifyIt(String name) {
         try {
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             String id = DriverAction.getElementText(TableAndPaginationLocators.firstTicketID);
             assignID = id;
             String pos = CommonUtils.getTableColPosition("Assigned to");
             List<WebElement> elements = DriverAction.getElements(TableAndPaginationLocators.getColValues(pos));
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             DriverAction.click(elements.get(0), "Assign to");
 
@@ -157,22 +162,22 @@ public class SupportDashboardStepDefinitions {
                 wait.until(ExpectedConditions.visibilityOfElementLocated(TicketLocators.callerMenu(name)));
                 DriverAction.click(TicketLocators.callerMenu(name), name);
                 if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
                 }
                 DriverAction.waitUntilElementClickable(DashboardHeaderLocators.ticketTabs("My Department"), 10);
                 DriverAction.click(DashboardHeaderLocators.ticketTabs("My Department"), "My Department");
                 if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
                 }
                 DriverAction.waitUntilElementClickable(SearchAndSortLocators.ticketSearchBox, 10);
                 DriverAction.waitSec(1);
                 DriverAction.typeText(SearchAndSortLocators.ticketSearchBox, id);
                 if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
                 }
                 DriverAction.click(SearchAndSortLocators.ticketSearchButton, "Search button");
                 if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
                 }
                 DriverAction.waitSec(2);
                 if (!DriverAction.isExist(TableAndPaginationLocators.noTableDataImg)) {
@@ -196,22 +201,22 @@ public class SupportDashboardStepDefinitions {
                 DriverAction.waitSec(1);
                 DriverAction.click(TicketLocators.ticketDropdownOptions("Assign to me"), "Assign to me");
                 if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
                 }
                 DriverAction.waitUntilElementClickable(DashboardHeaderLocators.ticketTabs("Assigned"), 10);
                 DriverAction.click(DashboardHeaderLocators.ticketTabs("Assigned"), "Assigned");
                 if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
                 }
                 DriverAction.waitSec(1);
                 DriverAction.waitUntilElementClickable(SearchAndSortLocators.ticketSearchBox, 10);
                 DriverAction.typeText(SearchAndSortLocators.ticketSearchBox, id);
                 if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
                 }
                 DriverAction.click(SearchAndSortLocators.ticketSearchButton, "Search button");
                 if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
                 }
                 if (!DriverAction.isExist(TableAndPaginationLocators.noTableDataImg) && DriverAction.getElementText(TableAndPaginationLocators.getAssignValues).equalsIgnoreCase(name)) {
                     GemTestReporter.addTestStep("Assign ticket", "Ticket assigned successfully", STATUS.PASS, DriverAction.takeSnapShot());
@@ -245,17 +250,17 @@ public class SupportDashboardStepDefinitions {
             DriverAction.waitUntilElementClickable(TicketLocators.submitModalForm, 5);
             DriverAction.click(TicketLocators.submitModalForm, "Submit");
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             DriverAction.waitUntilElementClickable(SearchAndSortLocators.ticketSearchBox, 10);
             DriverAction.waitSec(1);
             DriverAction.typeText(SearchAndSortLocators.ticketSearchBox, assignID);
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             DriverAction.click(SearchAndSortLocators.ticketSearchButton, "Search");
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
 
             DriverAction.waitUntilElementClickable(TableAndPaginationLocators.getStatusValues, 5);
@@ -289,17 +294,17 @@ public class SupportDashboardStepDefinitions {
             DriverAction.waitUntilElementClickable(TicketLocators.submitModalForm, 5);
             DriverAction.click(TicketLocators.submitModalForm, "Submit");
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             DriverAction.waitUntilElementClickable(SearchAndSortLocators.ticketSearchBox, 10);
             DriverAction.waitSec(1);
             DriverAction.typeText(SearchAndSortLocators.ticketSearchBox, assignID);
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             DriverAction.click(SearchAndSortLocators.ticketSearchButton, "Search");
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
 
             DriverAction.waitUntilElementClickable(TableAndPaginationLocators.getStatusValues, 5);
@@ -321,20 +326,21 @@ public class SupportDashboardStepDefinitions {
     public void enableVIPFilterForTickets() {
         try {
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
             }
             if (!DriverAction.isExist(SupportTicketLocators.toggleVIP("enable"))) {
                 DriverAction.waitUntilElementClickable(SupportTicketLocators.toggleVIP("disable"), 10);
                 DriverAction.click(SupportTicketLocators.toggleVIP("disable"), "VIP");
                 if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
                 }
                 if (DriverAction.isExist(SupportTicketLocators.toggleVIP("enable"))) {
                     GemTestReporter.addTestStep("Toggle VIP", "VIP enabled successfully", STATUS.PASS, DriverAction.takeSnapShot());
                 } else
                     GemTestReporter.addTestStep("Toggle VIP", "Unable to apply VIP filter", STATUS.FAIL, DriverAction.takeSnapShot());
 
-            } else GemTestReporter.addTestStep("Toggle VIP","VIP already enabled",STATUS.INFO,DriverAction.takeSnapShot());
+            } else
+                GemTestReporter.addTestStep("Toggle VIP", "VIP already enabled", STATUS.INFO, DriverAction.takeSnapShot());
         } catch (Exception e) {
             GemTestReporter.addTestStep("Exception Occurred", "Exception: " + e, STATUS.FAIL);
             throw new RuntimeException(e);
@@ -345,7 +351,7 @@ public class SupportDashboardStepDefinitions {
     public void verifyVIPFilterForTicketsCategories(String tab) {
         try {
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
             }
             try {
                 DriverAction.click(DashboardHeaderLocators.ticketTabs(tab), tab);
@@ -354,12 +360,12 @@ public class SupportDashboardStepDefinitions {
                 exe.executeScript("argument[0].click();", DriverAction.getElement(DashboardHeaderLocators.ticketTabs(tab)));
             }
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
             }
             List<WebElement> elements = new ArrayList<>();
             if (!DriverAction.isExist(TableAndPaginationLocators.noTableDataImg)) {
                 if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
                 }
                 elements = DriverAction.getElements(SupportTicketLocators.vipTag);
                 DriverAction.scrollIntoView(TableAndPaginationLocators.nextPageButton);
@@ -369,14 +375,14 @@ public class SupportDashboardStepDefinitions {
                     elements.addAll(DriverAction.getElements(SupportTicketLocators.vipTag));
                     DriverAction.click(TableAndPaginationLocators.nextPageButton, "Next button");
                     if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                        DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                        CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
                     }
                     nextActive = DriverManager.getWebDriver().findElement(TableAndPaginationLocators.nextPageButton).isEnabled();
                 }
             } else
                 GemTestReporter.addTestStep("Table results", "No data displayed for " + tab + " tickets", STATUS.INFO, DriverAction.takeSnapShot());
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
             }
 
             String[] displayedCountVal = DriverAction.getElementText(DashboardHeaderLocators.ticketTabs(tab)).replace("\"", "").split(" ");
@@ -398,7 +404,7 @@ public class SupportDashboardStepDefinitions {
     public void searchForDeptAndAssignedTo(String dept, String assign) {
         try {
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 5);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 5);
             }
             DriverAction.scrollIntoView(TicketLocators.createTicket);
             DriverAction.waitUntilElementClickable(SupportTicketLocators.otherTicketDept, 5);
@@ -413,7 +419,7 @@ public class SupportDashboardStepDefinitions {
             DriverAction.waitUntilElementClickable(SearchAndSortLocators.ticketSearchButton, 5);
             DriverAction.click(SearchAndSortLocators.ticketSearchButton, "Search");
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 5);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 5);
             }
 
         } catch (Exception e) {
@@ -428,7 +434,7 @@ public class SupportDashboardStepDefinitions {
             List<WebElement> elements = new ArrayList<>();
             if (!DriverAction.isExist(TableAndPaginationLocators.noTableDataImg)) {
                 if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
                 }
                 elements = DriverAction.getElements(SupportTicketLocators.vipTag);
                 DriverAction.scrollIntoView(TableAndPaginationLocators.nextPageButton);
@@ -438,7 +444,7 @@ public class SupportDashboardStepDefinitions {
                     elements.addAll(DriverAction.getElements(SupportTicketLocators.vipTag));
                     DriverAction.click(TableAndPaginationLocators.nextPageButton, "Next button");
                     if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                        DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                        CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
                     }
                     nextActive = DriverManager.getWebDriver().findElement(TableAndPaginationLocators.nextPageButton).isEnabled();
                 }
@@ -457,4 +463,21 @@ public class SupportDashboardStepDefinitions {
         }
     }
 
+    @Then("Verify ticket details page access for {string} dept")
+    public void verifyTicketDetailsPageAccess(String dept) {
+        try {
+            CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+            if (DriverAction.isExist(TableAndPaginationLocators.firstTicketID) && dept.equalsIgnoreCase("IT")) {
+                GemTestReporter.addTestStep("Ticket details access", "Ticket details can be accessed for own dept", STATUS.PASS, DriverAction.takeSnapShot());
+            } else if (DriverAction.isExist(TableAndPaginationLocators.firstTicketID) && !dept.equalsIgnoreCase("IT")) {
+                GemTestReporter.addTestStep("Ticket details access", "Ticket details can be accessed for other dept", STATUS.FAIL, DriverAction.takeSnapShot());
+            } else if (!DriverAction.isExist(TableAndPaginationLocators.firstTicketID) && !dept.equalsIgnoreCase("IT")) {
+                GemTestReporter.addTestStep("Ticket details access", "Ticket details can not be accessed for other dept", STATUS.PASS, DriverAction.takeSnapShot());
+            } else
+                GemTestReporter.addTestStep("Ticket details access", "Ticket details can not be accessed for own dept", STATUS.FAIL, DriverAction.takeSnapShot());
+        } catch (Exception e) {
+            GemTestReporter.addTestStep("Exception Occurred", "Exception: " + e, STATUS.FAIL);
+            throw new RuntimeException(e);
+        }
+    }
 }

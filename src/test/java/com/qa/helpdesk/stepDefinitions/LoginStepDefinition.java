@@ -9,6 +9,7 @@ import com.qa.helpdesk.locators.DashboardHeaderLocators;
 import com.qa.helpdesk.locators.LoginLocators;
 import com.qa.helpdesk.locators.TableAndPaginationLocators;
 import com.qa.helpdesk.locators.TicketLocators;
+import com.qa.helpdesk.utils.CommonUtils;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -40,13 +41,13 @@ public class LoginStepDefinition {
                 GemTestReporter.addTestStep("Login button", "Login button not found", STATUS.FAIL, DriverAction.takeSnapShot());
 
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 30);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 35);
             }
             if (DriverAction.isExist(LoginLocators.loginButton)) {
                 DriverAction.waitUntilElementClickable(LoginLocators.loginButton, 20);
                 DriverAction.click(LoginLocators.loginButton, "Login SSO");
             }
-            WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 45);
+            WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 20);
             wait.until(ExpectedConditions.visibilityOfElementLocated(DashboardHeaderLocators.headerButtons("logout")));
             DriverAction.waitUntilElementClickable(DashboardHeaderLocators.headerButtons("logout"), 10);
 
@@ -100,7 +101,7 @@ public class LoginStepDefinition {
             wait.until(ExpectedConditions.visibilityOfElementLocated(LoginLocators.viewDropdown));
             DriverAction.waitUntilElementClickable(LoginLocators.viewDropdown, 10);
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
             }
             DriverAction.click(LoginLocators.viewDropdown, "View dropdown");
             try {
@@ -112,7 +113,7 @@ public class LoginStepDefinition {
                 } else DriverAction.click(LoginLocators.getView(view), view);
             }
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
             }
             DriverAction.waitUntilElementClickable(TicketLocators.createTicket, 10);
         } catch (Exception e) {

@@ -5,6 +5,7 @@ import com.gemini.generic.reporting.STATUS;
 import com.gemini.generic.ui.utils.DriverAction;
 import com.qa.helpdesk.locators.DashboardHeaderLocators;
 import com.qa.helpdesk.locators.FilterAndCalendarLocators;
+import com.qa.helpdesk.locators.SupportTicketLocators;
 import com.qa.helpdesk.locators.TableAndPaginationLocators;
 import com.qa.helpdesk.utils.CommonUtils;
 import io.cucumber.java.en.And;
@@ -25,7 +26,11 @@ public class CalendarStepDefinition {
     @Given("Open calendar on dashboard")
     public void openCalendar() {
         try {
-            if (DriverAction.isExist(FilterAndCalendarLocators.calendarButton)) {
+            if(DriverAction.getElementText(DashboardHeaderLocators.getActiveTab).equalsIgnoreCase("others") && DriverAction.isExist(FilterAndCalendarLocators.calendarButtonOther)) {
+                DriverAction.click(FilterAndCalendarLocators.calendarButtonOther, "Calendar");
+                DriverAction.waitSec(2);
+            }
+            else if (DriverAction.isExist(FilterAndCalendarLocators.calendarButton)) {
                 DriverAction.click(FilterAndCalendarLocators.calendarButton, "Calendar");
                 DriverAction.waitSec(2);
             } else
@@ -168,7 +173,7 @@ public class CalendarStepDefinition {
                 DriverAction.dropDown(FilterAndCalendarLocators.calendarYearPicker, startYear);
                 DriverAction.click(FilterAndCalendarLocators.dateSelector(startDay));
                 if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
                 }
                 DriverAction.dropDown(FilterAndCalendarLocators.calendarMonthPicker, endMonth);
                 DriverAction.dropDown(FilterAndCalendarLocators.calendarYearPicker, endYear);
@@ -176,7 +181,7 @@ public class CalendarStepDefinition {
 
                 GemTestReporter.addTestStep("Calendar Date selection", "Date range selected successfully", STATUS.PASS, DriverAction.takeSnapShot());
                 if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
                 }
             } else GemTestReporter.addTestStep("Calendar Visibility", "Calendar not visible", STATUS.FAIL, DriverAction.takeSnapShot());
         } catch (Exception e) {
@@ -191,7 +196,7 @@ public class CalendarStepDefinition {
             DriverAction.click(DashboardHeaderLocators.myTicketsHeader,"Tickets");
             DriverAction.dropDown(TableAndPaginationLocators.paginationDropdown,"25");
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
             }
             String pos = CommonUtils.getTableColPosition("Created on");
             List<WebElement> elements = DriverAction.getElements(TableAndPaginationLocators.getColValues(pos));

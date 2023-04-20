@@ -85,7 +85,7 @@ public class TicketStepDefinition {
         try {
             DriverAction.click(TicketLocators.submitModalForm);
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
             DriverAction.waitUntilElementAppear(TicketLocators.ticketCreatedLogo,10);
             DriverAction.waitSec(1);
@@ -94,21 +94,21 @@ public class TicketStepDefinition {
             DriverAction.waitUntilElementClickable(TicketLocators.postSubmitContinueButton, 6);
             DriverAction.click(TicketLocators.postSubmitContinueButton);
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
             DriverAction.waitUntilElementClickable(SearchAndSortLocators.ticketSearchButton,10);
             DriverAction.typeText(SearchAndSortLocators.ticketSearchBox, ticketID);
             DriverAction.waitSec(1);
             DriverAction.click(SearchAndSortLocators.ticketSearchButton);
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
             DriverAction.waitUntilElementClickable(TableAndPaginationLocators.firstTicketID,10);
 
             if (DriverAction.isExist(TableAndPaginationLocators.firstTicketID)) {
                 DriverAction.click(TableAndPaginationLocators.firstTicketID);
                 if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
                 }
                 DriverAction.waitUntilElementClickable(TicketLocators.ticketCancelButton,10);
                 DriverAction.waitSec(1);
@@ -121,7 +121,7 @@ public class TicketStepDefinition {
                     DriverAction.waitSec(1);
                     DriverAction.click(TicketLocators.confirmCancelButton, "Cancel");
                     if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                        DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                        CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
                     }
                     DriverAction.waitUntilElementClickable(TableAndPaginationLocators.firstTicketID,10);
                 } else
@@ -132,7 +132,7 @@ public class TicketStepDefinition {
                 DriverAction.waitSec(1);
                 DriverAction.click(SearchAndSortLocators.ticketSearchButton);
                 if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
                 }
                 DriverAction.waitUntilElementClickable(TableAndPaginationLocators.firstTicketID,10);
 
@@ -164,7 +164,7 @@ public class TicketStepDefinition {
         try {
             DriverAction.click(TicketLocators.submitModalForm);
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
             WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(),30);
             wait.until(ExpectedConditions.visibilityOfElementLocated(TicketLocators.ticketCreatedLogo));
@@ -192,7 +192,7 @@ public class TicketStepDefinition {
         try {
             DriverAction.click(TicketLocators.submitModalForm);
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
             WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(),30);
             wait.until(ExpectedConditions.visibilityOfElementLocated(TicketLocators.ticketCreatedLogo));
@@ -230,21 +230,21 @@ public class TicketStepDefinition {
         try {
             DriverAction.click(TicketLocators.submitModalForm);
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
             DriverAction.waitUntilElementAppear(TicketLocators.ticketCreatedLogo,10);
             DriverAction.waitUntilElementClickable(TicketLocators.postSubmitContinueButton, 10);
             String ticketID = DriverAction.getElementText(TicketLocators.postSubmitTicketID).replace("Ticket ID: ", "");
             DriverAction.click(TicketLocators.postSubmitContinueButton);
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
             DriverAction.waitUntilElementClickable(SearchAndSortLocators.ticketSearchButton, 10);
             DriverAction.typeText(SearchAndSortLocators.ticketSearchBox, ticketID);
             DriverAction.waitSec(1);
             DriverAction.click(SearchAndSortLocators.ticketSearchButton);
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
             DriverAction.waitUntilElementClickable(TicketLocators.ticketActionButton,10);
             if (DriverManager.getWebDriver().findElement(TicketLocators.ticketActionButton).isEnabled()) {
@@ -261,21 +261,21 @@ public class TicketStepDefinition {
             DriverAction.waitUntilElementClickable(TicketLocators.confirmCancelButton,10);
             DriverAction.click(TicketLocators.confirmCancelButton);
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
 
             DriverAction.waitUntilElementClickable(TableAndPaginationLocators.firstTicketID,10);
             DriverAction.waitUntilElementClickable(SearchAndSortLocators.ticketSearchButton, 10);
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
             DriverAction.typeText(SearchAndSortLocators.ticketSearchBox, ticketID);
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
             DriverAction.click(SearchAndSortLocators.ticketSearchButton);
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
             if (!DriverManager.getWebDriver().findElement(TicketLocators.ticketActionButton).isEnabled()) {
                 GemTestReporter.addTestStep("Action button", "Action button is not active for the cancelled ticket", STATUS.PASS, DriverAction.takeSnapShot());
@@ -337,7 +337,7 @@ public class TicketStepDefinition {
     public void verifyIfFileCanBeUploaded(String fileFlag) {
         try {
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
             }
             DriverAction.scrollIntoView(TicketLocators.previewButton);
             DriverAction.waitSec(2);
@@ -387,27 +387,27 @@ public class TicketStepDefinition {
             DriverAction.waitUntilElementClickable(TicketLocators.ticketDropdownOptions("Request"),10);
             DriverAction.click(TicketLocators.ticketDropdownOptions("Request"));
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
             DriverAction.waitUntilElementClickable(TicketLocators.ticketDropdown("Department"),10);
             DriverAction.click(TicketLocators.ticketDropdown("Department"));
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
             DriverAction.waitUntilElementClickable(TicketLocators.ticketDropdownOptions(dept),10);
             DriverAction.click(TicketLocators.ticketDropdownOptions(dept));
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
             DriverAction.waitUntilElementClickable(TicketLocators.ticketDropdown("Category"),10);
             DriverAction.click(TicketLocators.ticketDropdown("Category"));
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
             DriverAction.waitUntilElementClickable(TicketLocators.ticketDropdownOptions(category),10);
             DriverAction.click(TicketLocators.ticketDropdownOptions(category));
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
             DriverAction.waitUntilElementClickable(TicketLocators.ticketDropdown("Sub-category"),10);
             DriverAction.click(TicketLocators.ticketDropdown("Sub-category"));
@@ -425,7 +425,7 @@ public class TicketStepDefinition {
         try {
             DriverAction.click(TicketLocators.createTicket, "Create ticket");
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
             }
             DriverAction.waitUntilElementAppear(TicketLocators.ticketDropdown("Department"), 5);
         } catch (Exception e) {
@@ -470,7 +470,7 @@ public class TicketStepDefinition {
             DriverAction.click(TicketLocators.ticketCommentSubmit, "Update comment");
             if(DriverAction.isExist(DashboardHeaderLocators.loaderCover))
             {
-                DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
             }
             if (DriverAction.isExist(TicketLocators.lastTicketComments) && DriverAction.getElementText(TicketLocators.lastTicketComments).equalsIgnoreCase(text)) {
                 DriverAction.scrollIntoView(TicketLocators.lastTicketComments);
@@ -500,7 +500,7 @@ public class TicketStepDefinition {
             for (String file : files) {
                 DriverAction.fileUpload(TicketLocators.fileUpload, basePath + file);
                 if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 100);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 100);
                 }
                 DriverAction.waitUntilElementClickable(TicketLocators.ticketCommentSubmit, 10);
             }
@@ -508,7 +508,7 @@ public class TicketStepDefinition {
             DriverAction.typeText(TicketLocators.ticketCommentInput, "valid files here");
             DriverAction.scrollIntoView(TicketLocators.ticketCommentSubmit);
             DriverAction.click(TicketLocators.ticketCommentSubmit, "Update comment");
-            DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 60);
+            CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 60);
             if (DriverAction.getElements(TicketLocators.lastTicketCommentDocs).size() == files.size()) {
                 GemTestReporter.addTestStep("Comment attachments", "Valid files attached successfully in comment", STATUS.PASS, DriverAction.takeSnapShot());
             } else
@@ -516,11 +516,11 @@ public class TicketStepDefinition {
 
             DriverAction.waitUntilElementClickable(TicketLocators.ticketCommentInput, 60);
             DriverAction.fileUpload(TicketLocators.fileUpload, basePath + "1MB_RTF.rtf");
-            DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 30);
+            CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 30);
             DriverAction.typeText(TicketLocators.ticketCommentInput, "invalid files here");
             DriverAction.waitUntilElementClickable(TicketLocators.ticketCommentSubmit, 10);
             DriverAction.click(TicketLocators.ticketCommentSubmit, "Update comment");
-            DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 60);
+            CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 60);
             DriverAction.waitSec(3);
             if (!DriverAction.isExist(TicketLocators.lastTicketCommentDocs)) {
                 GemTestReporter.addTestStep("Comment attachment", "Invalid files not attached", STATUS.PASS, DriverAction.takeSnapShot());
