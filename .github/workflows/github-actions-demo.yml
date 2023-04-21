@@ -18,13 +18,14 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 
-      - name: Official SonarQube Scan
+      - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v1.2.0
         with:
           projectBaseDir: src
           args: >
             -Dsonar.organization=gem-abhishek-gautam
             -Dsonar.projectKey=gem-abhishek-gautam_helpdeskTesting
+            -Dsonar.java.binaries=target
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
