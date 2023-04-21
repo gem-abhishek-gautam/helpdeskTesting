@@ -32,16 +32,17 @@ public class LoginStepDefinition {
                 DriverAction.click(LoginLocators.submitLoginForm);
                 DriverAction.waitUntilElementClickable(LoginLocators.loginPswd, 10);
                 DriverAction.typeText(LoginLocators.loginPswd, "Password", "Password entered successfully", env.get("PSWD"));
-                DriverAction.click(LoginLocators.submitLoginForm);
+                DriverAction.click(LoginLocators.submitLoginForm,"Submit");
                 DriverAction.waitUntilElementClickable(LoginLocators.rejectPrompt, 5);
                 if (DriverAction.isExist(LoginLocators.microsoftLoginPrompt)) {
-                    DriverAction.click(LoginLocators.rejectPrompt);
+                    DriverAction.click(LoginLocators.rejectPrompt,"Prompt");
+                    DriverAction.waitSec(1);
                 }
             } else
                 GemTestReporter.addTestStep("Login button", "Login button not found", STATUS.FAIL, DriverAction.takeSnapShot());
 
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 35);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 45);
             }
             if (DriverAction.isExist(LoginLocators.loginButton)) {
                 DriverAction.waitUntilElementClickable(LoginLocators.loginButton, 20);
@@ -52,7 +53,7 @@ public class LoginStepDefinition {
             DriverAction.waitUntilElementClickable(DashboardHeaderLocators.headerButtons("logout"), 10);
 
         } catch (Exception e) {
-            GemTestReporter.addTestStep("Exception Occurred", "Exception: " + e, STATUS.FAIL);
+            GemTestReporter.addTestStep("Exception Occurred", "Login was unsuccessful", STATUS.FAIL);
             throw new RuntimeException(e);
         }
 
@@ -66,7 +67,7 @@ public class LoginStepDefinition {
             if (actualUrl.contains(expectedUrl)) {
                 GemTestReporter.addTestStep("Login to dashboard", "Login is successful", STATUS.PASS, DriverAction.takeSnapShot());
             } else {
-                GemTestReporter.addTestStep("Login to dashboard", "Login is unsuccessful \nActual URL: " + actualUrl + " \nExpected URL: " + expectedUrl, STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Login to dashboard", "Login was unsuccessful \nActual URL: " + actualUrl + " \nExpected URL: " + expectedUrl, STATUS.FAIL, DriverAction.takeSnapShot());
                 throw new RuntimeException("Login unsuccessful");
             }
 

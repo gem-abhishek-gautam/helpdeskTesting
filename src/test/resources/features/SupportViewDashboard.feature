@@ -1,4 +1,4 @@
-@support1
+@support
 Feature: Testcases for Support view dashboard
 
   Background: Check login functionality
@@ -91,7 +91,7 @@ Feature: Testcases for Support view dashboard
     Examples:
       | tab           |
       | Assigned      |
-#      | Unassigned    |
+      | Unassigned    |
       | My Department |
 
   @test

@@ -5,7 +5,6 @@ import com.gemini.generic.reporting.STATUS;
 import com.gemini.generic.ui.utils.DriverAction;
 import com.qa.helpdesk.locators.DashboardHeaderLocators;
 import com.qa.helpdesk.locators.FilterAndCalendarLocators;
-import com.qa.helpdesk.locators.SupportTicketLocators;
 import com.qa.helpdesk.locators.TableAndPaginationLocators;
 import com.qa.helpdesk.utils.CommonUtils;
 import io.cucumber.java.en.And;

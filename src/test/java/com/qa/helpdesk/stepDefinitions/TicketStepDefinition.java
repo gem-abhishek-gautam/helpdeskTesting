@@ -420,6 +420,8 @@ public class TicketStepDefinition {
     @Given("Open create ticket form")
     public void openCreateTicketForm() {
         try {
+            CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            DriverAction.waitUntilElementClickable(TicketLocators.createTicket,5);
             DriverAction.click(TicketLocators.createTicket, "Create ticket");
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
                 CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);

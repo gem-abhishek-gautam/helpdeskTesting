@@ -7,6 +7,7 @@ import com.gemini.generic.ui.utils.DriverManager;
 import com.gemini.generic.utils.ProjectConfigData;
 import com.qa.helpdesk.locators.DashboardHeaderLocators;
 import com.qa.helpdesk.locators.LoginLocators;
+import com.qa.helpdesk.utils.CommonUtils;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -55,7 +56,9 @@ public class HeaderButtonStepDefinitions {
     @Given("Click on support button")
     public void clickOnSupportButton() {
         try {
-            DriverAction.click(DashboardHeaderLocators.headerButtons("Support"));
+            CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            DriverAction.waitUntilElementClickable(DashboardHeaderLocators.headerButtons("Support"),5);
+            DriverAction.click(DashboardHeaderLocators.headerButtons("Support"),"Support");
             DriverAction.waitSec(1);
         } catch (Exception e) {
             GemTestReporter.addTestStep("Exception Occurred","Exception: "+e,STATUS.FAIL);
@@ -79,7 +82,8 @@ public class HeaderButtonStepDefinitions {
     @Given("Click on notification button")
     public void clickOnNotificationButton() {
         try {
-            DriverAction.waitUntilElementAppear(DashboardHeaderLocators.notificationButton,10);
+            CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,10);
+            DriverAction.waitUntilElementClickable(DashboardHeaderLocators.notificationButton,10);
             if(DriverAction.isExist(DashboardHeaderLocators.notificationButton)) {
                 DriverAction.click(DashboardHeaderLocators.notificationButton,"Notification button");
             }
@@ -153,7 +157,7 @@ public class HeaderButtonStepDefinitions {
                         }
                     }
 
-                    notifList=DriverAction.getElements(DashboardHeaderLocators.notificationList);;
+                    notifList=DriverAction.getElements(DashboardHeaderLocators.notificationList);
                     isExist = DriverAction.isExist(DashboardHeaderLocators.showMoreNotifications);
                 }
                 if(unreadCount==notifList.size()) {

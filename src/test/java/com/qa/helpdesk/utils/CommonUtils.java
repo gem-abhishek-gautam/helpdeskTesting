@@ -8,7 +8,9 @@ import com.qa.helpdesk.locators.DashboardHeaderLocators;
 import com.qa.helpdesk.locators.SearchAndSortLocators;
 import com.qa.helpdesk.locators.TableAndPaginationLocators;
 import com.qa.helpdesk.locators.TicketLocators;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -18,8 +20,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
-
-import static com.gemini.generic.ui.utils.DriverAction.getElement;
 
 public class CommonUtils {
 
@@ -115,7 +115,7 @@ public class CommonUtils {
         String subCategoryActual = DriverAction.getElementText(TicketLocators.ticketPreview("Sub-category"));
         String statusActual = DriverAction.getElementText(TicketLocators.ticketPreview("Status"));
         String assignActual;
-        if (DriverAction.isExist(TicketLocators.ticketPreview("Assigned To"))) {
+        if(DriverAction.isExist(TicketLocators.ticketPreview("Assigned To"))) {
             assignActual = DriverAction.getElementText(TicketLocators.ticketPreview("Assigned To"));
             if (assignActual.equalsIgnoreCase("harvesh kumar")) {
                 GemTestReporter.addTestStep("Preview ticket Assigned to", "Ticket Assigned to expected: Harvesh Kumar Actual: " + assignActual, STATUS.PASS, DriverAction.takeSnapShot());
@@ -362,7 +362,7 @@ public class CommonUtils {
             String categoryActual = DriverAction.getElementText(TicketLocators.ticketDetails("Category"));
             String subCategoryActual = DriverAction.getElementText(TicketLocators.ticketDetails("Sub Category"));
 
-            if (DriverAction.isExist(TicketLocators.ticketDetailsCard)) {
+             if (DriverAction.isExist(TicketLocators.ticketDetailsCard)) {
 
                 if (typeActual.equalsIgnoreCase(type)) {
                     GemTestReporter.addTestStep("Verify ticket type", "Ticket type expected: " + type + " Actual: " + typeActual, STATUS.PASS, DriverAction.takeSnapShot());
@@ -503,7 +503,7 @@ public class CommonUtils {
                 DriverAction.click(TicketLocators.ticketDropdown("Status"), "Status");
             } catch (Exception e) {
                 JavascriptExecutor exe = (JavascriptExecutor) DriverManager.getWebDriver();
-                exe.executeScript("argument[0].click();", getElement(TicketLocators.ticketDropdown("Status")));
+                exe.executeScript("argument[0].click();",DriverAction.getElement(TicketLocators.ticketDropdown("Status")));
             }
             DriverAction.waitUntilElementClickable(TicketLocators.ticketDropdownOptions(status), 5);
             DriverAction.click(TicketLocators.ticketDropdownOptions(status), status);
@@ -524,18 +524,18 @@ public class CommonUtils {
         }
     }
 
-    public static void verifySupportTicketDetails(String type, String dept, String desc, String category, String subCategory, String status, String caller, String channel, boolean fileFlag) {
+    public static void verifySupportTicketDetails(String type, String dept, String desc, String category, String subCategory, String status,String caller, String channel, boolean fileFlag) {
         if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
             CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 15);
         }
         String ticketID = DriverAction.getElementText(TicketLocators.postSubmitTicketID).replace("Ticket ID: ", "");
-        DriverAction.click(TicketLocators.postSubmitContinueButton, "Continue");
+        DriverAction.click(TicketLocators.postSubmitContinueButton,"Continue");
         if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
             CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
         }
 
-        DriverAction.waitUntilElementClickable(DashboardHeaderLocators.ticketTabs("My Department"), 10);
-        DriverAction.click(DashboardHeaderLocators.ticketTabs("My Department"), "My Department");
+        DriverAction.waitUntilElementClickable(DashboardHeaderLocators.ticketTabs("My Department"),10);
+        DriverAction.click(DashboardHeaderLocators.ticketTabs("My Department"),"My Department");
         DriverAction.waitSec(3);
         DriverAction.waitUntilElementClickable(SearchAndSortLocators.ticketSearchButton, 10);
         DriverAction.typeText(SearchAndSortLocators.ticketSearchBox, ticketID);
@@ -584,7 +584,7 @@ public class CommonUtils {
                 } else
                     GemTestReporter.addTestStep("Verify Department", "Department expected: " + dept + " Actual: " + deptActual, STATUS.FAIL, DriverAction.takeSnapShot());
 
-                if (status.equalsIgnoreCase("open")) {
+                if(status.equalsIgnoreCase("open")) {
                     status = "Unassigned";
                 } else status = "Assigned";
                 if (statusActual.equalsIgnoreCase(status)) {
@@ -636,8 +636,7 @@ public class CommonUtils {
                     GemTestReporter.addTestStep("Attachment validation", "File attachment validation failed", STATUS.FAIL, DriverAction.takeSnapShot());
 
             }
-        } else
-            GemTestReporter.addTestStep("Ticket Search", "Ticket not found", STATUS.FAIL, DriverAction.takeSnapShot());
+        } else GemTestReporter.addTestStep("Ticket Search", "Ticket not found", STATUS.FAIL, DriverAction.takeSnapShot());
 
 
     }
@@ -696,14 +695,10 @@ public class CommonUtils {
         return (date.after(startDate) || date.equals(startDate)) && (date.before(endDate) || date.equals(endDate));
 
     }
-
+    
     public static void waitUntilElementDisappear(By locator, int seconds) {
-        try {
-            WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), seconds);
-            wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
-        } catch (Exception e) {
-            throw new TimeoutException(e);
-        }
+        WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(),seconds);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 
     public static void scrollToTop() {

@@ -68,8 +68,9 @@ public class SupportDashboardStepDefinitions {
                     exe.executeScript("argument[0].click();", DriverAction.getElement(DashboardHeaderLocators.ticketTabs(tab)));
                 }
                 if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
                 }
+                DriverAction.waitSec(2);
                 List<WebElement> elements = new ArrayList<>();
                 if (!DriverAction.isExist(TableAndPaginationLocators.noTableDataImg)) {
                     DriverAction.dropDown(TableAndPaginationLocators.paginationDropdown, "25");
