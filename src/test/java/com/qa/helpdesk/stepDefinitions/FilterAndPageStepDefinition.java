@@ -30,7 +30,7 @@ public class FilterAndPageStepDefinition {
                 DriverAction.click(TableAndPaginationLocators.paginationDropdown, "Rows per page");
                 DriverAction.dropDown(TableAndPaginationLocators.paginationDropdown, option);
                 if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
                 }
             } else
                 GemTestReporter.addTestStep("Pagination", "Dropdown for rows per page not found", STATUS.FAIL, DriverAction.takeSnapShot());
@@ -74,7 +74,7 @@ public class FilterAndPageStepDefinition {
     public void selectFilterCriteria(String dept, String status) {
         try {
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             if (!dept.isEmpty()) {
                 if (dept.contains(",")) {
@@ -82,13 +82,13 @@ public class FilterAndPageStepDefinition {
                     for (String i : deptList) {
                         DriverAction.click(FilterAndCalendarLocators.filterOptions(i), "Department");
                         if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                            CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                            CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
                         }
                     }
                 } else {
                     DriverAction.click(FilterAndCalendarLocators.filterOptions(dept), "Status");
                     if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                        CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                        CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
                     }
                 }
 
@@ -100,13 +100,13 @@ public class FilterAndPageStepDefinition {
                     for (String j : statusList) {
                         DriverAction.click(FilterAndCalendarLocators.filterOptions(j), "Status");
                         if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                            CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                            CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
                         }
                     }
                 } else {
                     DriverAction.click(FilterAndCalendarLocators.filterOptions(status), "Status");
                     if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                        CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                        CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
                     }
                 }
 
@@ -127,11 +127,11 @@ public class FilterAndPageStepDefinition {
                 DriverAction.click(FilterAndCalendarLocators.closeFilterButton, "Close button");
             }
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             DriverAction.dropDown(TableAndPaginationLocators.paginationDropdown, "25");
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             boolean nextActive;
             if (!dept.isEmpty()) {
@@ -148,7 +148,7 @@ public class FilterAndPageStepDefinition {
                         if (nextActive) {
                             DriverAction.click(TableAndPaginationLocators.nextPageButton, "Next page");
                             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
                             }
                             DriverAction.waitSec(1);
                         }
@@ -184,7 +184,7 @@ public class FilterAndPageStepDefinition {
                         if (nextActive) {
                             DriverAction.click(TableAndPaginationLocators.nextPageButton, "Next page");
                             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
                             }
                             DriverAction.waitSec(1);
                         }
@@ -219,11 +219,11 @@ public class FilterAndPageStepDefinition {
             DriverAction.waitSec(2);
             DriverAction.click(FilterAndCalendarLocators.clearFilterButton, "Clear filters");
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             DriverAction.click(FilterAndCalendarLocators.closeFilterButton, "Close filter");
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
         } catch (Exception e) {
             GemTestReporter.addTestStep("Exception Occurred", "Exception: " + e, STATUS.FAIL);
@@ -285,7 +285,7 @@ public class FilterAndPageStepDefinition {
             String displayedRows;
             if (DriverManager.getWebDriver().findElement(TableAndPaginationLocators.nextPageButton).isEnabled()) {
                 DriverAction.click(TableAndPaginationLocators.nextPageButton, "Next page button");
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
                 displayedRows = DriverAction.getElementText(TableAndPaginationLocators.displayedRows).split("–")[0];
                 int rows = DriverAction.getElements(TableAndPaginationLocators.getColValues("1")).size();
                 if ((Integer.parseInt(option) + 1) == Integer.parseInt(displayedRows) && rows == Integer.parseInt(option)) {
@@ -298,7 +298,7 @@ public class FilterAndPageStepDefinition {
 
             if (DriverManager.getWebDriver().findElement(TableAndPaginationLocators.prevPageButton).isEnabled()) {
                 DriverAction.click(TableAndPaginationLocators.prevPageButton, "Prev page button");
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
                 displayedRows = DriverAction.getElementText(TableAndPaginationLocators.displayedRows).split("–")[0];
                 int rows = DriverAction.getElements(TableAndPaginationLocators.getColValues("1")).size();
                 if ((rows == Integer.parseInt(option) && displayedRows.equals("1"))) {
@@ -321,11 +321,11 @@ public class FilterAndPageStepDefinition {
             DriverAction.waitUntilElementClickable(FilterAndCalendarLocators.filterToggleButton, 10);
             DriverAction.click(FilterAndCalendarLocators.filterToggleButton, "Filter toggle button");
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             DriverAction.click(FilterAndCalendarLocators.closeFilterButton, "Close filter");
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
         } catch (Exception e) {
             GemTestReporter.addTestStep("Exception Occurred", "Exception: " + e, STATUS.FAIL);
@@ -338,7 +338,7 @@ public class FilterAndPageStepDefinition {
         try {
             DriverAction.dropDown(TableAndPaginationLocators.paginationDropdown, "25");
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             DriverAction.waitSec(1);
             boolean nextActive;

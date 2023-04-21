@@ -32,10 +32,10 @@ public class LoginStepDefinition {
                 DriverAction.click(LoginLocators.submitLoginForm);
                 DriverAction.waitUntilElementClickable(LoginLocators.loginPswd, 10);
                 DriverAction.typeText(LoginLocators.loginPswd, "Password", "Password entered successfully", env.get("PSWD"));
-                DriverAction.click(LoginLocators.submitLoginForm,"Submit");
+                DriverAction.click(LoginLocators.submitLoginForm, "Submit");
                 DriverAction.waitUntilElementClickable(LoginLocators.rejectPrompt, 5);
                 if (DriverAction.isExist(LoginLocators.microsoftLoginPrompt)) {
-                    DriverAction.click(LoginLocators.rejectPrompt,"Prompt");
+                    DriverAction.click(LoginLocators.rejectPrompt, "Prompt");
                     DriverAction.waitSec(1);
                 }
             } else
@@ -102,19 +102,19 @@ public class LoginStepDefinition {
             wait.until(ExpectedConditions.visibilityOfElementLocated(LoginLocators.viewDropdown));
             DriverAction.waitUntilElementClickable(LoginLocators.viewDropdown, 10);
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             DriverAction.click(LoginLocators.viewDropdown, "View dropdown");
             try {
                 DriverAction.click(LoginLocators.getView(view), view);
             } catch (Exception e) {
-                if(!DriverAction.isExist(LoginLocators.viewListbox)) {
+                if (!DriverAction.isExist(LoginLocators.viewListbox)) {
                     DriverAction.click(LoginLocators.viewDropdown, "View dropdown");
                     DriverAction.click(LoginLocators.getView(view), view);
                 } else DriverAction.click(LoginLocators.getView(view), view);
             }
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             DriverAction.waitUntilElementClickable(TicketLocators.createTicket, 10);
         } catch (Exception e) {

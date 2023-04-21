@@ -43,14 +43,14 @@ public class SupportTicketStepDefinition {
             DriverAction.waitUntilElementClickable(TicketLocators.previewButton, 10);
             DriverAction.click(TicketLocators.previewButton, "Preview");
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             boolean fileFlag = file.equalsIgnoreCase("attached");
             CommonUtils.verifySupportPreview(fileFlag, type, caller, channel, dept, category, subcategory, subject, desc, status);
 
             DriverAction.click(TicketLocators.submitForm, "Submit");
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 30);
             wait.until(ExpectedConditions.visibilityOfElementLocated(TicketLocators.ticketCreatedLogo));
@@ -88,7 +88,7 @@ public class SupportTicketStepDefinition {
     public void verifyCallerInfoAndHistory() {
         try {
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             DriverAction.waitUntilElementClickable(SupportTicketLocators.formCallerInfoButton, 10);
             DriverAction.waitUntilElementClickable(SupportTicketLocators.formCallerHistoryButton, 10);
@@ -109,7 +109,7 @@ public class SupportTicketStepDefinition {
             if (DriverAction.isExist(SupportTicketLocators.formCallerHistoryButton) && DriverManager.getWebDriver().findElement(SupportTicketLocators.formCallerHistoryButton).isEnabled()) {
                 DriverAction.click(SupportTicketLocators.formCallerHistoryButton, "Caller history");
                 if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
                 }
                 if (DriverAction.isExist(SupportTicketLocators.callerHistory)) {
                     GemTestReporter.addTestStep("Caller history", "Caller history is visible", STATUS.PASS, DriverAction.takeSnapShot());
@@ -128,7 +128,7 @@ public class SupportTicketStepDefinition {
     public void openTicketDetailsForATicket() {
         try {
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             DriverAction.waitUntilElementAppear(TableAndPaginationLocators.firstTicketID, 5);
             DriverAction.click(TableAndPaginationLocators.firstTicketID, "Ticket");
@@ -143,13 +143,13 @@ public class SupportTicketStepDefinition {
     public void verifyIfCallerInfoCanBeOpened() {
         try {
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
 
             DriverAction.waitUntilElementClickable(SupportTicketLocators.detailsCallerInfoButton, 5);
             DriverAction.click(SupportTicketLocators.detailsCallerInfoButton, "Caller info");
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             DriverAction.waitSec(1);
             if (DriverAction.isExist(SupportTicketLocators.callerInfoModal)) {
@@ -169,12 +169,12 @@ public class SupportTicketStepDefinition {
     public void verifyIfCallerHistoryCanBeOpened() {
         try {
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             DriverAction.waitUntilElementClickable(SupportTicketLocators.detailsCallerHistoryButton, 5);
             DriverAction.click(SupportTicketLocators.detailsCallerHistoryButton, "Caller history");
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             if (DriverAction.isExist(SupportTicketLocators.callerHistory)) {
                 GemTestReporter.addTestStep("Caller history", "Caller history is visible", STATUS.PASS, DriverAction.takeSnapShot());
@@ -191,13 +191,13 @@ public class SupportTicketStepDefinition {
     public void verifyTicketAuditTrail(String step) {
         try {
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             DriverAction.waitSec(2);
             DriverAction.waitUntilElementClickable(SupportTicketLocators.auditTrailButton, 5);
             DriverAction.click(SupportTicketLocators.auditTrailButton, "Audit Trail");
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 10);
             wait.until(ExpectedConditions.elementToBeClickable(DashboardHeaderLocators.ticketTabs("Trails")));
@@ -224,7 +224,7 @@ public class SupportTicketStepDefinition {
 
             DriverAction.click(SupportTicketLocators.backButton, "Back");
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
         } catch (Exception e) {
             GemTestReporter.addTestStep("Exception Occurred", "Exception: " + e, STATUS.FAIL);
@@ -236,11 +236,11 @@ public class SupportTicketStepDefinition {
     public void editTicketDetailsForFieldAndValue(String field, String value) {
         try {
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             DriverAction.click(SupportTicketLocators.editTicketButton, "Edit");
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
             }
             DriverAction.waitUntilElementClickable(TicketLocators.ticketDropdown(field), 5);
             if (field.equalsIgnoreCase("Assigned to")) {
@@ -249,7 +249,7 @@ public class SupportTicketStepDefinition {
                 DriverAction.scrollIntoView(TicketLocators.callerMenu(value));
                 DriverAction.click(TicketLocators.callerMenu(value), value);
                 if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
                 }
                 DriverAction.click(TicketLocators.submitModalForm, "Submit");
             }
@@ -258,7 +258,7 @@ public class SupportTicketStepDefinition {
                 DriverAction.waitUntilElementClickable(TicketLocators.submitModalForm, 5);
                 DriverAction.click(TicketLocators.submitModalForm, "Submit");
                 if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
                 }
             }
         } catch (Exception e) {
