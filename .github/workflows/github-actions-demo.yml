@@ -23,8 +23,6 @@ jobs:
         with:
           java-version: '17'
           distribution: 'oracle'
-      - name: Build with Maven
-        run: mvn package
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v1.2.0
