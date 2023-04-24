@@ -44,6 +44,7 @@ public class LoginStepDefinition {
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
                 CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 45);
             }
+
             if (DriverAction.isExist(LoginLocators.loginButton)) {
                 DriverAction.waitUntilElementClickable(LoginLocators.loginButton, 20);
                 DriverAction.click(LoginLocators.loginButton, "Login SSO");
@@ -53,6 +54,9 @@ public class LoginStepDefinition {
             DriverAction.waitUntilElementClickable(DashboardHeaderLocators.headerButtons("logout"), 10);
 
         } catch (Exception e) {
+            if(DriverAction.isExist(LoginLocators.errorModal)) {
+                GemTestReporter.addTestStep("Portal health","Portal is not up and running. Error encountered.",STATUS.ERR,DriverAction.takeSnapShot());
+            }
             GemTestReporter.addTestStep("Exception Occurred", "Login was unsuccessful", STATUS.FAIL);
             throw new RuntimeException(e);
         }

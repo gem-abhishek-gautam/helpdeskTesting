@@ -9,6 +9,7 @@ public class LoginLocators {
     public static By loginError = By.xpath("//div[contains(@class,'ext-error')]");
     public static By submitLoginForm = By.xpath("//input[@type='submit']");
     public static By rejectPrompt = By.xpath("//input[@value='No']");
+    public static By errorModal = By.xpath("//div[contains(@class,'modal-dialog')]");
     public static By microsoftLoginPrompt = By.xpath("//div[contains(text(),'Stay')]");
     public static By employeeName = By.xpath("//div[contains(@class,'empName')]");
     public static By viewDropdown = By.xpath("//div[contains(@class,'control')]");

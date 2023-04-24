@@ -9,7 +9,6 @@ Feature: Testcases for Support view dashboard
     Given Click on toggle button on side menu
     Then Verify if menu gets collapsed or expanded
 
-
   Scenario: Check logout button
     Given Click on logout button on header
     Then Verify if user is logged out of dashboard

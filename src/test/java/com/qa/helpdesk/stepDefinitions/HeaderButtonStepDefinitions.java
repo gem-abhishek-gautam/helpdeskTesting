@@ -24,7 +24,8 @@ public class HeaderButtonStepDefinitions {
     @And("Click on user guide button")
     public void headerButtons() {
         try {
-            DriverAction.waitUntilElementClickable(DashboardHeaderLocators.headerButtons("userGuide"), 10);
+            DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,20);
+            DriverAction.waitUntilElementClickable(DashboardHeaderLocators.headerButtons("userGuide"), 20);
             DriverAction.click(DashboardHeaderLocators.headerButtons("userGuide"), "User-guide");
         } catch (Exception e) {
             GemTestReporter.addTestStep("Exception: ", "Exception:" + e, STATUS.FAIL);
@@ -217,6 +218,7 @@ public class HeaderButtonStepDefinitions {
     @Given("Click on logout button on header")
     public void clickOnNotificationButtonOnHeader() {
         try {
+            CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,20);
             if (DriverAction.isExist(DashboardHeaderLocators.headerButtons("logout"))) {
                 DriverAction.click(DashboardHeaderLocators.headerButtons("logout"), "Logout button");
             } else {
