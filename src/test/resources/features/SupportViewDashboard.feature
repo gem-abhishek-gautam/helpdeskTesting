@@ -265,6 +265,7 @@ Feature: Testcases for Support view dashboard
     Given Open "<tab>" ticket category tab
     When Open filter option
     And Clear all applied filters
+    And Open filter option
     And Select filter criteria as department "" and status "Closed,Cancelled,Resolved"
     And Click on toggle button to hide closed, resolved and cancelled status
     Then Verify if closed, cancelled and resolved tickets are hidden
@@ -280,6 +281,7 @@ Feature: Testcases for Support view dashboard
     When Search for dept "IT" and assigned to "Priyanka"
     And Open filter option
     And Clear all applied filters
+    And Open filter option
     And Select filter criteria as department "" and status "Closed,Cancelled,Resolved"
     And Click on toggle button to hide closed, resolved and cancelled status
     Then Verify if closed, cancelled and resolved tickets are hidden
