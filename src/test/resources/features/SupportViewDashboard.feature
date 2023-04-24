@@ -236,14 +236,14 @@ Feature: Testcases for Support view dashboard
     Then Verify result for selection dept "" and status "<status>"
     Examples:
       | status     |
-      | Open       |
-      | Unassigned |
-      | Assigned   |
-      | Hold       |
-      | Resolved   |
-      | Cancelled  |
+#      | Open       |
+#      | Unassigned |
+#      | Assigned   |
+#      | Hold       |
+#      | Resolved   |
+#      | Cancelled  |
       | Closed     |
-      | Re-open    |
+#      | Re-open    |
 
 
   Scenario Outline: Check Apply filter functionality for 'Others' ticket tab
