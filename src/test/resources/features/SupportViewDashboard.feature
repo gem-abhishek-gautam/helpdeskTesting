@@ -9,7 +9,7 @@ Feature: Testcases for Support view dashboard
     Given Click on toggle button on side menu
     Then Verify if menu gets collapsed or expanded
 
-  @test1
+
   Scenario: Check logout button
     Given Click on logout button on header
     Then Verify if user is logged out of dashboard
@@ -84,7 +84,6 @@ Feature: Testcases for Support view dashboard
     And Edit ticket details for field "Configuration" and value "config1"
     Then Verify ticket audit trail for "Configuration"
 
-  @test
   Scenario Outline: Check VIP filter for tickets
     Given Open "<tab>" ticket category tab
     When Enable VIP filter for tickets
@@ -95,7 +94,6 @@ Feature: Testcases for Support view dashboard
       | Unassigned    |
       | My Department |
 
-  @test
   Scenario: Check VIP filter for 'Others' tab
     Given Open "Others" ticket category tab
     When Search for dept "IT" and assigned to "Priyanka"
@@ -104,7 +102,6 @@ Feature: Testcases for Support view dashboard
     And Search for dept "Accounts" and assigned to "Jaish"
     Then Verify VIP table results for others tab
 
-  @test
   Scenario Outline: Check column sorting for ticket tabs
     Given Open "<tab>" ticket category tab
     Then Verify sorting button for "ID" column
@@ -119,7 +116,6 @@ Feature: Testcases for Support view dashboard
       | Unassigned    |
       | My Department |
 
-  @test
   Scenario: Check column sorting for 'Others' tab
     Given Open "Others" ticket category tab
     When Search for dept "IT" and assigned to "Priyanka"
@@ -135,7 +131,6 @@ Feature: Testcases for Support view dashboard
     And Search for dept "IT" and assigned to "Priyanka"
     Then Verify sorting button for "Status" column
 
-  @test
   Scenario Outline: Verify search functionality for all tabs
     Given Open "<tab>" ticket category tab
     When Search for keyword "<keyword>"
@@ -146,7 +141,6 @@ Feature: Testcases for Support view dashboard
       | request  | Unassigned    |
       | incident | My Department |
 
-  @test
   Scenario Outline: Verify clear text button
     Given Open "<tab>" ticket category tab
     When Search for keyword "test"
@@ -157,7 +151,6 @@ Feature: Testcases for Support view dashboard
       | Unassigned    |
       | My Department |
 
-  @test
   Scenario: Check if ticket details can be accessed for other departments
     Given Open "Others" ticket category tab
     When Search for dept "IT" and assigned to "Priyanka"
@@ -169,7 +162,6 @@ Feature: Testcases for Support view dashboard
     And Search for dept "Admin" and assigned to "Himanshu"
     Then Verify ticket details page access for "Admin" dept
 
-  @test
   Scenario Outline: Select a date range from calendar for ticket tabs
     Given Open "<tab>" ticket category tab
     When Open calendar on dashboard
@@ -182,7 +174,6 @@ Feature: Testcases for Support view dashboard
       | Unassigned    |
       | My Department |
 
-  @test
   Scenario: Select a date range from calendar for 'Others' tab
     Given Open "Others" ticket category tab
     When Search for dept "IT" and assigned to "Priyanka"
@@ -229,8 +220,6 @@ Feature: Testcases for Support view dashboard
     And Clear calendar date filter
     Then Verify if highlighted current date matches today's date
 
-
-  @test
   Scenario Outline: Check Apply filter functionality for ticket tabs
     Given Open "Assigned" ticket category tab
     When Open filter option
@@ -285,6 +274,7 @@ Feature: Testcases for Support view dashboard
       | Unassigned    |
       | My Department |
 
+  @test1
   Scenario: Check filter toggle button functionality for 'Others' tab
     Given Open "Others" ticket category tab
     When Search for dept "IT" and assigned to "Priyanka"
