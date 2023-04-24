@@ -1,4 +1,4 @@
-@support
+@support1
 Feature: Testcases for Support view dashboard
 
   Background: Check login functionality

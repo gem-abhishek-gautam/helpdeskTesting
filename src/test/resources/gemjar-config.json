@@ -10,7 +10,7 @@
   "email_bcc": "",
   "enter_point": "https://apis.gemecosystem.com/enter-point",
   "gemjarSubID": "test_id",
-  "tags": "@test1",
+  "tags": "@support1",
   "feature": "src/test/resources/features",
   "glueCode": "com.qa.helpdesk.stepDefinitions",
   "dev": {
