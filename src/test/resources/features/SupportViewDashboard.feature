@@ -244,7 +244,7 @@ Feature: Testcases for Support view dashboard
       | Closed     |
       | Re-open    |
 
-
+  @test1
   Scenario Outline: Check Apply filter functionality for 'Others' ticket tab
     Given Open "Others" ticket category tab
     When Search for dept "IT" and assigned to "Priyanka"
@@ -261,7 +261,7 @@ Feature: Testcases for Support view dashboard
       | Closed     |
       | Re-open    |
 
-  @test1
+
   Scenario Outline: Check filter toggle button functionality in ticket tabs
     Given Open "<tab>" ticket category tab
     When Open filter option
