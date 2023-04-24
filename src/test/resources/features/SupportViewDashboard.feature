@@ -200,6 +200,7 @@ Feature: Testcases for Support view dashboard
     And Select date "7-April-2023" from calendar
     Then Verify if tickets are shown for selected date "7-April-2023" only
 
+
   Scenario Outline: Jump to specific date in ticket tabs and clear data for calendar
     Given Open "<tab>" ticket category tab
     When Open calendar on dashboard
@@ -212,6 +213,7 @@ Feature: Testcases for Support view dashboard
       | Unassigned    |
       | My Department |
 
+
   Scenario: Jump to specific date in 'Others' tab and clear data for calendar
     Given Open "Others" ticket category tab
     When Search for dept "IT" and assigned to "Priyanka"
@@ -220,7 +222,7 @@ Feature: Testcases for Support view dashboard
     And Clear calendar date filter
     Then Verify if highlighted current date matches today's date
 
-  @test1
+
   Scenario Outline: Check Apply filter functionality for ticket tabs
     Given Open "Assigned" ticket category tab
     When Open filter option
@@ -230,21 +232,16 @@ Feature: Testcases for Support view dashboard
     When Open filter option
     And Select filter criteria as department "" and status "<status>"
     Then Verify result for selection dept "" and status "<status>"
-    And Open "My Department" ticket category tab
-    When Open filter option
-    And Select filter criteria as department "" and status "<status>"
-    Then Verify result for selection dept "" and status "<status>"
     Examples:
       | status     |
-#      | Open       |
-#      | Unassigned |
-#      | Assigned   |
-#      | Hold       |
-#      | Resolved   |
-#      | Cancelled  |
+      | Open       |
+      | Unassigned |
+      | Assigned   |
+      | Hold       |
+      | Resolved   |
+      | Cancelled  |
       | Closed     |
-#      | Re-open    |
-
+      | Re-open    |
 
   Scenario Outline: Check Apply filter functionality for 'Others' ticket tab
     Given Open "Others" ticket category tab
@@ -263,6 +260,52 @@ Feature: Testcases for Support view dashboard
       | Closed     |
       | Re-open    |
 
+  @test1
+  Scenario Outline: Check Clear filter functionality for ticket tabs
+    Given Open "Assigned" ticket category tab
+    When Open filter option
+    When Select filter criteria as department "" and status "<status>"
+    And Clear all applied filters
+    Then Verify if filters for dept "" and status "<status>" are cleared
+    And Open "Unassigned" ticket category tab
+    When Open filter option
+    When Select filter criteria as department "" and status "<status>"
+    And Clear all applied filters
+    Then Verify if filters for dept "" and status "<status>" are cleared
+    And Open "My Department" ticket category tab
+    When Open filter option
+    When Select filter criteria as department "" and status "<status>"
+    And Clear all applied filters
+    Then Verify if filters for dept "" and status "<status>" are cleared
+    Examples:
+      | status     |
+      | Open       |
+      | Unassigned |
+      | Assigned   |
+      | Hold       |
+      | Resolved   |
+      | Cancelled  |
+      | Closed     |
+      | Re-open    |
+
+  @test1
+  Scenario Outline: Check Clear filter functionality for 'Others' tab
+    Given Open "Others" ticket category tab
+    When Search for dept "IT" and assigned to "Priyanka"
+    And Open filter option
+    When Select filter criteria as department "" and status "<status>"
+    And Clear all applied filters
+    Then Verify if filters for dept "" and status "<status>" are cleared
+    Examples:
+      | status     |
+      | Open       |
+      | Unassigned |
+      | Assigned   |
+      | Hold       |
+      | Resolved   |
+      | Cancelled  |
+      | Closed     |
+      | Re-open    |
 
   Scenario Outline: Check filter toggle button functionality in ticket tabs
     Given Open "<tab>" ticket category tab
