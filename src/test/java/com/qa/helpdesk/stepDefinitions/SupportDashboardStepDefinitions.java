@@ -421,7 +421,7 @@ public class SupportDashboardStepDefinitions {
             DriverAction.waitUntilElementClickable(SearchAndSortLocators.ticketSearchButton, 5);
             DriverAction.click(SearchAndSortLocators.ticketSearchButton, "Search");
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 5);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
             }
 
         } catch (Exception e) {

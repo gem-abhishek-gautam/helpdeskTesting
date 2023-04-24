@@ -248,6 +248,7 @@ Feature: Testcases for Support view dashboard
   Scenario Outline: Check Apply filter functionality for 'Others' ticket tab
     Given Open "Others" ticket category tab
     When Search for dept "IT" and assigned to "Priyanka"
+    And Open filter option
     And Select filter criteria as department "" and status "<status>"
     Then Verify result for selection dept "" and status "<status>"
     Examples:
