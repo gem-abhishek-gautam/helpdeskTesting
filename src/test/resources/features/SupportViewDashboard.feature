@@ -261,6 +261,7 @@ Feature: Testcases for Support view dashboard
       | Closed     |
       | Re-open    |
 
+  @test1
   Scenario Outline: Check filter toggle button functionality in ticket tabs
     Given Open "<tab>" ticket category tab
     When Open filter option
@@ -275,7 +276,7 @@ Feature: Testcases for Support view dashboard
       | Unassigned    |
       | My Department |
 
-  @test1
+
   Scenario: Check filter toggle button functionality for 'Others' tab
     Given Open "Others" ticket category tab
     When Search for dept "IT" and assigned to "Priyanka"
