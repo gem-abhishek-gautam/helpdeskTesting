@@ -220,6 +220,7 @@ Feature: Testcases for Support view dashboard
     And Clear calendar date filter
     Then Verify if highlighted current date matches today's date
 
+  @test1
   Scenario Outline: Check Apply filter functionality for ticket tabs
     Given Open "Assigned" ticket category tab
     When Open filter option
@@ -244,7 +245,7 @@ Feature: Testcases for Support view dashboard
       | Closed     |
       | Re-open    |
 
-  @test1
+
   Scenario Outline: Check Apply filter functionality for 'Others' ticket tab
     Given Open "Others" ticket category tab
     When Search for dept "IT" and assigned to "Priyanka"
