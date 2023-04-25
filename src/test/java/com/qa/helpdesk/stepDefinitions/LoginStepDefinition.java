@@ -42,6 +42,13 @@ public class LoginStepDefinition {
                 GemTestReporter.addTestStep("Login button", "Login button not found", STATUS.FAIL, DriverAction.takeSnapShot());
 
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+            }
+            if(DriverAction.isExist(LoginLocators.errorModal)) {
+                GemTestReporter.addTestStep("Portal health","Portal is not up and running. Error encountered.",STATUS.ERR,DriverAction.takeSnapShot());
+                throw new Exception("Portal is not accessible at the moment");
+            }
+            if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
                 CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 45);
             }
 
