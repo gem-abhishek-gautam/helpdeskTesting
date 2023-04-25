@@ -94,7 +94,7 @@ public class SupportDashboardStepDefinitions {
 
                 DriverAction.refresh();
                 if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 30);
                 }
 
                 String[] displayedCountVal = DriverAction.getElementText(DashboardHeaderLocators.ticketTabs(tab)).replace("\"", "").split(" ");
