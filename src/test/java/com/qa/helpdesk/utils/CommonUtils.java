@@ -16,6 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -701,6 +702,11 @@ public class CommonUtils {
         WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), seconds);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
+    public static void waitUntilElementAppear(By locator, int duration) {
+        WebDriverWait webDriverWait = new WebDriverWait(DriverManager.getWebDriver(), Duration.ofSeconds((long)duration));
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
 
     public static void scrollToTop() {
         JavascriptExecutor js = (JavascriptExecutor) DriverManager.getWebDriver();

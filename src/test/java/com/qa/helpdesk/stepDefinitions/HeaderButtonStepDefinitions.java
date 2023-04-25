@@ -40,7 +40,7 @@ public class HeaderButtonStepDefinitions {
             Set<String> chromeTabs = new HashSet<>(DriverAction.getWindowHandles());
             String[] tabsList = chromeTabs.toArray(new String[chromeTabs.size()]);
             DriverAction.switchToWindow(tabsList[1]);
-            DriverAction.waitUntilElementClickable(DashboardHeaderLocators.pdfHeader, 10);
+            CommonUtils.waitUntilElementAppear(DashboardHeaderLocators.pdfHeader, 10);
             if (DriverAction.isExist(DashboardHeaderLocators.pdfHeader) && DriverAction.getElementText(DashboardHeaderLocators.pdfHeader).equalsIgnoreCase("Helpdesk user guide.pdf")) {
                 GemTestReporter.addTestStep("Verify user-guide pdf", "User-guide pdf is displayed", STATUS.PASS, DriverAction.takeSnapShot());
             } else

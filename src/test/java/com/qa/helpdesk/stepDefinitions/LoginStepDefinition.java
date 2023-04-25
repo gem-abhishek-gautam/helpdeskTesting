@@ -56,6 +56,7 @@ public class LoginStepDefinition {
         } catch (Exception e) {
             if(DriverAction.isExist(LoginLocators.errorModal)) {
                 GemTestReporter.addTestStep("Portal health","Portal is not up and running. Error encountered.",STATUS.ERR,DriverAction.takeSnapShot());
+                System.exit(0);
             }
             GemTestReporter.addTestStep("Exception Occurred", "Login was unsuccessful", STATUS.FAIL);
             throw new RuntimeException(e);

@@ -10,6 +10,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -362,7 +363,6 @@ public class TicketStepDefinition {
             DriverAction.fileUpload(TicketLocators.fileUpload, file1);
             DriverAction.waitUntilElementClickable(TicketLocators.previewButton, 60);
             String file2 = System.getProperty("user.dir") + "\\src\\test\\resources\\files\\png-5mb.png";
-//            DriverAction.fileUpload(TicketLocators.fileUpload, file2);
 
         } catch (Exception e) {
             GemTestReporter.addTestStep("Exception Occurred", "Exception: " + e, STATUS.FAIL);
