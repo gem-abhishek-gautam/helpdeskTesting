@@ -196,8 +196,8 @@ Feature: Testcases for Support view dashboard
     Given Open "Others" ticket category tab
     When Search for dept "IT" and assigned to "Priyanka"
     When Open calendar on dashboard
-    And Select date "7-April-2023" from calendar
-    Then Verify if tickets are shown for selected date "7-April-2023" only
+    And Select date "20-April-2023" from calendar
+    Then Verify if tickets are shown for selected date "20-April-2023" only
 
 
   Scenario Outline: Jump to specific date in ticket tabs and clear data for calendar

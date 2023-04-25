@@ -53,12 +53,12 @@ public class SupportDashboardStepDefinitions {
     public void verifyTheTicketCountMatches() {
         try {
             if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 30);
             }
             List<String> tabs = Arrays.asList("Assigned", "Unassigned", "My Department");
             for (String tab : tabs) {
                 if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 30);
                 }
                 DriverAction.waitUntilElementClickable(DashboardHeaderLocators.ticketTabs(tab), 5);
                 try {

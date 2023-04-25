@@ -24,8 +24,7 @@ public class HeaderButtonStepDefinitions {
     @And("Click on user guide button")
     public void headerButtons() {
         try {
-            DriverAction.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover,20);
-            DriverAction.waitUntilElementClickable(DashboardHeaderLocators.headerButtons("userGuide"), 20);
+            DriverAction.waitSec(3);
             DriverAction.click(DashboardHeaderLocators.headerButtons("userGuide"), "User-guide");
         } catch (Exception e) {
             GemTestReporter.addTestStep("Exception: ", "Exception:" + e, STATUS.FAIL);
