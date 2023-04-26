@@ -74,15 +74,6 @@ Feature: Testcases for Support view dashboard
       | Duplicate  |
       | No Action  |
 
-  Scenario: Check audit trail for a ticket
-    Given Create ticket with file "attached" and type "Incident", caller "Abhishek Gautam", channel "Portal", dept "IT", category "End User Hardware", sub-category "Desktop", subject "support test with file", desc "support test" and status "Open"
-    Then Submit and verify ticket with file "attached" and type "Incident", caller "Abhishek Gautam", channel "Portal", dept "IT", category "End User Hardware", sub-category "Desktop", subject "support test with file", desc "support test" and status "Open"
-    Then Verify ticket audit trail for "created"
-    And Edit ticket details for field "Assigned To" and value "Sheeza Bakshi"
-    Then Verify ticket audit trail for "assigned"
-    And Edit ticket details for field "Configuration" and value "config1"
-    Then Verify ticket audit trail for "Configuration"
-
   Scenario Outline: Check VIP filter for tickets
     Given Open "<tab>" ticket category tab
     When Enable VIP filter for tickets

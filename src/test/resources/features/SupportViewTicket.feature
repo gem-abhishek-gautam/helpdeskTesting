@@ -1,4 +1,4 @@
-@support
+@support2
 Feature: Testcases for Support view Create Ticket
 
   Background: Check login functionality
@@ -1099,6 +1099,14 @@ Feature: Testcases for Support view Create Ticket
       | IT   | Hardware       | Laptop                         |
       | IT   | Hardware       | Other                          |
 
+  Scenario: Check audit trail for a ticket
+    Given Create ticket with file "attached" and type "Incident", caller "Abhishek Gautam", channel "Portal", dept "IT", category "End User Hardware", sub-category "Desktop", subject "support test with file", desc "support test" and status "Open"
+    Then Submit and verify ticket with file "attached" and type "Incident", caller "Abhishek Gautam", channel "Portal", dept "IT", category "End User Hardware", sub-category "Desktop", subject "support test with file", desc "support test" and status "Open"
+    Then Verify ticket audit trail for "created"
+    And Edit ticket details for field "Assigned To" and value "Sheeza Bakshi"
+    Then Verify ticket audit trail for "assigned"
+    And Edit ticket details for field "Configuration" and value "config1"
+    Then Verify ticket audit trail for "Configuration"
 
   Scenario: Check for field validation in create ticket form
     Given Open create ticket form

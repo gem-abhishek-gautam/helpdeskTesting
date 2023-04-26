@@ -4,7 +4,7 @@
   "report_name": "Test Report",
   "jewel_user": "ab.gautam",
   "jewel_bridge_token": "7b57888b-43ea-4327-a1cb-e64945e112cd1676871921514",
-  "email_report": "y",
+  "email_report": "n",
   "email_to": "abhishek.gautam@geminisolutions.com",
   "enter_point": "https://apis.gemecosystem.com/enter-point",
   "gemjarSubID": "test_id",

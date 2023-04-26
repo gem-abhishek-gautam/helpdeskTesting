@@ -1,9 +1,14 @@
-name: Java CI
+name: Regression run
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
+      - master
 
 jobs:
   build:
+    name: Build and test
     runs-on: windows-latest
 
     steps:
@@ -13,5 +18,5 @@ jobs:
         with:
           java-version: '17'
           distribution: 'oracle'
-      - name: Build with Maven
+      - name: Build and test with Maven
         run: mvn clean test

@@ -36,7 +36,7 @@ public class LoginStepDefinition {
                 DriverAction.waitUntilElementClickable(LoginLocators.rejectPrompt, 5);
                 if (DriverAction.isExist(LoginLocators.microsoftLoginPrompt)) {
                     DriverAction.click(LoginLocators.rejectPrompt,"Prompt");
-                    DriverAction.waitSec(2);
+                    CommonUtils.waitUntilElementAppear(LoginLocators.loginButton,5);
                 }
                 CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
                 if(DriverAction.isExist(LoginLocators.errorModal)) {
