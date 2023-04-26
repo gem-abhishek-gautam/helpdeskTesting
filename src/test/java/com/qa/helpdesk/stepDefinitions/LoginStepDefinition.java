@@ -32,37 +32,34 @@ public class LoginStepDefinition {
                 DriverAction.click(LoginLocators.submitLoginForm);
                 DriverAction.waitUntilElementClickable(LoginLocators.loginPswd, 10);
                 DriverAction.typeText(LoginLocators.loginPswd, "Password", "Password entered successfully", env.get("PSWD"));
-                DriverAction.click(LoginLocators.submitLoginForm, "Submit");
+                DriverAction.click(LoginLocators.submitLoginForm,"Submit");
                 DriverAction.waitUntilElementClickable(LoginLocators.rejectPrompt, 5);
                 if (DriverAction.isExist(LoginLocators.microsoftLoginPrompt)) {
-                    DriverAction.click(LoginLocators.rejectPrompt, "Prompt");
-                    DriverAction.waitSec(1);
+                    DriverAction.click(LoginLocators.rejectPrompt,"Prompt");
+                    DriverAction.waitSec(2);
                 }
+                if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 45);
+                }
+                if(DriverAction.isExist(LoginLocators.errorModal)) {
+                    GemTestReporter.addTestStep("Portal health","Portal is not accessible. Error encountered.",STATUS.ERR,DriverAction.takeSnapShot());
+                    throw new Exception("Portal is not accessible");
+                }
+                if (DriverAction.isExist(LoginLocators.loginButton)) {
+                    DriverAction.waitUntilElementClickable(LoginLocators.loginButton, 20);
+                    DriverAction.click(LoginLocators.loginButton, "Login SSO");
+                }
+                WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 20);
+                wait.until(ExpectedConditions.visibilityOfElementLocated(DashboardHeaderLocators.headerButtons("logout")));
+                DriverAction.waitUntilElementClickable(DashboardHeaderLocators.headerButtons("logout"), 10);
+
             } else
                 GemTestReporter.addTestStep("Login button", "Login button not found", STATUS.FAIL, DriverAction.takeSnapShot());
 
-            if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
-            }
-            if(DriverAction.isExist(LoginLocators.errorModal)) {
-                GemTestReporter.addTestStep("Portal health","Portal is not up and running. Error encountered.",STATUS.ERR,DriverAction.takeSnapShot());
-                throw new Exception("Portal is not accessible at the moment");
-            }
-            if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 45);
-            }
-
-            if (DriverAction.isExist(LoginLocators.loginButton)) {
-                DriverAction.waitUntilElementClickable(LoginLocators.loginButton, 20);
-                DriverAction.click(LoginLocators.loginButton, "Login SSO");
-            }
-            WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 20);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(DashboardHeaderLocators.headerButtons("logout")));
-            DriverAction.waitUntilElementClickable(DashboardHeaderLocators.headerButtons("logout"), 10);
 
         } catch (Exception e) {
             if(DriverAction.isExist(LoginLocators.errorModal)) {
-                GemTestReporter.addTestStep("Portal health","Portal is not up and running. Error encountered.",STATUS.ERR,DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Portal health","Portal is not accessible. Error encountered.",STATUS.ERR,DriverAction.takeSnapShot());
             }
             GemTestReporter.addTestStep("Exception Occurred", "Login was unsuccessful", STATUS.FAIL);
             throw new RuntimeException(e);
