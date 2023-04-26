@@ -38,13 +38,11 @@ public class LoginStepDefinition {
                     DriverAction.click(LoginLocators.rejectPrompt, "Prompt");
                     DriverAction.waitUntilElementClickable(LoginLocators.loginButton, 5);
                 }
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 45);
                 if (DriverAction.isExist(LoginLocators.errorModal)) {
                     GemTestReporter.addTestStep("Portal health", "Portal is not accessible. Error encountered.", STATUS.ERR, DriverAction.takeSnapShot());
                     throw new Exception("Portal is not accessible");
                 } else {
-                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 45);
-
                     if (DriverAction.isExist(LoginLocators.loginButton)) {
                         DriverAction.waitUntilElementClickable(LoginLocators.loginButton, 20);
                         DriverAction.click(LoginLocators.loginButton, "Login SSO");
