@@ -32,20 +32,18 @@ public class LoginStepDefinition {
                 DriverAction.click(LoginLocators.submitLoginForm);
                 DriverAction.waitUntilElementClickable(LoginLocators.loginPswd, 10);
                 DriverAction.typeText(LoginLocators.loginPswd, "Password", "Password entered successfully", env.get("PSWD"));
-                DriverAction.click(LoginLocators.submitLoginForm,"Submit");
+                DriverAction.click(LoginLocators.submitLoginForm, "Submit");
                 DriverAction.waitUntilElementClickable(LoginLocators.rejectPrompt, 5);
                 if (DriverAction.isExist(LoginLocators.microsoftLoginPrompt)) {
-                    DriverAction.click(LoginLocators.rejectPrompt,"Prompt");
-                    CommonUtils.waitUntilElementAppear(LoginLocators.loginButton,5);
+                    DriverAction.click(LoginLocators.rejectPrompt, "Prompt");
+                    DriverAction.waitUntilElementClickable(LoginLocators.loginButton, 5);
                 }
                 CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
-                if(DriverAction.isExist(LoginLocators.errorModal)) {
-                    GemTestReporter.addTestStep("Portal health","Portal is not accessible. Error encountered.",STATUS.ERR,DriverAction.takeSnapShot());
+                if (DriverAction.isExist(LoginLocators.errorModal)) {
+                    GemTestReporter.addTestStep("Portal health", "Portal is not accessible. Error encountered.", STATUS.ERR, DriverAction.takeSnapShot());
                     throw new Exception("Portal is not accessible");
                 } else {
-                    if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                        CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 45);
-                    }
+                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 45);
 
                     if (DriverAction.isExist(LoginLocators.loginButton)) {
                         DriverAction.waitUntilElementClickable(LoginLocators.loginButton, 20);
