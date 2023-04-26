@@ -38,29 +38,28 @@ public class LoginStepDefinition {
                     DriverAction.click(LoginLocators.rejectPrompt,"Prompt");
                     DriverAction.waitSec(2);
                 }
-                if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 45);
-                }
+                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 10);
                 if(DriverAction.isExist(LoginLocators.errorModal)) {
                     GemTestReporter.addTestStep("Portal health","Portal is not accessible. Error encountered.",STATUS.ERR,DriverAction.takeSnapShot());
                     throw new Exception("Portal is not accessible");
-                }
-                if (DriverAction.isExist(LoginLocators.loginButton)) {
-                    DriverAction.waitUntilElementClickable(LoginLocators.loginButton, 20);
-                    DriverAction.click(LoginLocators.loginButton, "Login SSO");
-                }
-                WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 20);
-                wait.until(ExpectedConditions.visibilityOfElementLocated(DashboardHeaderLocators.headerButtons("logout")));
-                DriverAction.waitUntilElementClickable(DashboardHeaderLocators.headerButtons("logout"), 10);
+                } else {
+                    if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
+                        CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 45);
+                    }
 
+                    if (DriverAction.isExist(LoginLocators.loginButton)) {
+                        DriverAction.waitUntilElementClickable(LoginLocators.loginButton, 20);
+                        DriverAction.click(LoginLocators.loginButton, "Login SSO");
+                    }
+                    WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 20);
+                    wait.until(ExpectedConditions.visibilityOfElementLocated(DashboardHeaderLocators.headerButtons("logout")));
+                    DriverAction.waitUntilElementClickable(DashboardHeaderLocators.headerButtons("logout"), 10);
+                }
             } else
                 GemTestReporter.addTestStep("Login button", "Login button not found", STATUS.FAIL, DriverAction.takeSnapShot());
 
 
         } catch (Exception e) {
-            if(DriverAction.isExist(LoginLocators.errorModal)) {
-                GemTestReporter.addTestStep("Portal health","Portal is not accessible. Error encountered.",STATUS.ERR,DriverAction.takeSnapShot());
-            }
             GemTestReporter.addTestStep("Exception Occurred", "Login was unsuccessful", STATUS.FAIL);
             throw new RuntimeException(e);
         }
