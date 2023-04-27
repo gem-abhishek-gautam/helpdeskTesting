@@ -798,7 +798,7 @@ Feature: Testcases for Support view Create Ticket
       | IT   | Hardware       | Laptop                         |
       | IT   | Hardware       | Other                          |
 
-  Scenario Outline: Verify unassigned request ticket creation for other caller without file upload
+    Scenario Outline: Verify unassigned request ticket creation for other caller without file upload
     Given Create ticket with file "unattached" and type "Request", caller "Sheeza Bakshi", channel "Portal", dept "<dept>", category "<category>", sub-category "<subcategory>", subject "support test with file", desc "support test" and status "Open"
     Then Submit and verify ticket with file "unattached" and type "Request", caller "Sheeza Bakshi", channel "Portal", dept "<dept>", category "<category>", sub-category "<subcategory>", subject "support test with file", desc "support test" and status "Open"
     Examples:
@@ -821,7 +821,7 @@ Feature: Testcases for Support view Create Ticket
       | HR       | MIS            | MIS                            |
       | Admin    | Facility       | Chair                          |
 
-  Scenario Outline: Verify assigned request ticket creation for other caller without file upload
+    Scenario Outline: Verify assigned request ticket creation for other caller without file upload
     Given Create ticket with file "unattached" and type "Request", caller "Sheeza Bakshi", channel "Portal", dept "<dept>", category "<category>", sub-category "<subcategory>", subject "support test with file", desc "support test" and status "Assigned"
     Then Submit and verify ticket with file "unattached" and type "Request", caller "Sheeza Bakshi", channel "Portal", dept "<dept>", category "<category>", sub-category "<subcategory>", subject "support test with file", desc "support test" and status "Assigned"
     Examples:

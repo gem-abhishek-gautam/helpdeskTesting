@@ -14,6 +14,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.github.cdimascio.dotenv.Dotenv;
+import org.apache.commons.codec.binary.Base64;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -23,15 +24,17 @@ public class LoginStepDefinition {
     @Given("Navigate to helpdesk and login")
     public void navigateAndLogin() {
         try {
-            Dotenv env = Dotenv.load();
+
             DriverAction.waitUntilElementClickable(LoginLocators.loginButton, 10);
             if (DriverAction.isExist(LoginLocators.loginButton)) {
                 DriverAction.click(LoginLocators.loginButton, "Login SSO");
                 DriverAction.waitUntilElementClickable(LoginLocators.loginEmail, 20);
-                DriverAction.typeText(LoginLocators.loginEmail, env.get("EMAIL"));
+                DriverAction.typeText(LoginLocators.loginEmail, ProjectConfigData.getProperty("email"));
                 DriverAction.click(LoginLocators.submitLoginForm);
                 DriverAction.waitUntilElementClickable(LoginLocators.loginPswd, 10);
-                DriverAction.typeText(LoginLocators.loginPswd, "Password", "Password entered successfully", env.get("PSWD"));
+                byte[] decodingString = Base64.decodeBase64(ProjectConfigData.getProperty("password"));
+                String passwordDecoded = new String(decodingString);
+                DriverAction.typeText(LoginLocators.loginPswd, "Password", "Password entered successfully",passwordDecoded);
                 DriverAction.click(LoginLocators.submitLoginForm, "Submit");
                 DriverAction.waitUntilElementClickable(LoginLocators.rejectPrompt, 5);
                 if (DriverAction.isExist(LoginLocators.microsoftLoginPrompt)) {
@@ -47,8 +50,7 @@ public class LoginStepDefinition {
                         DriverAction.waitUntilElementClickable(LoginLocators.loginButton, 20);
                         DriverAction.click(LoginLocators.loginButton, "Login SSO");
                     }
-                    WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 20);
-                    wait.until(ExpectedConditions.visibilityOfElementLocated(DashboardHeaderLocators.headerButtons("logout")));
+                    CommonUtils.waitUntilElementAppear(DashboardHeaderLocators.headerButtons("logout"),20);
                     DriverAction.waitUntilElementClickable(DashboardHeaderLocators.headerButtons("logout"), 10);
                 }
             } else

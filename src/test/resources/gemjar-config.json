@@ -16,6 +16,8 @@
     "launchUrl": "https://helpdeskui-np.geminisolutions.com/",
     "dashboardUrl": "https://helpdeskui-np.geminisolutions.com/#/dashboard/",
     "ticketDetailsUrl": "https://helpdeskui-np.geminisolutions.com/#/ticket-details/",
+    "email": "abhishek.gautam@geminisolutions.com",
+    "password": "YS5hYS5hYS4uLjE=",
     "browserTimeout": 20
   }
 }
