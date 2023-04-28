@@ -1,9 +1,10 @@
-@support2
+@support
 Feature: Testcases for Support view Create Ticket
 
   Background: Check login functionality
     Given Navigate to helpdesk and login
     Then Verify if login is successful
+    And Switch to view "Support View"
 
   Scenario Outline: Verify unassigned incident ticket creation for own caller with file upload
     Given Create ticket with file "attached" and type "Incident", caller "Abhishek Gautam", channel "Portal", dept "<dept>", category "<category>", sub-category "<subcategory>", subject "support test with file", desc "support test" and status "Open"
@@ -798,7 +799,7 @@ Feature: Testcases for Support view Create Ticket
       | IT   | Hardware       | Laptop                         |
       | IT   | Hardware       | Other                          |
 
-    Scenario Outline: Verify unassigned request ticket creation for other caller without file upload
+  Scenario Outline: Verify unassigned request ticket creation for other caller without file upload
     Given Create ticket with file "unattached" and type "Request", caller "Sheeza Bakshi", channel "Portal", dept "<dept>", category "<category>", sub-category "<subcategory>", subject "support test with file", desc "support test" and status "Open"
     Then Submit and verify ticket with file "unattached" and type "Request", caller "Sheeza Bakshi", channel "Portal", dept "<dept>", category "<category>", sub-category "<subcategory>", subject "support test with file", desc "support test" and status "Open"
     Examples:
@@ -821,7 +822,7 @@ Feature: Testcases for Support view Create Ticket
       | HR       | MIS            | MIS                            |
       | Admin    | Facility       | Chair                          |
 
-    Scenario Outline: Verify assigned request ticket creation for other caller without file upload
+  Scenario Outline: Verify assigned request ticket creation for other caller without file upload
     Given Create ticket with file "unattached" and type "Request", caller "Sheeza Bakshi", channel "Portal", dept "<dept>", category "<category>", sub-category "<subcategory>", subject "support test with file", desc "support test" and status "Assigned"
     Then Submit and verify ticket with file "unattached" and type "Request", caller "Sheeza Bakshi", channel "Portal", dept "<dept>", category "<category>", sub-category "<subcategory>", subject "support test with file", desc "support test" and status "Assigned"
     Examples:
@@ -1098,15 +1099,6 @@ Feature: Testcases for Support view Create Ticket
       | IT   | Hardware       | RAM                            |
       | IT   | Hardware       | Laptop                         |
       | IT   | Hardware       | Other                          |
-
-  Scenario: Check audit trail for a ticket
-    Given Create ticket with file "attached" and type "Incident", caller "Abhishek Gautam", channel "Portal", dept "IT", category "End User Hardware", sub-category "Desktop", subject "support test with file", desc "support test" and status "Open"
-    Then Submit and verify ticket with file "attached" and type "Incident", caller "Abhishek Gautam", channel "Portal", dept "IT", category "End User Hardware", sub-category "Desktop", subject "support test with file", desc "support test" and status "Open"
-    Then Verify ticket audit trail for "created"
-    And Edit ticket details for field "Assigned To" and value "Sheeza Bakshi"
-    Then Verify ticket audit trail for "assigned"
-    And Edit ticket details for field "Configuration" and value "config1"
-    Then Verify ticket audit trail for "Configuration"
 
   Scenario: Check for field validation in create ticket form
     Given Open create ticket form

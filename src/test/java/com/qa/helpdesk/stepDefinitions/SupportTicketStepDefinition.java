@@ -10,13 +10,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SupportTicketStepDefinition {
@@ -40,23 +37,23 @@ public class SupportTicketStepDefinition {
     public void submitAndVerifyTicketWithFileAndTypeCaller(String file, String type, String caller, String channel, String dept, String category, String subcategory, String subject, String desc, String status) {
 
         try {
-            DriverAction.waitUntilElementClickable(TicketLocators.previewButton, 10);
-            DriverAction.click(TicketLocators.previewButton, "Preview");
-            if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+            DriverAction.waitUntilElementClickable(EmployeeTicketLocators.previewButton, 10);
+            DriverAction.click(EmployeeTicketLocators.previewButton, "Preview");
+            if (DriverAction.isExist(EmployeeDashboardLocators.loaderCover)) {
+                CommonUtils.waitUntilElementDisappear(EmployeeDashboardLocators.loaderCover, 20);
             }
             boolean fileFlag = file.equalsIgnoreCase("attached");
             CommonUtils.verifySupportPreview(fileFlag, type, caller, channel, dept, category, subcategory, subject, desc, status);
 
-            DriverAction.click(TicketLocators.submitForm, "Submit");
-            if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+            DriverAction.click(EmployeeTicketLocators.submitForm, "Submit");
+            if (DriverAction.isExist(EmployeeDashboardLocators.loaderCover)) {
+                CommonUtils.waitUntilElementDisappear(EmployeeDashboardLocators.loaderCover, 20);
             }
             WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 30);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(TicketLocators.ticketCreatedLogo));
-            DriverAction.waitUntilElementClickable(TicketLocators.postSubmitContinueButton, 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(EmployeeTicketLocators.ticketCreatedLogo));
+            DriverAction.waitUntilElementClickable(EmployeeTicketLocators.postSubmitContinueButton, 10);
             DriverAction.waitSec(1);
-            if (DriverAction.getElementText(TicketLocators.postSubmitBannerTitle).equalsIgnoreCase("Ticket Created")) {
+            if (DriverAction.getElementText(EmployeeTicketLocators.postSubmitBannerTitle).equalsIgnoreCase("Ticket Created")) {
                 GemTestReporter.addTestStep("Ticket Creation", "Ticket created successfully", STATUS.PASS, DriverAction.takeSnapShot());
             } else
                 GemTestReporter.addTestStep("Ticket Creation", "Unable to successfully create ticket", STATUS.FAIL, DriverAction.takeSnapShot());
@@ -71,12 +68,12 @@ public class SupportTicketStepDefinition {
     @When("Caller name {string} is provided")
     public void callerNameIsProvided(String name) {
         try {
-            DriverAction.waitUntilElementClickable(TicketLocators.callerNameInput, 10);
-            DriverAction.typeText(TicketLocators.callerNameInput, name);
+            DriverAction.waitUntilElementClickable(EmployeeTicketLocators.callerNameInput, 10);
+            DriverAction.typeText(EmployeeTicketLocators.callerNameInput, name);
             WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 10);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(TicketLocators.callerMenu(name)));
-            wait.until(ExpectedConditions.elementToBeClickable(TicketLocators.callerMenu(name)));
-            DriverAction.click(TicketLocators.callerMenu(name), name);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(EmployeeTicketLocators.callerMenu(name)));
+            wait.until(ExpectedConditions.elementToBeClickable(EmployeeTicketLocators.callerMenu(name)));
+            DriverAction.click(EmployeeTicketLocators.callerMenu(name), name);
 
         } catch (Exception e) {
             GemTestReporter.addTestStep("Exception Occurred", "Exception: " + e, STATUS.FAIL);
@@ -87,8 +84,8 @@ public class SupportTicketStepDefinition {
     @Then("Verify caller info and history")
     public void verifyCallerInfoAndHistory() {
         try {
-            if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+            if (DriverAction.isExist(EmployeeDashboardLocators.loaderCover)) {
+                CommonUtils.waitUntilElementDisappear(EmployeeDashboardLocators.loaderCover, 20);
             }
             DriverAction.waitUntilElementClickable(SupportTicketLocators.formCallerInfoButton, 10);
             DriverAction.waitUntilElementClickable(SupportTicketLocators.formCallerHistoryButton, 10);
@@ -108,8 +105,8 @@ public class SupportTicketStepDefinition {
 
             if (DriverAction.isExist(SupportTicketLocators.formCallerHistoryButton) && DriverManager.getWebDriver().findElement(SupportTicketLocators.formCallerHistoryButton).isEnabled()) {
                 DriverAction.click(SupportTicketLocators.formCallerHistoryButton, "Caller history");
-                if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+                if (DriverAction.isExist(EmployeeDashboardLocators.loaderCover)) {
+                    CommonUtils.waitUntilElementDisappear(EmployeeDashboardLocators.loaderCover, 20);
                 }
                 if (DriverAction.isExist(SupportTicketLocators.callerHistory)) {
                     GemTestReporter.addTestStep("Caller history", "Caller history is visible", STATUS.PASS, DriverAction.takeSnapShot());
@@ -127,11 +124,11 @@ public class SupportTicketStepDefinition {
     @Given("Open ticket details for a ticket")
     public void openTicketDetailsForATicket() {
         try {
-            if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+            if (DriverAction.isExist(EmployeeDashboardLocators.loaderCover)) {
+                CommonUtils.waitUntilElementDisappear(EmployeeDashboardLocators.loaderCover, 20);
             }
-            DriverAction.waitUntilElementAppear(TableAndPaginationLocators.firstTicketID, 5);
-            DriverAction.click(TableAndPaginationLocators.firstTicketID, "Ticket");
+            DriverAction.waitUntilElementAppear(EmployeeDashboardLocators.firstTicketID, 5);
+            DriverAction.click(EmployeeDashboardLocators.firstTicketID, "Ticket");
 
         } catch (Exception e) {
             GemTestReporter.addTestStep("Exception Occurred", "Exception: " + e, STATUS.FAIL);
@@ -142,14 +139,14 @@ public class SupportTicketStepDefinition {
     @Then("Verify if caller info can be opened")
     public void verifyIfCallerInfoCanBeOpened() {
         try {
-            if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+            if (DriverAction.isExist(EmployeeDashboardLocators.loaderCover)) {
+                CommonUtils.waitUntilElementDisappear(EmployeeDashboardLocators.loaderCover, 20);
             }
 
             DriverAction.waitUntilElementClickable(SupportTicketLocators.detailsCallerInfoButton, 5);
             DriverAction.click(SupportTicketLocators.detailsCallerInfoButton, "Caller info");
-            if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+            if (DriverAction.isExist(EmployeeDashboardLocators.loaderCover)) {
+                CommonUtils.waitUntilElementDisappear(EmployeeDashboardLocators.loaderCover, 20);
             }
             DriverAction.waitSec(1);
             if (DriverAction.isExist(SupportTicketLocators.callerInfoModal)) {
@@ -168,13 +165,13 @@ public class SupportTicketStepDefinition {
     @And("Verify if caller history can be opened")
     public void verifyIfCallerHistoryCanBeOpened() {
         try {
-            if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+            if (DriverAction.isExist(EmployeeDashboardLocators.loaderCover)) {
+                CommonUtils.waitUntilElementDisappear(EmployeeDashboardLocators.loaderCover, 20);
             }
             DriverAction.waitUntilElementClickable(SupportTicketLocators.detailsCallerHistoryButton, 5);
             DriverAction.click(SupportTicketLocators.detailsCallerHistoryButton, "Caller history");
-            if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+            if (DriverAction.isExist(EmployeeDashboardLocators.loaderCover)) {
+                CommonUtils.waitUntilElementDisappear(EmployeeDashboardLocators.loaderCover, 20);
             }
             if (DriverAction.isExist(SupportTicketLocators.callerHistory)) {
                 GemTestReporter.addTestStep("Caller history", "Caller history is visible", STATUS.PASS, DriverAction.takeSnapShot());
@@ -190,21 +187,21 @@ public class SupportTicketStepDefinition {
     @Then("Verify ticket audit trail for {string}")
     public void verifyTicketAuditTrail(String step) {
         try {
-            if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+            if (DriverAction.isExist(EmployeeDashboardLocators.loaderCover)) {
+                CommonUtils.waitUntilElementDisappear(EmployeeDashboardLocators.loaderCover, 20);
             }
             DriverAction.waitSec(2);
             DriverAction.waitUntilElementClickable(SupportTicketLocators.auditTrailButton, 5);
             DriverAction.click(SupportTicketLocators.auditTrailButton, "Audit Trail");
-            if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+            if (DriverAction.isExist(EmployeeDashboardLocators.loaderCover)) {
+                CommonUtils.waitUntilElementDisappear(EmployeeDashboardLocators.loaderCover, 20);
             }
             WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 10);
-            wait.until(ExpectedConditions.elementToBeClickable(DashboardHeaderLocators.ticketTabs("Trails")));
+            wait.until(ExpectedConditions.elementToBeClickable(EmployeeDashboardLocators.ticketTabs("Trails")));
             DriverAction.waitSec(2);
             String pos = CommonUtils.getTableColPosition("Event Activities");
-            List<WebElement> elements = DriverAction.getElements(TableAndPaginationLocators.getColValues(pos));
-            if (DriverAction.getElements(TableAndPaginationLocators.getAllTableElements).size() > 1) {
+            List<WebElement> elements = DriverAction.getElements(EmployeeDashboardLocators.getColValues(pos));
+            if (DriverAction.getElements(EmployeeDashboardLocators.getAllTableElements).size() > 1) {
                 int flag = 0;
                 for (WebElement ele : elements) {
                     if (DriverAction.getElementText(ele).toLowerCase().contains(step.toLowerCase())) {
@@ -223,8 +220,8 @@ public class SupportTicketStepDefinition {
             }
 
             DriverAction.click(SupportTicketLocators.backButton, "Back");
-            if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+            if (DriverAction.isExist(EmployeeDashboardLocators.loaderCover)) {
+                CommonUtils.waitUntilElementDisappear(EmployeeDashboardLocators.loaderCover, 20);
             }
         } catch (Exception e) {
             GemTestReporter.addTestStep("Exception Occurred", "Exception: " + e, STATUS.FAIL);
@@ -235,30 +232,30 @@ public class SupportTicketStepDefinition {
     @And("Edit ticket details for field {string} and value {string}")
     public void editTicketDetailsForFieldAndValue(String field, String value) {
         try {
-            if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+            if (DriverAction.isExist(EmployeeDashboardLocators.loaderCover)) {
+                CommonUtils.waitUntilElementDisappear(EmployeeDashboardLocators.loaderCover, 20);
             }
             DriverAction.click(SupportTicketLocators.editTicketButton, "Edit");
-            if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+            if (DriverAction.isExist(EmployeeDashboardLocators.loaderCover)) {
+                CommonUtils.waitUntilElementDisappear(EmployeeDashboardLocators.loaderCover, 20);
             }
-            DriverAction.waitUntilElementClickable(TicketLocators.ticketDropdown(field), 5);
+            DriverAction.waitUntilElementClickable(EmployeeTicketLocators.ticketDropdown(field), 5);
             if (field.equalsIgnoreCase("Assigned to")) {
-                DriverAction.click(TicketLocators.ticketDropdown("Assigned To"), "Assigned To");
+                DriverAction.click(EmployeeTicketLocators.ticketDropdown("Assigned To"), "Assigned To");
                 DriverAction.waitSec(1);
-                DriverAction.scrollIntoView(TicketLocators.callerMenu(value));
-                DriverAction.click(TicketLocators.callerMenu(value), value);
-                if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+                DriverAction.scrollIntoView(EmployeeTicketLocators.callerMenu(value));
+                DriverAction.click(EmployeeTicketLocators.callerMenu(value), value);
+                if (DriverAction.isExist(EmployeeDashboardLocators.loaderCover)) {
+                    CommonUtils.waitUntilElementDisappear(EmployeeDashboardLocators.loaderCover, 20);
                 }
-                DriverAction.click(TicketLocators.submitModalForm, "Submit");
+                DriverAction.click(EmployeeTicketLocators.submitModalForm, "Submit");
             }
             if (field.equalsIgnoreCase("configuration")) {
-                DriverAction.typeText(TicketLocators.configInput, value);
-                DriverAction.waitUntilElementClickable(TicketLocators.submitModalForm, 5);
-                DriverAction.click(TicketLocators.submitModalForm, "Submit");
-                if (DriverAction.isExist(DashboardHeaderLocators.loaderCover)) {
-                    CommonUtils.waitUntilElementDisappear(DashboardHeaderLocators.loaderCover, 20);
+                DriverAction.typeText(EmployeeTicketLocators.configInput, value);
+                DriverAction.waitUntilElementClickable(EmployeeTicketLocators.submitModalForm, 5);
+                DriverAction.click(EmployeeTicketLocators.submitModalForm, "Submit");
+                if (DriverAction.isExist(EmployeeDashboardLocators.loaderCover)) {
+                    CommonUtils.waitUntilElementDisappear(EmployeeDashboardLocators.loaderCover, 20);
                 }
             }
         } catch (Exception e) {
